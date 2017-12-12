@@ -1,10 +1,5 @@
 <?php
     session_start();
-    $DB_DSN = "mysql:host=127.0.0.1;port=3306;";
-    $DB_NAME = "camagru";
-    $DB_USER = "root";
-    $DB_PASSWORD = "Beauvois41";
-    //$DB_PASSWORD = "";
     try {
       $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
       $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
