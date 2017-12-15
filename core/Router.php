@@ -1,6 +1,5 @@
 <?php
 class Router{
-
 	/**
 	*Permet de parser une url
 	*@param $url Url a parser
@@ -18,7 +17,6 @@ class Router{
 		$request->params['params'] = array_slice($params, 2);
 		return true;
 	}
-
 }
 
 ?>

@@ -5,7 +5,8 @@ define('DS', DIRECTORY_SEPARATOR);
 define('CORE', ROOT.DS.'core');
 define('BASE_URL', dirname($_SERVER['SCRIPT_NAME']));
 
-echo 'fuck you bitch';
+// $pdo = new PDO('mysql:host=localhost;', 'root', 'qwerty');
+echo 'pouet';
 echo '<br />';
 echo '<br />';
 echo '<br />';
@@ -27,7 +28,6 @@ echo '<br />';
 //
 // $pdo = new PDO($connStr, 'Utilisateur', 'Mot de passe', $arrExtraParam);
 //
-// $pdo = new PDO('mysql:host=localhost;', 'root', 'qwerty');
 // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //
 // $query = 'CREATE DATABASE pikmin';

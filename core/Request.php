@@ -6,7 +6,7 @@ class Request
 	function __construct()
 	{
 		// echo $_SERVER['PATH_INFO'];
-		$this->url = $_SERVER['PATH_INFO'];
+		$this->url = (isset($_SERVER['PATH_INFO'])) ? $_SERVER['PATH_INFO'] : NULL;
 	}
 }
 ?>
