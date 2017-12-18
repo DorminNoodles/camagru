@@ -2,7 +2,8 @@
 class PagesController extends Controller{
 
 	function view($nom){
-		echo "vous avez demande : ".$nom;
+		$phrase = "Bienvenue sur la page". $nom;
+		$this->render('index');
 	}
 }
 ?>
