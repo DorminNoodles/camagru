@@ -1,13 +1,15 @@
 <?php
+
 /**
- * Controller
+ *	Index
  */
-class Controller
+class Index extends Controller
 {
+
 	function __construct()
 	{
 		# code...
 	}
 }
 
- ?>
+?>
