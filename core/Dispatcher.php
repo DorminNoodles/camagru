@@ -1,22 +1,23 @@
 <?php
+
+require('Request.php');
+require('Routeur.php');
+/**
+ * class Dispatcher decoupe l url et l envoi au routeur ???....
+ */
+
 class Dispatcher
 {
-	var $request;
+	public $request;
 
-	function __construct(){
-		$this->request = new Request();
-
-		Router::parse($this->request->url, $this->request);
-		$controller = $this->loadController();
-		call_user_func_array(array($controller, $this->request->action), $this->request->params);
-		// print_r($this->request);
-	}
-
-	function loadController(){
-		$name = ucfirst($this->request->controller).'Controller';
-		$file = ROOT.DS.'controller'.DS.$name.'.php';
-		require $file;
-		return new $name($this->request);
+	function __construct()
+	{
+		$request = new Request($_SERVER['REQUEST_URI']);
+		// $request = new Request($_SERVER['REQUEST_URI']);
+		// echo $request->controller;
+		new Routeur($request);
 	}
 }
+
+
 ?>
