@@ -3,7 +3,7 @@
  *
  */
 
-require('model/Db.php');
+require('core/Database.php');
 
 class Login
 {
@@ -12,7 +12,7 @@ class Login
 	function __construct()
 	{
 		var_dump($_SESSION);
-		$bdd = new Db();
+		$bdd = new Database();
 	}
 
 	function check_auth()
@@ -20,6 +20,11 @@ class Login
 		var_dump($_SESSION);
 	}
 
+	public function signIn()
+	{
+		echo 'test';
+		var_dump($_POST);
+	}
 
 }
 
