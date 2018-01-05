@@ -5,7 +5,6 @@ define("HOST", "localhost");
 class Db
 {
 
-
 	function __construct()
 	{
 		if (!$this->connect)
@@ -23,7 +22,7 @@ class Db
 
 		if (isset($this->bdd))
 		{
-			echo 'connected to DB';
+			// echo 'connected to DB';
 			$this->connect = true;
 		}
 	}

@@ -1,5 +1,5 @@
 <div>
-	<form action="home/login" method="post">
+	<form action="login" method="post">
 		Name:<br>
 		<input type="text" name="firstname" value="Mickey">
 		<br>
