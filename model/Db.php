@@ -2,10 +2,9 @@
 
 define("HOST", "localhost");
 
-class Db {
+class Db
+{
 
-	private $connect = false;
-	private $bdd;
 
 	function __construct()
 	{

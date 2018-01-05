@@ -1,3 +1,9 @@
 <div>
-	<?php include 'view/loginHeader.php'; ?>
+
+	<?php
+		if (isset($_SESSION['auth']))
+			include ('view/logInHeader.php');
+		else
+			include ('view/logOutHeader.php');
+	?>
 </div>

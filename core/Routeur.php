@@ -16,7 +16,7 @@ class Routeur
 		// $name = $request->controller;
 		// $controller = new $name();
 		require('controller/'.$request->controller.'.php');
-		new $request->controller();
+		new $request->controller($request);
 	}
 }
 
