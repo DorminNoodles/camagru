@@ -20,8 +20,11 @@ class Login
 		var_dump($_SESSION);
 	}
 
+	function signIn($user, $pwd)
+	{
+		$user = Db.get_user();
 
+	}
 }
 
-
- ?>
+?>

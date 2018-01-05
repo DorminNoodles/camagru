@@ -7,13 +7,14 @@ class Db {
 	private $connect = false;
 	private $bdd;
 
-	function __construct(){
-
+	function __construct()
+	{
 		if (!$this->connect)
 			$this->connect_to_mysql();
 	}
 
-	function connect_to_mysql(){
+	function connect_to_mysql()
+	{
 		try {
 			$this->bdd = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
 		}
@@ -28,8 +29,14 @@ class Db {
 		}
 	}
 
-	function connect_to_db(){
+	function connect_to_db()
+	{
 
+
+	}
+
+	function get_user($username)
+	{
 
 	}
 }
