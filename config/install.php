@@ -2,11 +2,18 @@
 
 	define('HOST', 'localhost');
 
+
+
+
 	try {
 		$db = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
-		echo "Database already exist...";
+		$db->exec('DROP DATABASE camagru');
+		echo "Database reset...";
 	}
 	catch ( PDOException $Exception ){
+		echo "Database created !";
+
+	}
 		// echo 'error DB NOT EXIST';
 
 		$db = new PDO('mysql:host='.HOST.'', 'root', 'qwerty');
@@ -19,8 +26,16 @@
 					name VARCHAR(30) NOT NULL,
 					pwd VARCHAR(255) NOT NULL
 				)');
-		echo "Database created !";
-	}
+
+		$db->exec('INSERT INTO users (name, pwd) VALUES (\'admin\',\'qwerty\')');
+		$db->exec('INSERT INTO users (name, pwd) VALUES (\'mickey\',\'qwerty\')');
+		$db->exec('INSERT INTO users (name, pwd) VALUES (\'monsieur\',\'qwerty\')');
+
+		// $db->exec('INSERT INTO users ('name', 'pwd')
+				// VALUES ('mickey', 'qwerty')');
+
+
+
 
 
 ?>

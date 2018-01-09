@@ -5,25 +5,27 @@ define('HOST', 'localhost');
 class Database {
 
 	private $connect = false;
-	private $bdd;
+	private $db;
+	private $object;
 
 	function __construct(){
 
-		if (!$this->connect)
-			$this->connect();
+		// if (!$this->connect)
+		// 	$this->connect();
 	}
 
-	function connect()
+	public function connect()
 	{
+		// echo "HAAAAAAAAAA";
 		try {
-			$this->bdd = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
+			$this->db = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
 		}
 		catch ( PDOException $Exception ){
 			echo 'erro DB : fuck PDO';
 		}
-		if (isset($this->bdd))
+		if (isset($this->db))
 		{
-			$this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			echo 'connected to DB';
 			$this->connect = true;
 		}
@@ -37,13 +39,27 @@ class Database {
 
 	public function find_user($username)
 	{
-		$this.connect();
+		$this->connect();
+		// Database::connect();
 
-		$query = 'SELECT * FROM user where name = ' .$username. '';
-		$arr = $this->bdd->query($query)->fetch();
 
-		var_dump($arr);
 
+		$query = 'SELECT * FROM users WHERE name=\'' .$username. '\'';
+		// $query = 'SELECT * FROM users';
+		// echo $query;
+		// echo "HELLOOOOOOOOOOOO";
+
+		$arr = $this->db->query($query);
+		return($arr->fetch());
+
+		// $this->object = $arr->fetch(PDO::FETCH_ASSOC);
+
+		// return($ret);
+		// foreach($this->db->query($query) as $row)
+		// {
+		// 	var_dump($row);
+		// }
+		// var_dump($arr);
 
 	}
 }
