@@ -1,8 +1,7 @@
 <div>
-
 	<?php
 
-		if ($_SESSION['auth'])
+		if (!empty($_SESSION['auth']))
 			include ('view/logInHeader.php');
 		else
 			include ('view/logOutHeader.php');

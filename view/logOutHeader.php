@@ -1,5 +1,5 @@
 <div>
-	<form action="\camagru\login\login" method="post">
+	<form action="\camagru\home\login" method="post">
 		Name:<br>
 		<input type="text" name="name" value="Mickey">
 		<br>
