@@ -10,45 +10,80 @@
 </div>
 <video autoplay></video>
 
+
+<button id="startbutton">Prendre une photo</button>
+<canvas id="canvas"></canvas>
+<img src="http://placekitten.com/g/320/261" id="photo" alt="photo">
+
 <script>
+    //
+	// function error(err)
+	// {
+	// 	console.log("error : " + err.name);
+	// }
+    //
+	// function test (stream)
+	// {
+	// 	var video = document.querySelector('video');
+	// 	video.src = window.URL.createObjectURL(stream);
+	// 	// video.onloadedmetadata
+	// }
+    //
+	// if (navigator.getUserMedia)
+	// {
+    //
+	// 	navigator.getUserMedia({audio: false, video: true}, test, error);
+	// }
+	// else
+	// {
+	// 	console.log("getUserMedia not supported");
+	// }
 
-	function error(err)
-	{
-		console.log("error : " + err.name);
-	}
+	// alert('alert a la bite');
 
-	function test (stream)
-	{
-		var video = document.querySelector('video');
-		video.src = window.URL.createObjectURL(stream);
-		// video.onloadedmetadata
-	}
+	(function(){
 
-if (navigator.getUserMedia)
-{
+		var streaming = false,
+			photo		= document.querySelector('photo'),
+			video		= document.querySelector('video');
 
-	navigator.getUserMedia({audio: false, video: true}, test, error);
-}
-else
-{
-	console.log("getUserMedia not supported");
-}
+		navigator.getUserMedia(
+			{
+				video: true,
+				audio: false
+			},
+			function(stream) {
+				var vendorURL = window.URL;
+				video.src = vendorURL.createObjectURL(stream);
+				video.play();
+			},
+			function(err){
+				console.log("Error haaaa");
+			}
+		);
 
 
+		// var test = navigator.mediaDevices;
+		// var test = navigator.mediaDevices.getUserMedia();
+		// console.log(test);
+
+		function takepicture()
+		{
+			canvas.width = 640;
+			canvas.height = 480;
+			canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
+			var data = canvas.toDataURL('image/png');
+			/photo.setAttribute('src', data);
+		}
+
+		startbutton.addEventListener('click', function(ev)
+		{
+			takepicture();
+			ev.preventDefault();
+		}, false);
 
 
-// Not showing vendor prefixes.
-// navigator.getUserMedia({video: true, audio: false}, function(localMediaStream) {
-//   var video = document.querySelector('vide');
-//   video.src = window.URL.createObjectURL(localMediaStream);
-//
-//   // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
-//   // See crbug.com/110938.
-//   video.onloadedmetadata = function(e) {
-// 	// Ready to go. Do some stuff.
-//   };
-// }, errorCallback);
-
+	})()
 
 
 </script>
