@@ -13,34 +13,10 @@
 
 <button id="startbutton">Prendre une photo</button>
 <canvas id="canvas"></canvas>
-<img src="http://placekitten.com/g/320/261" id="photo" alt="photo">
+<!-- <img src="http://placekitten.com/g/320/261" id="photo" alt="photo"> -->
+<button id="savebutton">Sauvegarder image</button>
 
 <script>
-    //
-	// function error(err)
-	// {
-	// 	console.log("error : " + err.name);
-	// }
-    //
-	// function test (stream)
-	// {
-	// 	var video = document.querySelector('video');
-	// 	video.src = window.URL.createObjectURL(stream);
-	// 	// video.onloadedmetadata
-	// }
-    //
-	// if (navigator.getUserMedia)
-	// {
-    //
-	// 	navigator.getUserMedia({audio: false, video: true}, test, error);
-	// }
-	// else
-	// {
-	// 	console.log("getUserMedia not supported");
-	// }
-
-	// alert('alert a la bite');
-
 	(function(){
 
 		var streaming = false,
@@ -62,18 +38,13 @@
 			}
 		);
 
-
-		// var test = navigator.mediaDevices;
-		// var test = navigator.mediaDevices.getUserMedia();
-		// console.log(test);
-
 		function takepicture()
 		{
 			canvas.width = 640;
 			canvas.height = 480;
 			canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
 			var data = canvas.toDataURL('image/png');
-			/photo.setAttribute('src', data);
+			//photo.setAttribute('src', data);
 		}
 
 		startbutton.addEventListener('click', function(ev)
@@ -82,9 +53,11 @@
 			ev.preventDefault();
 		}, false);
 
+		savebutton.addEventListener('click', function(ev)
+		{
+		}, false);
 
 	})()
-
 
 </script>
 
