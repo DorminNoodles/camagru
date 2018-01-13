@@ -1,6 +1,7 @@
 <?php
 
 require('model/Login.php');
+require('core/File.php');
 // require('model/LoginHeader.php');
 
 
@@ -37,10 +38,10 @@ class Home
 	{
 		// echo $data;
 
+		echo ("SAVE IMG !");
 		$img = new File();
-
 		$img->data = $data;
-
+		$img->saveFile("img/");
 
 	}
 }
