@@ -19,6 +19,8 @@
 <script>
 	(function(){
 
+		var data;
+
 		var streaming = false,
 			photo		= document.querySelector('photo'),
 			video		= document.querySelector('video');
@@ -43,8 +45,24 @@
 			canvas.width = 640;
 			canvas.height = 480;
 			canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
-			var data = canvas.toDataURL('image/png');
+			data = canvas.toDataURL('image/png');
 			//photo.setAttribute('src', data);
+		}
+
+		function post(path, params, method)
+		{
+			var form = document.createElement("form");
+			form.setAttribute("method", "post");
+			form.setAttribute("action", path);
+
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "saveimg");
+			hiddenField.setAttribute("value", params);
+
+			form.appendChild(hiddenField);
+			document.body.appendChild(form);
+			form.submit();
 		}
 
 		startbutton.addEventListener('click', function(ev)
@@ -55,6 +73,9 @@
 
 		savebutton.addEventListener('click', function(ev)
 		{
+			var test = 5;
+			// alert(data);
+			post("/camagru/home/saveimg", data, "post");
 		}, false);
 
 	})()

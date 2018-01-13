@@ -19,10 +19,27 @@ class Home
 		// {
 		// 	$login->logIN($_POST['name'], $_POST['pwd']);
 		// }
+		if ($request->action == "saveimg" && isset($_POST["saveimg"]))
+		{
+			// var_dump($_POST);
+			$this->saveImg($_POST['saveimg']);
+		}
 		include('view/home.php');
 	}
+
 	function render()
 	{
+
+
+	}
+
+	function saveImg($data)
+	{
+		// echo $data;
+
+		$img = new File();
+
+		$img->data = $data;
 
 
 	}
