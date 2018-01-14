@@ -14,7 +14,7 @@ class File
 
 	public function saveFile($path)
 	{
-		$file = fopen($path."001.php", "w");
+		$file = fopen($path."001", "w");
 		fwrite($file, $this->data);
 
 	}

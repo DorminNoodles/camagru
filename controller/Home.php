@@ -2,6 +2,7 @@
 
 require('model/Login.php');
 require('core/File.php');
+// require('core/Database.php');
 // require('model/LoginHeader.php');
 
 
@@ -36,12 +37,14 @@ class Home
 
 	function saveImg($data)
 	{
-		// echo $data;
 
 		echo ("SAVE IMG !");
 		$img = new File();
 		$img->data = $data;
-		$img->saveFile("img/");
+		$db = new Database();
+
+
+		$img->saveFile("img/".$db->tableSize("images"));
 
 	}
 }

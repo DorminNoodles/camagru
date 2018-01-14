@@ -31,6 +31,10 @@
 		$db->exec('INSERT INTO users (name, pwd) VALUES (\'mickey\',\'qwerty\')');
 		$db->exec('INSERT INTO users (name, pwd) VALUES (\'monsieur\',\'qwerty\')');
 
+		$db->exec('CREATE TABLE images (
+					id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY
+					user_id INT(6) UNSIGNED
+				)');
 		// $db->exec('INSERT INTO users ('name', 'pwd')
 				// VALUES ('mickey', 'qwerty')');
 

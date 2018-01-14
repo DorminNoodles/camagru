@@ -16,7 +16,6 @@ class Database {
 
 	public function connect()
 	{
-		// echo "HAAAAAAAAAA";
 		try {
 			$this->db = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
 		}
@@ -42,24 +41,15 @@ class Database {
 		$this->connect();
 		// Database::connect();
 
-
-
 		$query = 'SELECT * FROM users WHERE name=\'' .$username. '\'';
-		// $query = 'SELECT * FROM users';
-		// echo $query;
-		// echo "HELLOOOOOOOOOOOO";
-
 		$arr = $this->db->query($query);
 		return($arr->fetch());
+	}
 
-		// $this->object = $arr->fetch(PDO::FETCH_ASSOC);
-
-		// return($ret);
-		// foreach($this->db->query($query) as $row)
-		// {
-		// 	var_dump($row);
-		// }
-		// var_dump($arr);
+	public function tableSize($table)
+	{
+		$this->connect();
+		// $query = "SELECT COUNT(*) FROM table";
 
 	}
 }
