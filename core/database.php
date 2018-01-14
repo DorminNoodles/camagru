@@ -7,8 +7,11 @@ class Database {
 	private $connect = false;
 	private $db;
 	private $object;
+	private $dbName;
 
-	function __construct(){
+	function __construct($name)
+	{
+		$this->dbName = name;
 
 		// if (!$this->connect)
 		// 	$this->connect();
@@ -17,16 +20,16 @@ class Database {
 	public function connect()
 	{
 		try {
-			$this->db = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
+			$this->db = new PDO('mysql:host='.HOST.';dbname='.$this->dbName.';', 'root', 'qwerty');
 		}
 		catch ( PDOException $Exception ){
 			echo 'erro DB : fuck PDO';
 		}
 		if (isset($this->db))
 		{
+			echo "SQUELETTE";
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			echo 'connected to DB';
-			$this->connect = true;
 		}
 	}
 
