@@ -1,5 +1,7 @@
 <?php
 
+// require("/model/DatabasePhoto.php");
+
 class Photo extends File
 {
 	function __construct()
@@ -20,9 +22,8 @@ class Photo extends File
 		$nb = $db->tableSize("photos");
 		$this->saveFile("photos/", $nb);
 
-		$this->insert_photo($db, $nb+1, 4);
+		$this->insertPhoto($db, $nb+1, 4);
 		// $db->insert()
-
 
 		//et maintenant que vais je faireuuuuuuuh
 		//et maintenant ajouter la nouvelle image dans la db avec l id de l user
@@ -30,9 +31,12 @@ class Photo extends File
 		//A VERIFIER
 	}
 
-	function insert_photo($db, $id, $user_id)
+	function insertPhoto($db, $id, $user_id)
 	{
-		$db->exec('INSERT INTO photos (user_id) VALUES (\''.$user_id.'.\')');
+		$db = new DatabasePhoto();
+		$db->insertPhoto($user_id);
+
+		// $db->exec('INSERT INTO photos (user_id) VALUES (\''.$user_id.'.\')');
 
 		//table/ id/ user_id
 
