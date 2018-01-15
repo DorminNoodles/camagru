@@ -7,17 +7,18 @@ class Database {
 	private $connect = false;
 	private $db;
 	private $object;
+	private $dbName;
 
-	function __construct(){
+	function __construct($name)
+	{
+		$this->dbName = $name;
 
-		// if (!$this->connect)
-		// 	$this->connect();
 	}
 
 	public function connect()
 	{
 		try {
-			$this->db = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
+			$this->db = new PDO('mysql:host='.HOST.';dbname='.$this->dbName.';', 'root', 'qwerty');
 		}
 		catch ( PDOException $Exception ){
 			echo 'erro DB : fuck PDO';
@@ -26,7 +27,6 @@ class Database {
 		{
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			echo 'connected to DB';
-			$this->connect = true;
 		}
 	}
 
@@ -49,8 +49,10 @@ class Database {
 	public function tableSize($table)
 	{
 		$this->connect();
-		// $query = "SELECT COUNT(*) FROM table";
-
+		$query = "SELECT COUNT(*) FROM images";
+		$arr = $this->db->query($query);
+		$tmp = $arr->fetch();
+		return ($tmp[0]);
 	}
 }
 

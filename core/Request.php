@@ -11,8 +11,6 @@ class Request
 
 	function __construct($url)
 	{
-		// echo $this->action;
-		// Request::pouet();
 		$arr = explode('/',$url);
 		$this->setController($arr[2]);
 		$this->action = (isset($arr[3])) ? $arr[3] : null;
@@ -21,7 +19,6 @@ class Request
 
 	function setController($str)
 	{
-		// $a = explode('/', $url);
 		$this->controller = ($str) ? $str : 'Home';
 		if (!file_exists('controller/'.$this->controller.'.php'))
 			$this->controller = 'Home';

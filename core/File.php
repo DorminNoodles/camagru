@@ -12,11 +12,10 @@ class File
 
 	}
 
-	public function saveFile($path)
+	public function saveFile($path, $name)
 	{
-		$file = fopen($path."001", "w");
+		$file = fopen($path.$name, "w");
 		fwrite($file, $this->data);
-
 	}
 }
 

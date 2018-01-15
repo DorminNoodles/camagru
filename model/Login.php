@@ -13,7 +13,7 @@ class Login
 	function __construct($action)
 	{
 		var_dump($_SESSION);
-		$this->db = new Database();
+		$this->db = new Database("camagru");
 		$this->check_action($action);
 	}
 
