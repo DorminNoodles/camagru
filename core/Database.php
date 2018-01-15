@@ -11,10 +11,8 @@ class Database {
 
 	function __construct($name)
 	{
-		$this->dbName = name;
+		$this->dbName = $name;
 
-		// if (!$this->connect)
-		// 	$this->connect();
 	}
 
 	public function connect()
@@ -27,7 +25,6 @@ class Database {
 		}
 		if (isset($this->db))
 		{
-			echo "SQUELETTE";
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			echo 'connected to DB';
 		}
@@ -52,8 +49,10 @@ class Database {
 	public function tableSize($table)
 	{
 		$this->connect();
-		// $query = "SELECT COUNT(*) FROM table";
-
+		$query = "SELECT COUNT(*) FROM images";
+		$arr = $this->db->query($query);
+		$tmp = $arr->fetch();
+		return ($tmp[0]);
 	}
 }
 
