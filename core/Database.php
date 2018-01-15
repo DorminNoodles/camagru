@@ -49,7 +49,7 @@ class Database {
 	public function tableSize($table)
 	{
 		$this->connect();
-		$query = "SELECT COUNT(*) FROM images";
+		$query = "SELECT COUNT(*) FROM $table";
 		$arr = $this->db->query($query);
 		$tmp = $arr->fetch();
 		return ($tmp[0]);
