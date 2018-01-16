@@ -14,7 +14,6 @@ class Home
 		{
 			// $photo = new
 			$tmp = New Photo();
-			// $this->saveImg($_POST['saveimg']);
 			$tmp->savePhoto($_POST['saveimg']);
 		}
 		include('view/home.php');

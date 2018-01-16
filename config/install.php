@@ -2,9 +2,6 @@
 
 	define('HOST', 'localhost');
 
-
-
-
 	try {
 		$db = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
 		$db->exec('DROP DATABASE camagru');
@@ -20,7 +17,6 @@
 		$db->exec('CREATE DATABASE camagru');
 		$db = new PDO('mysql:host='.HOST.';dbname=camagru;', 'root', 'qwerty');
 
-		// echo "HELLO";
 		$db->exec('CREATE TABLE users (
 					id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					name VARCHAR(30) NOT NULL,
@@ -32,7 +28,9 @@
 		$db->exec('INSERT INTO users (name, pwd) VALUES (\'monsieur\',\'qwerty\')');
 		$db->exec('CREATE TABLE photos (
 					id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-					user_id INT(6) UNSIGNED
+					user_id INT(6) UNSIGNED,
+					date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+					-- ALTER TABLE `ddddd` ADD `dsdfs` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `date`;
 				)');
 		// $db->exec('INSERT INTO users ('name', 'pwd')
 				// VALUES ('mickey', 'qwerty')');

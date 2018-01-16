@@ -4,10 +4,10 @@ define('HOST', 'localhost');
 
 class Database {
 
-	private $connect = false;
-	private $db;
-	private $object;
-	private $dbName;
+	protected $connect = false;
+	protected $db;
+	protected $object;
+	protected $dbName;
 
 	function __construct($name)
 	{
@@ -40,6 +40,7 @@ class Database {
 	{
 		$this->connect();
 		// Database::connect();
+
 
 		$query = 'SELECT * FROM users WHERE name=\'' .$username. '\'';
 		$arr = $this->db->query($query);
