@@ -15,5 +15,18 @@ class DatabasePhoto extends Database
 		echo "HELLO";
 		$this->db->exec('INSERT INTO photos (user_id) VALUES (\''.$user_id.'.\')');
 	}
+
+	public function getPhotos()
+	{
+		$this->connect();
+		$query = 'SELECT * FROM photos';
+		$tmp = $this->db->query($query);
+		$arr = $tmp->fetchAll();
+		// $tmp = $this->db->exec('SELECT * FROM photos');
+
+		// echo "here";
+		// var_dump($tmp);
+		return ($arr);
+	}
 }
  ?>
