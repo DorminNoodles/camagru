@@ -16,6 +16,7 @@
 			var vendorURL = window.URL;
 			video.src = vendorURL.createObjectURL(stream);
 			video.play();
+
 		},
 		function(err){
 			console.log("Error haaaa");
