@@ -10,16 +10,26 @@ class Montage
 {
 	function __construct($request)
 	{
-		$sticker = new Sticker("homer.png");
-		// $login = new Login($request->action);
-		// $login = new Login($request->action);
-		if ($request->action == "saveimg" && isset($_POST["saveimg"]))
-		{
-			$tmp = New Photo();
-			$tmp->savePhoto($_POST['saveimg']);
-		}
 
-		include('view/montage.php');
+		var_dump($_POST);
+		// $sticker = new Sticker("homer.png");
+		// // $login = new Login($request->action);
+		// // $login = new Login($request->action);
+		// if ($request->action == "saveimg" && isset($_POST["saveimg"]))
+		// {
+		// 	$tmp = New Photo();
+		// 	$tmp->savePhoto($_POST['saveimg']);
+		// }
+
+		if (!isset($_POST['photo']))
+		{
+			include('view/camera.php');
+		}
+		else
+		{
+			include('view/canvas.php');
+		}
+		// include('view/montage.php');
 
 
 

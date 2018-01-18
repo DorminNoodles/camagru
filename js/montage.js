@@ -115,3 +115,17 @@
 	}, false);
 
 })()
+
+// resetPhoto.addEventListener('click', function(e)
+// {
+// 	var form = document.createElement("form");
+// 	form.setAttribute("method", "post");
+// 	form.setAttribute("action", "/camagru/montage");
+//
+// 	var hiddenField = document.createElement("input");
+// 	hiddenField.setAttribute("type", "hidden");
+// 	hiddenField.setAttribute("name", "photo");
+// 	hiddenField.setAttribute("value", "tamere");
+// 	form.appendChild(hiddenField);
+//
+// }, false);

@@ -1,5 +1,7 @@
 <div>
-	<canvas id="canvas_camera"></canvas>
-	<canvas id="canvas_sticker"></canvas>
-
+	<video autoplay></video>
+	<canvas id="canvas"></canvas>
+	<button id="takePhoto">Prendre une photo</button>
 </div>
+<script src="/camagru/js/takePhoto.js">
+</script>
