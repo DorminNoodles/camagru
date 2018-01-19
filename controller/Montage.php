@@ -28,6 +28,7 @@ class Montage
 		else
 		{
 			include('view/canvas.php');
+
 		}
 		// include('view/montage.php');
 

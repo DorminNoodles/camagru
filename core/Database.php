@@ -40,8 +40,6 @@ class Database {
 	{
 		$this->connect();
 		// Database::connect();
-
-
 		$query = 'SELECT * FROM users WHERE name=\'' .$username. '\'';
 		$arr = $this->db->query($query);
 		return($arr->fetch());
@@ -56,7 +54,6 @@ class Database {
 		return ($tmp[0]);
 	}
 }
-
 
 
 ?>
