@@ -1,23 +1,63 @@
 (function(){
 
 	// var data;
-	// var sticker = "/camagru/stickers/pika.png";
+	var sticker = "/camagru/stickers/pika.png";
 
 	var video = document.querySelector('video');
 
 	document.getElementById("takePhoto").onclick = function(e)
 	{
 		canvas = document.createElement("canvas");
+		canvas.id = "canvasPhoto";
 		canvas.width = 640;
 		canvas.height = 480;
 		// canvas.video
 		canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
 		// data = canvas.toDataURL('image/png');
-		// console.log( data);
-		// document.body.appendChild(form);
 		// divMontage = document.getElementById("montage");
-		document.body.appendChild(canvas);
+		document.getElementById("montage").appendChild(canvas);
 		video.parentNode.removeChild(video);
+
+		var takeBtn = document.getElementById("takePhoto");
+		takeBtn.parentNode.removeChild(takeBtn);
+
+		var resetBtn = document.createElement("button");
+		resetBtn.id = "resetPhoto";
+		resetBtn.onclick = resetPhoto;
+		// var t = document.createTextNode("Reset Photo");
+		resetBtn.appendChild(document.createTextNode("Reset Photo"));
+
+		document.getElementById("btn").appendChild(resetBtn);
+
+		createStickersCanvas();
+	}
+
+	function createStickersCanvas()
+	{
+		canvasPhoto = document.createElement("canvasPhoto");
+
+		canvas = document.createElement("canvas");
+		canvas.id = "canvasSticker";
+		canvas.width = 640;
+		canvas.height = 480;
+
+
+
+		document.getElementById("canvasPhoto").appendChild(canvas);
+
+		var img = new Image();
+		img.src = sticker;
+		canvas.getContext('2d').drawImage(img, 0, 0, 640, 480);
+
+	}
+
+	function resetPhoto(e)
+	{
+		location.reload();
+		// console.log("HELLLLO");
+		// canvas = document.getElementById("canvasPhoto");
+		// canvas.parentNode.removeChild(canvas);
+
 	}
 
 	if (video)
