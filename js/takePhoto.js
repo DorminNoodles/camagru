@@ -1,6 +1,6 @@
 (function(){
 
-	// var data;
+
 	var sticker = "/camagru/stickers/pika.png";
 
 	var video = document.querySelector('video');
@@ -11,20 +11,14 @@
 		canvas.id = "canvasPhoto";
 		canvas.width = 640;
 		canvas.height = 480;
-		// canvas.video
 		canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
-		// data = canvas.toDataURL('image/png');
-		// divMontage = document.getElementById("montage");
 		document.getElementById("montage").appendChild(canvas);
 		video.parentNode.removeChild(video);
-
 		var takeBtn = document.getElementById("takePhoto");
 		takeBtn.parentNode.removeChild(takeBtn);
-
 		var resetBtn = document.createElement("button");
 		resetBtn.id = "resetPhoto";
 		resetBtn.onclick = resetPhoto;
-		// var t = document.createTextNode("Reset Photo");
 		resetBtn.appendChild(document.createTextNode("Reset Photo"));
 
 		document.getElementById("btn").appendChild(resetBtn);
