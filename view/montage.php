@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <body>
 <?php include 'view/header.php';?>
+<script src="/camagru/js/montage.js"></script>
 <div class="null">
 	<h1>Bienvenue</h1>
 	<p>It s the homepage</p>
@@ -23,8 +24,6 @@
 <img id="casquette" src="/camagru/stickers/casquette.png">
 <img id="apple" src="/camagru/stickers/apple.png">
 
-<script src="/camagru/js/montage.js">
 
-</script>
 
 </body>

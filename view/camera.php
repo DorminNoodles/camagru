@@ -1,17 +1,3 @@
-<style type="text/css">
-	#box-shadow-div{
-		position: fixed;
-		width: 1px;
-		height: 1px;
-		border-radius: 100%;
-		background-color:black;
-		box-shadow: 0 0 10px 10px black;
-		top: 49%;
-		left: 48.85%;
-		pointer-events: none;
-	}
-</style>
-
 <div id="montage">
 	<video autoplay="true"></video>
 </div>

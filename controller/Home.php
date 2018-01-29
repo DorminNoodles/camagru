@@ -8,11 +8,18 @@ require('model/Gallery.php');
 
 class Home
 {
+	public $vars = [];
 	function __construct($request)
 	{
 		$login = new Login($request->action);
 		$gallery = new Gallery();
-		$gallery->display();
+		if (!isset($request->params[0]))
+			$request->params[0] = 0;
+		$photos = $gallery->getPhotos($request->params[0]);
+		$vars['gallery'] = $photos;
+		$vars['btnNextPage'] = $gallery->nextPage($request->params[0]);
+
+
 
 		// if ($request->action == "saveimg" && isset($_POST["saveimg"]))
 		// {

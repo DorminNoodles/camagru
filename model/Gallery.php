@@ -10,26 +10,41 @@ class Gallery
 		$this->photos = $db->getPhotos();
 	}
 
-	function display()
+	function getPhotos($start = 0)
 	{
+		if (!is_numeric($start))
+			$start = 0;
 		// var_dump($this->photos);
 		// echo $this->photos['user_id'];
+		$nbPhotos = count($this->photos);
+		$arr = [];
 
-		foreach($this->photos as $photo)
+		for ($i=0;$i < 5 && $i < $nbPhotos;$i++)
 		{
-			$file = file_get_contents("./photos/".$photo['id']);
-			// $file = file_get_contents("./photos/". $);
+			// echo "start => ".$start;
+			if(isset($this->photos[$start + $i]['id']))
+			{
+				$img = [];
+				// $file = file_get_contents("./photos/".$photo['id'].".png");
+				// $file = file_get_contents("./photos/". $);
 
-			echo '<img src="'. $file .'">';
-			// echo $file;
-			// echo '">';
+				// echo "fuck you -> " . $this->photos[0]['id'];
+				$id = $this->photos[$start + $i]['id'];
 
-
-			// echo '<br>';
-			// var_dump($photo);
-			// echo 'zizi';
+				$img['id'] = $id;
+				$img['path'] = "/camagru/photos/" . $id . ".png";
+				$arr[] = $img;
+			}
 		}
+		return ($arr);
+	}
 
+	function nextPage($nb)
+	{
+		if (!is_numeric($nb))
+			$nb = 0;
+
+		return ("/camagru/home/gallery/". ($nb+5));
 	}
 
 }

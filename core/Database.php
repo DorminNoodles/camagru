@@ -26,7 +26,7 @@ class Database {
 		if (isset($this->db))
 		{
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			echo 'connected to DB';
+			// echo 'connected to DB';
 		}
 	}
 

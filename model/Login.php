@@ -12,7 +12,6 @@ class Login
 
 	function __construct($action)
 	{
-		var_dump($_SESSION);
 		$this->db = new Database("camagru");
 		$this->check_action($action);
 	}
@@ -28,13 +27,12 @@ class Login
 
 	function check_auth()
 	{
-		var_dump($_SESSION);
+
 	}
 
 	public function login($name, $pwd)
 	{
 		$user = $this->db->find_user($name);
-		// var_dump($user);
 		// echo "name : " . strtolower($name);
 		// echo "namedb : " . strtolower($user['name']);
 		echo "pwd : " . $user['pwd'];

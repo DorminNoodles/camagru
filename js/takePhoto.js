@@ -2,6 +2,7 @@ var mouseX;
 var mouseY;
 
 var handleSticker = null;
+var origImg = new Image();
 var stickersArr = [];
 var video = document.querySelector('video');
 
@@ -100,6 +101,9 @@ function replaceVideo()
 	canvas.onclick = pasteSticker;
 	canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
 
+	origImg.src = canvas.toDataURL();
+
+	console.log(origImg.src);
 	document.getElementById("montage").appendChild(canvas);
 	video.parentNode.removeChild(video);
 }
@@ -121,12 +125,47 @@ function pasteSticker()
 function createSaveBtn()
 {
 	var btn = document.createElement("button");
+	btn.id = "saveCompo";
+	btn.onclick = savePhoto;
 	btn.appendChild(document.createTextNode("Save Photo"));
 	document.getElementById("btn").appendChild(btn);
 }
 
 function savePhoto()
 {
+	console.log("HERE");
+	// console.log(origImg.src);
+	var arr = stickersArr;
+	var myJSON = JSON.stringify(arr);
+
+	var params = {json: myJSON, img: origImg.src};
+	// params.push(myJSON);
+	// params.push(origImg.src);// myJSON;
+	// params[] = origImg;
+
+
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", "/camagru/montage/saveCompo");
+
+	for(var key in params)
+	{
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", key);
+		hiddenField.setAttribute("value", params[key]);
+		form.appendChild(hiddenField);
+	}
+	document.body.appendChild(form);
+	form.submit();
+
+
+
+
+
+	// window.location.href = "/camagru/montage/save?compo=" + myJSON + "?img=" + origImg.src;
+
+
 
 
 }
