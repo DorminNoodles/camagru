@@ -1,12 +1,19 @@
-body
+/* body
 {
+	transform: rotate(0deg);
 	margin: 0px;
+	transition: transform 15s;
 }
+
+body:hover{
+	transform: rotate(156165deg);
+} */
 
 #headerContainer
 {
 	background-color: #444444;
 	/* width: 100%; */
+	box-shadow: 0px 0px 4px #444444;
 	align-items: stretch;
 	display: flex;
 	justify-content: center;
@@ -17,11 +24,11 @@ body
 {
 	/* background-color: #; */
 	position: relative;
-	box-shadow: 0px 0px 3px #444444;
 	display: flex;
-	width: 1000px;
+	width: 100%;
+	max-width: 1400px;
 	align-items: center;
-	border: 1px solid;
+	/* border: 1px solid; */
 	font-family: Verdana, Helvetica, Arial, Sans-Serif;
 	color: #CCCCCC;
 	/* color: #FF55FF; */
@@ -56,12 +63,15 @@ body
 	align-items: stretch;
 	display: flex;
 	justify-content: center;
+
 }
 
 #content
 {
 	display: flex;
-	width: 1000px;
+	width: 100%;
+	max-width: 1400px;
+	flex-direction: column;
 }
 
 #mainLogo
@@ -105,6 +115,8 @@ a:hover
 
 #gallery
 {
+	min-height: 700px;
+	min-width: 800px;
 	display: flex;
 	/* flex-direction: column; */
 	flex-wrap: wrap;
@@ -129,10 +141,35 @@ a:hover
 
 #btnGallery
 {
+	display: flex;
 	width:100%;
+	justify-content: center;
 }
 
 #btnLoginMenu
 {
 	cursor: pointer;
+}
+
+
+@media (max-width: 900px)
+{
+	#gallery
+	{
+		width: 100%;
+		display: flex;
+		/* flex-direction: column; */
+		flex-wrap: wrap;
+		justify-content: center;
+		border: 1px #000000 solid;
+	}
+
+	.divPhoto
+	{
+		width: 100%;
+		margin: 5px;
+		font-size: 1vw;
+		/* display: flex; */
+		/* width: 10%%; */
+	}
 }

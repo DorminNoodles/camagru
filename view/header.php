@@ -5,15 +5,7 @@
 		<div id="loginMenu">
 			<div id="btnLoginMenu" onclick=dropDownMenu(true)>+</button>
 				<?php include("view/dropDownMenu.php"); ?>
+			</div>
 		</div>
-
-
-
-		<!-- <?php
-			if (!empty($_SESSION['auth']))
-				include ('view/logInHeader.php');
-			else
-				include ('view/logOutHeader.php');
-		?> -->
 	</div>
 </div>

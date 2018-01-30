@@ -24,6 +24,4 @@
 <img id="casquette" src="/camagru/stickers/casquette.png">
 <img id="apple" src="/camagru/stickers/apple.png">
 
-
-
 </body>

@@ -41,10 +41,21 @@ class Gallery
 
 	function nextPage($nb)
 	{
+		// echo $nb;
 		if (!is_numeric($nb))
 			$nb = 0;
 
 		return ("/camagru/home/gallery/". ($nb+5));
+	}
+
+	function previousPage($nb)
+	{
+		if (is_numeric($nb) && $nb >= 5)
+			$nb -= 5;
+		else
+		$nb = 0;
+
+		return ("/camagru/home/gallery/". $nb);
 	}
 
 }
