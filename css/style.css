@@ -26,7 +26,7 @@ body:hover{
 	position: relative;
 	display: flex;
 	width: 100%;
-	max-width: 1400px;
+	max-width: 1100px;
 	align-items: center;
 	/* border: 1px solid; */
 	font-family: Verdana, Helvetica, Arial, Sans-Serif;
@@ -47,8 +47,8 @@ body:hover{
 {
 	visibility: hidden;
 	position: absolute;
-	left : 5px;
-	top : 18px;
+	left : 0px;
+	top : 20px;
 	width: 200px;
 	height: 400px;
 	background-color: #FFFFFF;
@@ -70,16 +70,16 @@ body:hover{
 {
 	display: flex;
 	width: 100%;
-	max-width: 1400px;
+	max-width: 1200px;
 	flex-direction: column;
 }
 
 #mainLogo
 {
 	margin: 5px;
-	margin-left: 12px;
+	margin-left: 18px;
 	display: flex;
-	width: 75%;
+	width: 85%;
 	/* border: 1px solid #33FFCC; */
 	color: #FFFFFF;
 }
@@ -116,7 +116,7 @@ a:hover
 #gallery
 {
 	min-height: 700px;
-	min-width: 800px;
+	/* min-width: 800px; */
 	display: flex;
 	/* flex-direction: column; */
 	flex-wrap: wrap;
@@ -152,7 +152,7 @@ a:hover
 }
 
 
-@media (max-width: 900px)
+@media (max-width: 700px)
 {
 	#gallery
 	{
