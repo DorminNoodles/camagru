@@ -37,7 +37,8 @@ body:hover{
 
 #loginMenu
 {
-	position: relative;
+	position: absolute;
+	right: 20px;
 	display: flex;
 	/* border: 1px solid; */
 	font-size: 20px;
@@ -47,14 +48,27 @@ body:hover{
 {
 	visibility: hidden;
 	position: absolute;
-	left : 0px;
-	top : 20px;
+	left : -200px;
+	top : 30px;
 	width: 200px;
 	height: 400px;
 	background-color: #FFFFFF;
 	border-radius: 5px;
 	border: 1px #AAAAAA solid;
 }
+
+/* #dropDownMenu
+{
+	visibility: hidden;
+	position: absolute;
+	left : -50px;
+	top : 30px;
+	width: 200px;
+	height: 400px;
+	background-color: #FFFFFF;
+	border-radius: 5px;
+	border: 1px #AAAAAA solid;
+} */
 
 #contentContainer
 {
