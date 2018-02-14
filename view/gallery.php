@@ -2,7 +2,11 @@
 	<?php
 		foreach($this->render['gallery'] as $photo)
 		{
-			echo'<div class="divPhoto"><img class="photo" src="'. $photo['path'] .'"></div>';
+			echo'<div class="divPhoto">';
+			echo '<a href="/camagru/home/photo">';
+			echo '<img class="photo" src="'. $photo['path'] .'">';
+			echo '</a>';
+			echo '</div>';
 		}
 	?>
 

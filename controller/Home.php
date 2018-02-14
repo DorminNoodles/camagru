@@ -19,9 +19,9 @@ class Home
 		// 	$tmp->savePhoto($_POST['saveimg']);
 		// }
 		// var_dump ($request);
-		if ( $request->controller == "photo")
+		if ( $request->controller == "home" && $request->action == "photo")
 		{
-
+			var_dump($request);
 		}
 		else
 			$this->showGallery($request);

@@ -41,7 +41,6 @@ class Gallery
 
 	function nextPage($nb)
 	{
-		// echo $nb;
 		if (!is_numeric($nb))
 			$nb = 0;
 
@@ -57,10 +56,7 @@ class Gallery
 
 		return ("/camagru/home/gallery/". $nb);
 	}
-
 }
-
-
 
 
 ?>
