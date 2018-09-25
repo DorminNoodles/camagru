@@ -1,15 +1,6 @@
 <div class="registerCard">
-	<?php
-		print_r($_POST);
-		if (!empty($_SESSION['auth']))
-		{
-			echo 'You\'re already connected';
-		}
-		else
-		{
-			echo 'Register<br/><br/>';
-		}
-	?>
+	<div>Create an Account</div>
+	<br/>
 	<form class="registerForm" action="Register" method="post">
 		<div class="input">
 			<!-- <label>Name</label> -->
