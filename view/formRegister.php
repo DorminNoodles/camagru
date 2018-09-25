@@ -1,0 +1,30 @@
+<div class="registerCard">
+	<?php
+		print_r($_POST);
+		if (!empty($_SESSION['auth']))
+		{
+			echo 'You\'re already connected';
+		}
+		else
+		{
+			echo 'Register<br/><br/>';
+		}
+	?>
+	<form class="registerForm" action="Register" method="post">
+		<div class="input">
+			<!-- <label>Name</label> -->
+			<input type="text" name="login" placeholder="My Login">
+		</div>
+		<div class="input">
+			<!-- <label>Password</label> -->
+			<input type="password" name="password" placeholder="My Password">
+		</div>
+		<div class="input">
+			<!-- <label>Email</label> -->
+			<input type="text" name="email" placeholder="My Email">
+		</div>
+		<div class="registerBtn">
+			<button type="submit" name="button">Register</button>
+		</div>
+	</form>
+</div>

@@ -1,6 +1,6 @@
 <?php
 
-require('model/Login.php');
+require('model/User.php');
 require('core/File.php');
 require('model/Photo.php');
 require('model/Sticker.php');

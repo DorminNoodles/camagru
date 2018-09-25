@@ -1,11 +1,6 @@
 <div id="headerContainer">
 	<div id="header">
-		<div id="mainLogo"><a href="/camagru">Camagru</a>
-		</div>
-		<div id="loginMenu">
-			<div id="btnLoginMenu" onclick=dropDownMenu(true)>+</button>
-				<?php include("view/dropDownMenu.php"); ?>
-			</div>
-		</div>
+		<div id="mainLogo"><a href="/camagru/home">Camagru</a></div>
+		<div id="headerLink"><a href="/camagru/Register">Register</a></div>
 	</div>
 </div>
