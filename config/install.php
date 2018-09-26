@@ -1,5 +1,5 @@
 <?php
-
+	$path = '/Users/lchety/projet/web/camagru/';
 	define('HOST', 'localhost');
 
 	try {
@@ -35,7 +35,7 @@
 		// $db->exec('INSERT INTO users ('name', 'pwd')
 				// VALUES ('mickey', 'qwerty')');
 
-
+		mkdir($path . "photos", 0700);
 
 
 

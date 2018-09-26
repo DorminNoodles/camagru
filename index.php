@@ -3,6 +3,12 @@
 	require('core/Dispatcher.php');
 
 	new Dispatcher();
+
+
+	$hello = include('model/mailTest.php');
+
+	echo '    ' . $hello;
+
 ?>
 
 <!-- <?php
@@ -18,6 +24,9 @@
 	$tpl->set('name', null);
 
 	echo $tpl->fetch('register.php');
+
+
+
 
 
 	/**

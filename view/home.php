@@ -5,7 +5,7 @@
 	<?php include 'view/header.php';?>
 	<div id="contentContainer">
 		<div id="content">
-			<?php include($this->render['homeContent']);?>
+			<?= $content;?>
 		</div>
 	</div>
 </body>

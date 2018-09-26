@@ -20,8 +20,6 @@ class Montage
 		// 	$tmp->savePhoto($_POST['saveimg']);
 		// }
 
-
-
 		if ($request->action == "saveCompo")
 		{
 			$this->saveCompo();
@@ -57,32 +55,8 @@ class Montage
 
 		$stickers = json_decode($_POST['json']);
 
-
-
-		// echo $_POST['img'];
-		// echo base64_decode($_POST['img']);
-		// echo '<img src="' . $_POST['img'] . '" />';
-		// $photo = $_POST['img'];
-
-		// $image1=imagecreatefrompng($photo->src);
-
 		$photo->mergeStickers($stickers);
-			// var_dump($value);
-			// echo '<br/>';
-			// echo $value->name;
-			// $image2=imagecreatefrompng("./stickers/".$value->name);
-			// $w=imagesx($image2);
-			// $h=imagesy($image2);
-			// imagecopy($image1,$image2,$value->x,$value->y,0,0,$w,$h);
 
-
-		// $image1=imagecreatefrompng($photo);
-        //
-
-        //
-		// imagecopy($image1,$image2,0,0,0,0,$w,$h);
-		// var_dump($image1);
-		// imagepng($photo->src,'./out.png');
 		$photo->savePhoto();
 
 

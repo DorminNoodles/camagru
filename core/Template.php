@@ -4,7 +4,7 @@ class Template {
 	var $vars;
 	var $path;
 
-	function __construct($path) {
+	function __construct($path = 'view/') {
 		$this->path = $path;
 		$this->vars = array();
 	}
@@ -19,6 +19,12 @@ class Template {
 		include($this->path . $file);  // Include the file
 		$contents = ob_get_contents(); // Get the contents of the buffer
 		ob_end_clean();                // End buffering and discard
+		return $contents;              // Return the contents
+	}
+
+	function render() {
+		ob_start();                    // Start output buffering
+		$contents = ob_get_contents(); // Get the contents of the buffer
 		return $contents;              // Return the contents
 	}
 }

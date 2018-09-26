@@ -1,6 +1,6 @@
 <div id="gallery">
 	<?php
-		foreach($this->render['gallery'] as $photo)
+		foreach ($photos as $photo)
 		{
 			echo'<div class="divPhoto">';
 			echo '<a href="/camagru/home/photo">';
@@ -12,6 +12,6 @@
 
 </div>
 <div id="btnGallery">
-	<a href=<?= $this->render['btnPreviousPage']?>><button>precedent</button>
-	<a href=<?= $this->render['btnNextPage']?>><button>suivant</button>
+	<a href=<?= $previousPage; ?>><button>precedent</button>
+	<a href=<?= $nextPage; ?>><button>suivant</button>
 </div>

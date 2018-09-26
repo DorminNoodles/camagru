@@ -1,15 +1,25 @@
 <?php
 
-	$headers = array("From: from@example.com",
-	"Reply-To: replyto@example.com",
-	"X-Mailer: PHP/" . PHP_VERSION
-	);
+	$emailTo = htmlspecialchars($userinfo['email']);
+	$emailFrom = 'test@camagru.com';
+	$subject = "Camagru - Confirm Your Account";
+	$message = "To create your account, confirm by clicking on the link below <br/> <a href='http://localhost:". PORT . DS . $this->req->path . "/verisignup/validEmail/" . $_POST['login'] . "'>Confirm account</a>";
+	$headers = "From: " . $emailFrom . "\r\n";
+	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+	mail($emailTo, $subject, $message, $headers);
 
-	$headers = implode("\r\n", $headers);
+	// $headers = array("From: from@example.com",
+	// "Reply-To: replyto@example.com",
+	// "X-Mailer: PHP/" . PHP_VERSION
+	// );
 
-	echo "bordel de merde";
+	// $headers = implode("\r\n", $headers);
 
-$ret =  mail ( "loic.chety@gmail.com" , "hello" , "bye !", $headers);
+	// echo "bordel de merde";
+
+	mail($emailTo, $subject, $message, $headers);
+
+// $ret =  mail ( "blabla@yopmail.com" , "hello" , "bye !");
 
 if ($ret)
 	echo "   ret OK  ";
