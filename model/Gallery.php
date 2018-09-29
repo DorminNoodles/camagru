@@ -1,11 +1,12 @@
 <?php
 
+require('model/DatabasePhoto.php');
+
 class Gallery
 {
 	public $photos;
 
-	function __construct()
-	{
+	function __construct() {
 		$db = new DatabasePhoto("camagru");
 		$this->photos = $db->getPhotos();
 	}
@@ -14,8 +15,6 @@ class Gallery
 	{
 		if (!is_numeric($start))
 			$start = 0;
-		// var_dump($this->photos);
-		// echo $this->photos['user_id'];
 		$nbPhotos = count($this->photos);
 		$arr = [];
 
@@ -25,10 +24,6 @@ class Gallery
 			if(isset($this->photos[$start + $i]['id']))
 			{
 				$img = [];
-				// $file = file_get_contents("./photos/".$photo['id'].".png");
-				// $file = file_get_contents("./photos/". $);
-
-				// echo "fuck you -> " . $this->photos[0]['id'];
 				$id = $this->photos[$start + $i]['id'];
 
 				$img['id'] = $id;

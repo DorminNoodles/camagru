@@ -1,12 +1,15 @@
 <?php
 
-require_once("core/Database.php");
+// require_once('core/Database.php');
+// require('core/Database.php');
 
 class DatabasePhoto extends Database
 {
+
 	function __construct($name)
 	{
 		parent::__construct($name);
+		$db = new Database();
 	}
 
 	public function insertPhoto($user_id)
@@ -22,10 +25,6 @@ class DatabasePhoto extends Database
 		$query = 'SELECT * FROM photos';
 		$tmp = $this->db->query($query);
 		$arr = $tmp->fetchAll();
-		// $tmp = $this->db->exec('SELECT * FROM photos');
-
-		// echo "here";
-		// var_dump($tmp);
 		return ($arr);
 	}
 }

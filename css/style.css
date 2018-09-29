@@ -176,7 +176,27 @@ a:hover
 	justify-content: center;
 }
 
+.login
+{
+	display: flex;
+	justify-content: center;
+}
+
 .registerCard
+{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 10px;
+	margin: 10px;
+	border: 1px #DDD solid;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #DDD;
+	width: 100%;
+	max-width: 360px;
+}
+
+.loginCard
 {
 	display: flex;
 	justify-content: center;
@@ -213,12 +233,6 @@ a:hover
 	justify-content: center;
 }
 
-
-.registerForm
-{
-	/* display: flex; */
-	/* justify-content: center; */
-}
 
 
 

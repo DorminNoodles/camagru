@@ -20,7 +20,8 @@
 		$db->exec('CREATE TABLE users (
 					id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					name VARCHAR(30) NOT NULL,
-					pwd VARCHAR(255) NOT NULL
+					pwd VARCHAR(255) NOT NULL,
+					likes BLOB(65535)
 				)');
 
 		$db->exec('INSERT INTO users (name, pwd) VALUES (\'admin\',\'qwerty\')');

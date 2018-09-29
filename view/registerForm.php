@@ -4,7 +4,7 @@
 	<form class="registerForm" action="Register" method="post">
 		<div class="input">
 			<!-- <label>Name</label> -->
-			<input type="text" name="login" placeholder="My Login">
+			<input type="text" name="username" placeholder="My Login">
 		</div>
 		<div class="input">
 			<!-- <label>Password</label> -->

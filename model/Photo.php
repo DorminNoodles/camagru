@@ -1,6 +1,7 @@
 <?php
 
-require("model/DatabasePhoto.php");
+// require("model/DatabasePhoto.php");
+require("core/DatabasePhoto.php");
 
 class Photo extends File
 {
@@ -15,14 +16,8 @@ class Photo extends File
 	public function savePhoto()
 	{
 		echo ("SAVE IMG !");
-		// $img = new File();
-		// $this->data = $data;
 		$db = new Database("camagru");
-        //
-		// echo $db->tableSize("images");
-        //
 		$nb = $db->tableSize("photos");
-		// $this->savePhoto("photos/", $nb+1);
 		imagepng($this->src, "./photos/". ($nb + 1) .".png");
 		$this->insertPhoto($db, $nb+1, 4);
 	}
@@ -35,7 +30,6 @@ class Photo extends File
 
 	public function mergeImage($dest, $src, $pos)
 	{
-		echo "chatte";
 
 	}
 

@@ -3,7 +3,7 @@
 		foreach ($photos as $photo)
 		{
 			echo'<div class="divPhoto">';
-			echo '<a href="/camagru/home/photo">';
+			echo '<a href="/camagru/detail/' . $photo['id'] . '">';
 			echo '<img class="photo" src="'. $photo['path'] .'">';
 			echo '</a>';
 			echo '</div>';

@@ -3,26 +3,26 @@
  *
  */
 
-require('core/Database.php');
 
-class Login
+
+class User
 {
 	private $auth;
 	private $db;
 
-	function __construct($action)
+	function __construct()
 	{
 		$this->db = new Database("camagru");
-		$this->check_action($action);
+		// $this->check_action($action);
 	}
 
 	function check_action($action)
 	{
 		// echo 'check action !!!!!    action -> ' . $action;
-		if($action === 'logout')
-			$this->logout();
-		if($action === 'login')
-			$this->login($_POST['name'], $_POST['pwd']);
+		// if($action === 'logout')
+		// 	$this->logout();
+		// if($action === 'login')
+		// 	$this->login($_POST['name'], $_POST['pwd']);
 	}
 
 	function check_auth()
@@ -45,6 +45,25 @@ class Login
 		else {
 			echo "WRONG PASSWORD";
 		}
+	}
+
+	function addLike($photoId) {
+
+		$db->connect();
+
+		$arr = getLikes();
+
+		$arr['$photoId'] = true;
+		$serialized = serialize($arr);
+		// $quer
+		$this->db->exec('INSERT INTO users (likes) VALUES (\''.$serialized.'.\')');
+
+	}
+
+	function getLike() {
+		$this->connect();
+		return (null);
+		// $query = 'SELECT likes FROM users'
 	}
 
 	public function logout()
