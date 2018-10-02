@@ -4,75 +4,95 @@
  */
 
 
-
 class User
 {
 	private $auth;
 	private $db;
+	private $id;
+	private $name;
+	private $likes;
 
-	function __construct()
-	{
+	function __construct() {
 		$this->db = new Database("camagru");
-		// $this->check_action($action);
+		$this->auth = false;
 	}
 
-	function check_action($action)
-	{
-		// echo 'check action !!!!!    action -> ' . $action;
-		// if($action === 'logout')
-		// 	$this->logout();
-		// if($action === 'login')
-		// 	$this->login($_POST['name'], $_POST['pwd']);
+	public function save() {
+		$_SESSION['user'] = serialize($this);
 	}
 
-	function check_auth()
-	{
-
+	public function getAuth() {
+		return ($this->auth);
 	}
 
-	public function login($name, $pwd)
-	{
-		$user = $this->db->find_user($name);
-		// echo "name : " . strtolower($name);
-		// echo "namedb : " . strtolower($user['name']);
-		echo "pwd : " . $user['pwd'];
-		echo "pwd : " . $pwd;
-		if (strtolower($name) === strtolower($user['name']) && $pwd === $user['pwd'])
-		{
-			echo "CONNECTION !!!!!";
-			$_SESSION['auth'] = true;
-		}
-		else {
-			echo "WRONG PASSWORD";
-		}
+	public function setAuth($auth) {
+		$this->auth = $auth;
+	}
+	public function setID($id) {
+		$this->id = $id;
 	}
 
-	function addLike($photoId) {
+	public function getID() {
+		return $this->id;
+	}
 
-		$db->connect();
+	public function setName($name) {
+		$this->name = $name;
+	}
 
-		$arr = getLikes();
+	public function getName() {
+		return $this->name;
+	}
 
-		$arr['$photoId'] = true;
+	public function addLike($photoId) {
+		$arr = $this->db->updateLikes($photoID, 1);
+	}
+
+	public function deleteLike($photoID) {
+		$this->db->connect();
+		$arr = $this->db->userGetLikes();
+		$arr[$photoID] = false;
 		$serialized = serialize($arr);
-		// $quer
-		$this->db->exec('INSERT INTO users (likes) VALUES (\''.$serialized.'.\')');
-
+		$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = 1');
 	}
 
-	function getLike() {
-		$this->connect();
-		return (null);
-		// $query = 'SELECT likes FROM users'
+	function checkLike() {
+		$ret = $this->db->userGetLikes(1);
+		print_r($ret);
+		return ($ret);
 	}
 
-	public function logout()
-	{
+	public function setLikes($likes) {
+		$this->likes = $likes;
+	}
+
+	public function getLikes() {
+		return $this->likes;
+	}
+
+	public function logout() {
 		echo 'test';
 		$_SESSION['auth'] = false;
 		// $_SESSION = NULL;
 		echo 'here ->';
 		var_dump($_SESSION);
+	}
+
+	public function login($name, $password) {
+
+		$arr = [];
+		$data = $this->db->find_user($name);
+
+		if (strtolower($name) === strtolower($data['name']) && $password === $data['pwd']) {
+			$this->setAuth(true);
+			$this->setID($data['id']);
+			// $this->setLikes(unserialize($data['likes']));
+			$arr['valid'] = true;
+		}
+		else
+			$arr['valid'] = false;
+		// $this->save();
+		return $arr;
 	}
 }
 

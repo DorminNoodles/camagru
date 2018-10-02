@@ -24,6 +24,9 @@ class Home extends Controller
 		$this->tpl->set('content', $tplGallery->fetch('gallery.php'));
 		echo $this->tpl->fetch('main.php');
 
+		$unseri = unserialize($_SESSION['user']);
+
+		$unseri->getLikes();
 	}
 
 	function render()

@@ -11,21 +11,45 @@ class Login extends Controller
 
 		parent::__construct();
 
-		echo $this->hello;
+		echo $this->user->getName();
 
-		$arr = [];
 
-		// print_r($_POST);
-		// $arr = $this->createUser();
-		$this->displayForm = (isset($_SESSION['id'])) ? false : true;
+		if (isset($_POST['username']) && isset($_POST['password']) && !$this->user->getAuth())
+		{
+			$ret = $this->connectUser();
+			if (!$ret['valid'])
+				echo "Hello";
+		}
+
+		$this->displayForm = ($this->user->getAuth()) ? false : true;
 
 		$contentTpl = new Template('view/');
-		$this->tpl->set('content', $contentTpl->fetch('registerSuccess.php'));
+		$this->tpl->set('content', $contentTpl->fetch('loginSuccess.php'));
 		if ($this->displayForm)
 		{
 			$this->tpl->set('content', $contentTpl->fetch('loginForm.php'));
 		}
 		echo $this->tpl->fetch('main.php');
+	}
+
+	function checkInputs() {
+
+		return (true);
+	}
+
+
+	function connectUser()
+	{
+		echo "CONNECT_USER";
+
+
+		$arr['valid'] = (!$this->checkInputs()) ? false : true;
+		if ($arr['valid'])
+			$arr = $this->user->login($_POST['username'], $_POST['password']);
+
+		$this->user->save();
+
+		return ($arr);
 	}
 
 	// function createUser() {

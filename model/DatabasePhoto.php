@@ -9,7 +9,7 @@ class DatabasePhoto extends Database
 	function __construct($name)
 	{
 		parent::__construct($name);
-		$db = new Database();
+		$db = new Database('camagru');
 	}
 
 	public function insertPhoto($user_id)

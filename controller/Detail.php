@@ -14,6 +14,8 @@ class Detail extends Controller {
 		$this->tpl->set('content', $detailTpl->fetch('detail.php'));
 
 		echo ($this->tpl->fetch('main.php'));
+
+		$this->user->addLike(5);
 	}
 }
 
