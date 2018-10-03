@@ -16,15 +16,20 @@ class Controller
 	function __construct()
 	{
 		$this->tpl = new Template('view/');
+		$this->db = new Database('camagru');
 
-		if (!isset($_SESSION['user']))
+		if (!isset($_SESSION['id']))
 		{
-			$this->user = new User();
-			$_SESSION['user'] = serialize($this->user);
+			// $this->user = new User();
+			// $_SESSION['user'] = serialize($this->user);
 		}
 
-		$this->user = unserialize($_SESSION['user']);
-		$this->db = new Database('camagru');
+		if (isset($_SESSION['id']))
+		{
+			$this->user = new User();
+			// $_SESSION['user'] = serialize($this->user);
+		}
+
 	}
 }
 

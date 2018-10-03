@@ -11,44 +11,45 @@ class Login extends Controller
 
 		parent::__construct();
 
-		echo $this->user->getName();
-
-
-		if (isset($_POST['username']) && isset($_POST['password']) && !$this->user->getAuth())
+		if (isset($_POST['username']) && isset($_POST['password']) && !isset($_POST['id']))
 		{
-			$ret = $this->connectUser();
-			if (!$ret['valid'])
-				echo "Hello";
+			$ret = $this->connectUser($_POST['username'], $_POST['password']);
 		}
 
-		$this->displayForm = ($this->user->getAuth()) ? false : true;
+		// $this->displayForm = (isset($_SESSION['id'])) ? false : true;
 
 		$contentTpl = new Template('view/');
-		$this->tpl->set('content', $contentTpl->fetch('loginSuccess.php'));
-		if ($this->displayForm)
-		{
+
+		if (isset($_SESSION['id']))
+			$this->tpl->set('content', $contentTpl->fetch('loginSuccess.php'));
+		else
 			$this->tpl->set('content', $contentTpl->fetch('loginForm.php'));
-		}
 		echo $this->tpl->fetch('main.php');
 	}
 
 	function checkInputs() {
-
 		return (true);
 	}
 
 
-	function connectUser()
-	{
+	function connectUser($name, $pwd) {
 		echo "CONNECT_USER";
 
 
 		$arr['valid'] = (!$this->checkInputs()) ? false : true;
 		if ($arr['valid'])
-			$arr = $this->user->login($_POST['username'], $_POST['password']);
+		{
+			$data = $this->db->find_user($name);
+			if (strtolower($name) === strtolower($data['name']) && $pwd === $data['pwd'])
+			{
+				$_SESSION['id'] = $data['id'];
+				$arr['valid'] = true;
+			}
+			else
+				$arr['valid'] = false;
+			return $arr;
 
-		$this->user->save();
-
+		}
 		return ($arr);
 	}
 

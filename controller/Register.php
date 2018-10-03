@@ -11,25 +11,27 @@ class Register extends Controller
 
 		parent::__construct();
 
-		echo $this->hello;
-
 		$arr = [];
-
-		// print_r($_POST);
-		$arr = $this->createUser();
+		$arr['valid'] = false;
+		$arr['message'] = '';
+		if(!empty($_POST))
+			$arr = $this->createUser();
 		$this->displayForm = ($arr['valid']) ? false : true;
-
 		$contentTpl = new Template('view/');
 		$this->tpl->set('content', $contentTpl->fetch('registerSuccess.php'));
-		if ($this->displayForm)
+		$contentTpl->set('message', $arr['message']);
+		if (!$arr['valid'])
 		{
 			$this->tpl->set('content', $contentTpl->fetch('registerForm.php'));
 		}
+
+		// if (!$arr['valid'])
+		// 	echo $arr['message'];
+
 		echo $this->tpl->fetch('main.php');
 	}
 
 	function createUser() {
-
 		echo "Create_User";
 		$arr = $this->checkInputs();
 		if (!$arr['valid'])
@@ -39,7 +41,6 @@ class Register extends Controller
 		$db = new Database('camagru');
 		$ret = $db->find_user($_POST['username']);
 
-		// print_r($ret);
 
 		if (!isset($ret))
 		{
@@ -63,18 +64,38 @@ class Register extends Controller
 	function checkInputs() {
 
 		$arr = [];
-		$valid = true;
+		$arr['valid'] = true;
+		$arr['message'] = '';
 
-		if (!$valid || !isset($_POST['username']))
+		if (!$arr['valid'] || !isset($_POST['username']))
 		{
-			echo ' >' . $valid . '< ';
-			$valid = false;
-			// echo ' >' . $valid . '< ';
-			$arr['username'] = 'Username need to be specified !';
+			$arr['valid'] = false;
+			$arr['message'] = 'Username need to be specified !';
+			return $arr;
+		}
+
+		if (!$arr['valid'] || !isset($_POST['password']))
+		{
+			$arr['valid'] = false;
+			$arr['message'] = 'Password need to be specified !';
+			return $arr;
+		}
+
+		if (!$arr['valid'] || strlen($_POST['password']) < 6)
+		{
+			$arr['valid'] = false;
+			$arr['message'] = 'password must be 6 characters minimum !';
+			return $arr;
 		}
 
 
-		$arr['valid'] = $valid;
+		if (!$arr['valid'] || strlen($_POST['email']) < 5)
+		{
+			$arr['valid'] = false;
+			$arr['message'] = 'Invalid email !';
+			return $arr;
+		}
+
 		return $arr;
 	}
 

@@ -12,10 +12,11 @@
 		</div>
 		<div class="input">
 			<!-- <label>Email</label> -->
-			<input type="text" name="email" placeholder="My Email">
+			<input type="email" name="email" placeholder="My Email">
 		</div>
 		<div class="registerBtn">
 			<button type="submit" name="button">Register</button>
 		</div>
 	</form>
+	<div><?= $message;?></div>
 </div>

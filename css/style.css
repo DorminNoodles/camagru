@@ -40,6 +40,11 @@ body
 
 }
 
+.headerLink
+{
+	margin-right: 25px;
+}
+
 #loginMenu
 {
 	position: absolute;

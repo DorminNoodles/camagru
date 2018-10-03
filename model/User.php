@@ -6,7 +6,7 @@
 
 class User
 {
-	private $auth;
+	// private $auth;
 	private $db;
 	private $id;
 	private $name;
@@ -17,10 +17,6 @@ class User
 		$this->auth = false;
 	}
 
-	public function save() {
-		$_SESSION['user'] = serialize($this);
-	}
-
 	public function getAuth() {
 		return ($this->auth);
 	}
@@ -28,6 +24,7 @@ class User
 	public function setAuth($auth) {
 		$this->auth = $auth;
 	}
+
 	public function setID($id) {
 		$this->id = $id;
 	}
@@ -79,20 +76,20 @@ class User
 	}
 
 	public function login($name, $password) {
-
-		$arr = [];
-		$data = $this->db->find_user($name);
-
-		if (strtolower($name) === strtolower($data['name']) && $password === $data['pwd']) {
-			$this->setAuth(true);
-			$this->setID($data['id']);
-			// $this->setLikes(unserialize($data['likes']));
-			$arr['valid'] = true;
-		}
-		else
-			$arr['valid'] = false;
+		// $arr = [];
+		// $data = $this->db->find_user($name);
+		// $this->db->find_user($name);
+		//
+		// if (strtolower($name) === strtolower($data['name']) && $password === $data['pwd']) {
+		// 	$this->setAuth(true);
+		// 	$this->setID($data['id']);
+		// 	$this->setLikes(unserialize($data['likes']));
+		// 	$arr['valid'] = true;
+		// }
+		// else
+		// 	$arr['valid'] = false;
 		// $this->save();
-		return $arr;
+		// return $arr;
 	}
 }
 
