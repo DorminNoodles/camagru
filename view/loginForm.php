@@ -15,5 +15,6 @@
 				<button type="submit" name="button">Login</button>
 			</div>
 		</form>
+		<div><?= $message; ?></div>
 	</div>
 </div>

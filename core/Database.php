@@ -36,31 +36,6 @@ class Database {
 
 	}
 
-	public function updateLikes($photoID, $userID) {
-
-		$this->connect();
-		$prep = $this->db->prepare('SELECT likes FROM users WHERE id = '.$userID.'');
-		$prep->execute();
-		$ret = $prep->fetchAll();
-		$likes = unserialize($ret[0]['likes']);
-
-		if (isset($likes[$photoID]))
-			$likes[$photoID] = !$likes[$photoID];
-		else
-			$likes[$photoID] = true;
-
-		// print_r($likes);
-
-		echo 'fuck >    ';
-		print_r($likes);
-
-
-		$serialized = serialize($likes);
-
-		$prep = $this->db->prepare('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$userID.'');
-		$prep->execute();
-}
-
 	public function userGetLikes($userID) {
 		$this->connect();
 		$prep = $this->db->prepare('SELECT likes FROM users WHERE id = '.$userID.'');
@@ -82,6 +57,14 @@ class Database {
 	{
 		$this->connect();
 		$query = 'SELECT * FROM users WHERE name=\'' .$username. '\'';
+		$arr = $this->db->query($query);
+		return($arr->fetch());
+	}
+
+	public function findUserById($id)
+	{
+		$this->connect();
+		$query = 'SELECT * FROM users WHERE id=\'' .$id. '\'';
 		$arr = $this->db->query($query);
 		return($arr->fetch());
 	}

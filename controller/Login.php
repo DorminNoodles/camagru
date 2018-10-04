@@ -13,17 +13,23 @@ class Login extends Controller
 
 		if (isset($_POST['username']) && isset($_POST['password']) && !isset($_POST['id']))
 		{
-			$ret = $this->connectUser($_POST['username'], $_POST['password']);
+			$arr = $this->connectUser($_POST['username'], $_POST['password']);
 		}
 
 		// $this->displayForm = (isset($_SESSION['id'])) ? false : true;
 
 		$contentTpl = new Template('view/');
 
+		if (empty($arr['message']))
+			$contentTpl->set('message', '');
+		else
+			$contentTpl->set('message', $arr['message']);
+
 		if (isset($_SESSION['id']))
 			$this->tpl->set('content', $contentTpl->fetch('loginSuccess.php'));
 		else
 			$this->tpl->set('content', $contentTpl->fetch('loginForm.php'));
+
 		echo $this->tpl->fetch('main.php');
 	}
 
@@ -35,7 +41,7 @@ class Login extends Controller
 	function connectUser($name, $pwd) {
 		echo "CONNECT_USER";
 
-
+		$arr['message'] = '';
 		$arr['valid'] = (!$this->checkInputs()) ? false : true;
 		if ($arr['valid'])
 		{
@@ -46,7 +52,10 @@ class Login extends Controller
 				$arr['valid'] = true;
 			}
 			else
+			{
 				$arr['valid'] = false;
+				$arr['message'] = "Error bad username or password";
+			}
 			return $arr;
 
 		}
