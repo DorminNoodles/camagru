@@ -15,6 +15,7 @@ class Dispatcher
 		$request = new Request($_SERVER['REQUEST_URI']);
 		// $request = new Request($_SERVER['REQUEST_URI']);
 		// echo $request->controller;
+
 		new Routeur($request);
 	}
 }

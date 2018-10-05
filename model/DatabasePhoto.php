@@ -1,11 +1,12 @@
 <?php
 
+use camagru\core\Database;
+
 // require_once('core/Database.php');
 // require('core/Database.php');
 
 class DatabasePhoto extends Database
 {
-
 	function __construct($name)
 	{
 		parent::__construct($name);

@@ -1,40 +1,39 @@
 <?php
 
-require('model/User.php');
-require('core/File.php');
+// require('model/User.php');
+// require('core/File.php');
 require('model/Photo.php');
-require('model/Sticker.php');
+// require('model/Sticker.php');
+require('core/Controller.php');
 
 
-class Montage
+class Montage extends Controller
 {
 	function __construct($request)
 	{
+		echo "hello";
+		$test = new Database("bite");
+		//
+		parent::__construct();
+		//
+		$contentTpl = new Template('view/');
+		$this->tpl->set('content', $contentTpl->fetch('camera.php'));
 
-		// $sticker = new Sticker("homer.png");
-		// // $login = new Login($request->action);
-		// // $login = new Login($request->action);
-		// if ($request->action == "saveimg" && isset($_POST["saveimg"]))
-		// {
-		// 	$tmp = New Photo();
-		// 	$tmp->savePhoto($_POST['saveimg']);
-		// }
-
+		echo $this->tpl->fetch('main.php');
 		if ($request->action == "saveCompo")
 		{
 			$this->saveCompo();
 		}
-
-		if (!isset($_POST['photo']))
-		{
-			include('view/camera.php');
-		}
-		else
-		{
-			include('view/canvas.php');
-
-		}
-		// include('view/montage.php');
+		//
+		// if (!isset($_POST['photo']))
+		// {
+		// 	include('view/camera.php');
+		// }
+		// else
+		// {
+		// 	include('view/canvas.php');
+		//
+		// }
 
 
 

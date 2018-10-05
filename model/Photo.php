@@ -1,7 +1,7 @@
 <?php
 
-// require("model/DatabasePhoto.php");
-require("core/DatabasePhoto.php");
+echo "PIKACHU";
+require("model/DatabasePhoto.php");
 
 class Photo extends File
 {
@@ -9,7 +9,6 @@ class Photo extends File
 	public $src;
 	function __construct()
 	{
-
 
 	}
 
