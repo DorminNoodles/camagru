@@ -1,9 +1,8 @@
 <?php
 
-use camagru\core\Database;
+// use camagru\core\Database;
 
 // require_once('core/Database.php');
-// require('core/Database.php');
 
 class DatabasePhoto extends Database
 {

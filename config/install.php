@@ -1,4 +1,8 @@
 <?php
+
+	define('USERNAME', 'root');
+    define('PSSWD', 'root');
+
 	$path = '/Users/lchety/projet/web/camagru/';
 	define('HOST', 'localhost');
 
@@ -32,10 +36,13 @@
 					user_id INT(6) UNSIGNED,
 					date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 					-- ALTER TABLE `ddddd` ADD `dsdfs` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `date`;
-				)');
-		// $db->exec('INSERT INTO users ('name', 'pwd')
-				// VALUES ('mickey', 'qwerty')');
-
+		)');
+		$db->exec('CREATE TABLE comments (
+			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			id_photo INT(6) UNSIGNED,
+			name VARCHAR(30) NOT NULL,
+			content TEXT(3000)
+		)');
 		mkdir($path . "photos", 0700);
 
 

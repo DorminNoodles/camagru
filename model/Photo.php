@@ -1,15 +1,18 @@
 <?php
 
-echo "PIKACHU";
 require("model/DatabasePhoto.php");
 
 class Photo extends File
 {
 
-	public $src;
+	protected $src;
 	function __construct()
 	{
 
+	}
+
+	public function setSrc($src) {
+		$this->src = $src;
 	}
 
 	public function savePhoto()
@@ -51,6 +54,5 @@ class Photo extends File
 		// echo "hihihihi".$sticker->name;
 	}
 }
-
 
 ?>

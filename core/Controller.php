@@ -1,6 +1,5 @@
 <?php
 
-require('core/Database.php');
 require('core/Template.php');
 require('model/User.php');
 

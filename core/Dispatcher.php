@@ -13,6 +13,7 @@ class Dispatcher
 	{
 		echo 'Hello DISPATCHER <br>';
 		$request = new Request($_SERVER['REQUEST_URI']);
+
 		// $request = new Request($_SERVER['REQUEST_URI']);
 		// echo $request->controller;
 

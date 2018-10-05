@@ -1,42 +1,24 @@
 <?php
 
-// require('model/User.php');
-// require('core/File.php');
 require('model/Photo.php');
-// require('model/Sticker.php');
 require('core/Controller.php');
-
 
 class Montage extends Controller
 {
 	function __construct($request)
 	{
-		echo "hello";
-		$test = new Database("bite");
-		//
 		parent::__construct();
 		//
 		$contentTpl = new Template('view/');
 		$this->tpl->set('content', $contentTpl->fetch('camera.php'));
+		// $this->tpl->set('content', $contentTpl->fetch('canvas.php'));
 
 		echo $this->tpl->fetch('main.php');
+
 		if ($request->action == "saveCompo")
 		{
 			$this->saveCompo();
 		}
-		//
-		// if (!isset($_POST['photo']))
-		// {
-		// 	include('view/camera.php');
-		// }
-		// else
-		// {
-		// 	include('view/canvas.php');
-		//
-		// }
-
-
-
 	}
 
 	function render()
@@ -49,9 +31,9 @@ class Montage extends Controller
 	{
 		$photo = new Photo();
 
-		$photo->src = $_POST['img'];
+		$photo->setSrc($_POST['img']);
 
-
+		// echo "  ".$photo->src."  ";
 		$stickers = json_decode($_POST['json']);
 
 		$photo->mergeStickers($stickers);
