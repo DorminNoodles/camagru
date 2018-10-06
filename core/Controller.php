@@ -26,13 +26,12 @@ class Controller
 		if (isset($_SESSION['id']))
 		{
 			$this->user = new User();
-			// $data = $this->db->findUserById($_SESSION['id']);
-
-			// $this->user->setLikes(unserialize($data['likes']));
-			$this->user->setLikes($this->db->userGetLikes($_SESSION['id']));
+			// $this->user->setLikes($this->db->userGetLikes($_SESSION['id']));
+			// $this->user->setLikes();
+			$arr = $this->db->select(['likes'], 'users', 'WHERE id = '.$_SESSION['id']);
+			$this->user->setLikes(unserialize($arr[0][0]));
 			print_r($this->user->getLikes());
 			$this->user->setID($_SESSION['id']);
-			// $_SESSION['user'] = serialize($this->user);
 		}
 
 	}

@@ -133,17 +133,9 @@ function createSaveBtn()
 
 function savePhoto()
 {
-	console.log("HERE");
-	// console.log(origImg.src);
 	var arr = stickersArr;
 	var myJSON = JSON.stringify(arr);
-
-	var params = {json: myJSON, img: origImg.src};
-	// params.push(myJSON);
-	// params.push(origImg.src);// myJSON;
-	// params[] = origImg;
-
-
+	var params = {stickers: myJSON, img: origImg.src};
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
 	form.setAttribute("action", "/camagru/montage/saveCompo");
@@ -158,16 +150,6 @@ function savePhoto()
 	}
 	document.body.appendChild(form);
 	form.submit();
-
-
-
-
-
-	// window.location.href = "/camagru/montage/save?compo=" + myJSON + "?img=" + origImg.src;
-
-
-
-
 }
 
 function pasteOnCanvas()
@@ -180,7 +162,7 @@ function pasteOnCanvas()
 	img.src = "/camagru/stickers/" + handleSticker;
 
 	x = (mouseX - (img.width/2)) - canvas.offsetLeft;
-	y = (mouseY - (img.height/2)) - canvas.offsetTop;
+	y = (mouseY - (img.height/2)) - canvas.offsetTop + document.body.scrollTop;
 	canvas.getContext('2d').drawImage(img, x, y);
 
 	stickersArr.push({x:x, y:y, name:handleSticker});

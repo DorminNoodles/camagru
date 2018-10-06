@@ -21,12 +21,11 @@ class Database {
 			$this->db = new PDO('mysql:host='.HOST.';dbname='.$this->dbName.';', 'root', 'qwerty');
 		}
 		catch ( PDOException $Exception ){
-			echo 'erro DB : fuck PDO';
+			echo 'error Database connection';
 		}
 		if (isset($this->db))
 		{
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			// echo 'connected to DB';
 		}
 	}
 
@@ -34,6 +33,14 @@ class Database {
 	{
 
 
+	}
+
+	public function select($colsArr, $table, $condition) {
+		$this->connect();
+		$cols = implode(',', $colsArr);
+		$query = $this->db->prepare('SELECT '.$cols.' FROM '.$table.' '.$condition);
+		$query->execute();
+		return $query->fetchAll();
 	}
 
 	public function userGetLikes($userID) {
@@ -50,7 +57,6 @@ class Database {
 
 	public function exec($query) {
 		$ret = $this->db->exec($query);
-		// echo $ret->fetch();
 	}
 
 	public function find_user($username)

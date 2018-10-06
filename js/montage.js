@@ -135,13 +135,13 @@
 
 (function()
 {
-	var photo = document.getElementById("photo").value;
-	console.log(photo);
-	var canvasPhoto = document.querySelector("#canvasPhoto");
+	// var photo = document.getElementById("photo").value;
+	// console.log(photo);
+	// var canvasPhoto = document.querySelector("#canvasPhoto");
 	// var photo = "<?php echo $_POST['photo'] ?>";
 
-	canvasPhoto.width = 640;
-	canvasPhoto.height = 480;
+	// canvasPhoto.width = 640;
+	// canvasPhoto.height = 480;
 	// var img = new Image();
 	// img.src = ;
 	// canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);

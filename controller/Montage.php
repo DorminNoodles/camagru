@@ -15,10 +15,9 @@ class Montage extends Controller
 
 		echo $this->tpl->fetch('main.php');
 
-		if ($request->action == "saveCompo")
-		{
+		print_r($_POST);
+		if ($request->action == "saveCompo" && $_POST['img'] && $_POST['stickers'])
 			$this->saveCompo();
-		}
 	}
 
 	function render()
@@ -34,7 +33,7 @@ class Montage extends Controller
 		$photo->setSrc($_POST['img']);
 
 		// echo "  ".$photo->src."  ";
-		$stickers = json_decode($_POST['json']);
+		$stickers = json_decode($_POST['stickers']);
 
 		$photo->mergeStickers($stickers);
 
