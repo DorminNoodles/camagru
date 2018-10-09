@@ -15,7 +15,6 @@ class Montage extends Controller
 
 		echo $this->tpl->fetch('main.php');
 
-		print_r($_POST);
 		if ($request->action == "saveCompo" && $_POST['img'] && $_POST['stickers'])
 			$this->saveCompo();
 	}

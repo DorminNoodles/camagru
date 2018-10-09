@@ -31,6 +31,7 @@ class Controller
 			$arr = $this->db->select(['likes'], 'users', 'WHERE id = '.$_SESSION['id']);
 			$this->user->setLikes(unserialize($arr[0][0]));
 			print_r($this->user->getLikes());
+
 			$this->user->setID($_SESSION['id']);
 		}
 

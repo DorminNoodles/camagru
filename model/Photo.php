@@ -53,6 +53,16 @@ class Photo extends File
 		// echo ($hello);
 		// echo "hihihihi".$sticker->name;
 	}
+
+	public function existInDb($photoId)
+	{
+		$db = new DatabasePhoto("camagru");
+		$data = $db->select(['*'], 'photos', 'WHERE id=' . $photoId);
+		if ($data)
+			return true;
+		else
+			return false;
+	}
 }
 
 ?>

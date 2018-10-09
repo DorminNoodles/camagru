@@ -1,10 +1,10 @@
 <div class="detail">
 
-
+	<div class="photoDetails">
 		<img src=<?= $photoPath ?> alt="">
-
+	</div>
 	<div class="like">
-		<a href="/camagru/detail/<?=$photoId;?>"><img src=<?= $likeImg ?> alt=""></a>
+		<a href="/camagru/detail/<?=$photoId;?>"><?=$likeImg ?></a>
 	</div>
 	<div class="comments">
 		<?
@@ -12,5 +12,18 @@
 				echo "One comment";
 			}
 		?>
+		<h3>New Comment</h3>
+		<form class="newComment" action="" method="post">
+			<label for="titleLabel">Title</label>
+			<div>
+				<input class="title" type="text" name="title">
+			</div>
+			<label for="titleLabel">Message</label>
+			<div>
+				<textarea class="areaComment" name="message">
+				</textarea>
+			</div>
+			<input type="submit" value="Submit">
+		</form>
 	</div>
 </div>

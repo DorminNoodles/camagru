@@ -5,24 +5,30 @@ var handleSticker = null;
 var origImg = new Image();
 var stickersArr = [];
 var video = document.querySelector('video');
+var imageLoader = document.getElementById('imageLoader');
+var importImg = null;
+
+
+imageLoader.addEventListener('change', function(e){
+	console.log("IMAGELOADER");
+	importImg =  new Image();
+	importImg.src = URL.createObjectURL(this.files[0]);
+	console.log(importImg);
+	changeUI();
+	replaceVideo();
+});
+
 
 document.addEventListener('mousemove', function(e){
 	mouseX = e.clientX;
 	mouseY = e.clientY;
 });
 
+
 document.getElementById("takePhoto").onclick = function(e)
 {
+	changeUI();
 	replaceVideo();
-	displayStickers();
-	var takeBtn = document.getElementById("takePhoto");
-	takeBtn.parentNode.removeChild(takeBtn);
-	var resetBtn = document.createElement("button");
-	resetBtn.id = "retakePhoto";
-	resetBtn.onclick = resetPhoto;
-	resetBtn.appendChild(document.createTextNode("Reset Photo"));
-	document.getElementById("btn").appendChild(resetBtn);
-	createSaveBtn();
 }
 
 if (video)
@@ -42,6 +48,22 @@ if (video)
 	);
 }
 
+function changeUI() {
+	var takeBtn = document.getElementById("takePhoto");
+	takeBtn.parentNode.removeChild(takeBtn);
+	var btnLoader = document.getElementById("labelLoader");
+	btnLoader.parentNode.removeChild(btnLoader);
+	var chooseFileBtn = document.getElementById("imageLoader");
+	chooseFileBtn.parentNode.removeChild(chooseFileBtn);
+	var resetBtn = document.createElement("button");
+	resetBtn.id = "resetPhoto";
+	resetBtn.onclick = resetPhoto;
+	resetBtn.appendChild(document.createTextNode("Reset Photo"));
+	// document.getElementById("btn").appendChild(resetBtn);
+	document.getElementsByClassName("btn")[0].appendChild(resetBtn);
+	displayStickers();
+	createSaveBtn();
+}
 
 function instanceSticker(name)
 {
@@ -59,7 +81,6 @@ function instanceSticker(name)
 		img.style.top = mouseY - (img.height/2);
 
 		document.body.appendChild(img);
-
 		window.addEventListener('mousemove', function(e)
 		{
 			img.style.left = e.clientX - (img.width/2);
@@ -78,6 +99,7 @@ function instanceSticker(name)
 
 function displayStickers()
 {
+	console.log("blabla");
 	var menu = document.getElementById("menuStickers");
 	menu.style.display = "block";
 }
@@ -92,18 +114,28 @@ function resetPhoto(e)
 
 
 
-function replaceVideo()
-{
+function replaceVideo() {
 	var canvas = document.createElement("canvas");
 	canvas.id = "canvasPhoto";
 	canvas.width = 640;
 	canvas.height = 480;
 	canvas.onclick = pasteSticker;
-	canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
 
-	origImg.src = canvas.toDataURL();
 
-	console.log(origImg.src);
+	// 	importImg.onload = function () {
+	// 		canvas.getContext('2d').drawImage(importImg, 0, 0, 640, 480);
+	// 		origImg.src = canvas.toDataURL();
+	// 	}
+	if (importImg) {
+		importImg.onload = function () {
+			canvas.getContext('2d').drawImage(importImg, 0, 0, 640, 480);
+			origImg.src = canvas.toDataURL();
+		}
+	}
+	else {
+		canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
+		origImg.src = canvas.toDataURL();
+	}
 	document.getElementById("montage").appendChild(canvas);
 	video.parentNode.removeChild(video);
 }
@@ -128,7 +160,7 @@ function createSaveBtn()
 	btn.id = "saveCompo";
 	btn.onclick = savePhoto;
 	btn.appendChild(document.createTextNode("Save Photo"));
-	document.getElementById("btn").appendChild(btn);
+	document.getElementsByClassName("btn")[0].appendChild(btn);
 }
 
 function savePhoto()

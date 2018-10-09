@@ -1,9 +1,14 @@
 <div id="montage">
 	<video autoplay="true"></video>
 </div>
-<div id="btn">
-		<button id="takePhoto">Prendre une photo</button>
+<div class="btn">
+	<button id="takePhoto">Prendre une photo</button>
 </div>
+<input type="file" id="imageLoader" name="imageLoader"/>
+<div class="btn">
+	<label id="labelLoader" for="imageLoader">Choose a file</label>
+</div>
+
 <div id="menuStickers" style="display:none">
 	<img id="pika" src="/camagru/stickers/pika.png" onclick="instanceSticker('pika.png')">
 	<img id="homer" src="/camagru/stickers/homer.png" onclick="instanceSticker('homer.png')">
