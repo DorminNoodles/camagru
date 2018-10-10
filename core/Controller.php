@@ -6,25 +6,22 @@ require('model/User.php');
 /**
  * Controller
  */
-class Controller
-{
+class Controller {
+
 	protected $tpl;
 	protected $user;
 	protected $db;
 
-	function __construct()
-	{
+	function __construct() {
 		$this->tpl = new Template('view/');
 		$this->db = new Database('camagru');
 
-		if (!isset($_SESSION['id']))
-		{
+		if (!isset($_SESSION['id'])) {
 			// $this->user = new User();
 			// $_SESSION['user'] = serialize($this->user);
 		}
 
-		if (isset($_SESSION['id']))
-		{
+		if (isset($_SESSION['id'])) {
 			$this->user = new User();
 			// $this->user->setLikes($this->db->userGetLikes($_SESSION['id']));
 			// $this->user->setLikes();
@@ -35,6 +32,7 @@ class Controller
 			$this->user->setID($_SESSION['id']);
 		}
 
+		print_r($_GET);
 	}
 }
 
