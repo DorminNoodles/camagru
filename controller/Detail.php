@@ -16,29 +16,49 @@ class Detail extends Controller {
 			return;
 		}
 
-		if ($_POST['message'] && $_POST['title'])
-			$this->addComment();
+
+		if (isset($_POST['message']))
+			$this->insertComment($this->user->getName(), $_POST['message'], $request->action);
 
 		$detailTpl = new Template("view/");
 		$detailTpl->set('likeImg', null);
 		$detailTpl->set('newComment', null);
+		$detailTpl->set('comments', []);
 
 		$this->displayPhoto($detailTpl, $request->action);
 
-		if (isset($request->params[0]) && $request->params[0] == 'like')
-			$this->user->addLike($request->action);
-		if (isset($request->params[0]) && $request->params[0] == 'dislike')
-			$this->user->disLike($request->action);
 
 		if (isset($_SESSION['id'])) {
+			if (isset($request->params[0]))
+				$this->manageLike($request->params[0], $request->action);
 			$this->displayLike($detailTpl, $request->action);
-			$this->displayComments($detailTpl);
+			$this->displayNewComments($detailTpl);
 		}
-
+		$this->displayComments($detailTpl, $request->action);
 		$this->tpl->set('content', $detailTpl->fetch('detail.php'));
 
 		echo ($this->tpl->fetch('main.php'));
 
+	}
+
+	function displayComments($detailTpl, $photoId) {
+		$data = $this->db->select(['*'], 'comments', 'WHERE id_photo='.$photoId);
+		$arr = [];
+
+		foreach ($data as $comment) {
+
+			$tmp['message'] = $comment['content'];
+			$tmp['login'] = $comment['login'];
+			$arr[] = $tmp;
+		}
+		$detailTpl->set('comments', $arr);
+	}
+
+	function manageLike($param, $photoId) {
+		if ( $param == 'like')
+			$this->user->addLike($photoId);
+		if ($param == 'dislike')
+			$this->user->disLike($photoId);
 	}
 
 	function displayPhoto($detailTpl, $photoId) {
@@ -56,7 +76,6 @@ class Detail extends Controller {
 				$detailTpl->set('photoId', $photoId . '/dislike');
 			}
 		}
-
 	}
 
 	function checkLike($photoId) {
@@ -67,25 +86,15 @@ class Detail extends Controller {
 			return false;
 	}
 
-	function displayComments($detailTpl) {
+	function displayNewComments($detailTpl) {
 		$newCommentTpl = new Template("view/");
 		$detailTpl->set('newComment', $newCommentTpl->fetch('newComment.php'));
 	}
 
-	function addComment() {
-		echo 'ADD COMMENT';
-		$this->insertComment('comments', $_POST['title'], $_POST['message']);
-		// $this->db->insert('comments', $_POST['title'], [$_POST['message']);
-
-	}
-
-	public function insertComment($table, $title, $message) {
+	public function insertComment($login, $message, $photoId) {
 		$this->db->connect();
-		// $str = implode(', ', $values);
-		// echo 'INSERT INTO '.$table.' VALUES (\''.$title.'\', \''.$message.'\')';
-		$query = $this->db->prepare('INSERT INTO '.$table.' VALUES (\''.$title.'\', \''.$message.'\')');
+		$query = $this->db->prepare('INSERT INTO comments (id_photo, login, content) VALUES ('.$photoId.', \''.$login.'\', \''.$message.'\')');
 		$query->execute();
-		$query->fetchAll();
 	}
 }
 

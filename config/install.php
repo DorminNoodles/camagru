@@ -40,7 +40,8 @@
 		$db->exec('CREATE TABLE comments (
 			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			id_photo INT(6) UNSIGNED,
-			name VARCHAR(30) NOT NULL,
+			login VARCHAR(30) NOT NULL,
+			title VARCHAR(60) NOT NULL,
 			content TEXT(3000)
 		)');
 		mkdir($path . "photos", 0700);

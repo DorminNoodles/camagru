@@ -8,8 +8,16 @@ class Montage extends Controller
 	function __construct($request)
 	{
 		parent::__construct();
-		//
+
+
 		$contentTpl = new Template('view/');
+
+		if (!isset($_SESSION['id']))
+		{
+			$this->tpl->set('content', 'you are not connected');
+			echo $this->tpl->fetch('main.php');
+			return;
+		}
 		$this->tpl->set('content', $contentTpl->fetch('camera.php'));
 		// $this->tpl->set('content', $contentTpl->fetch('canvas.php'));
 

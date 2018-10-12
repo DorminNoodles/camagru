@@ -61,7 +61,7 @@ class Database {
 	}
 
 	function prepare($query) {
-
+		return $this->db->prepare($query);
 	}
 
 	public function exec($query) {
