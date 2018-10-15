@@ -9,7 +9,6 @@ class Montage extends Controller
 	{
 		parent::__construct();
 
-
 		$contentTpl = new Template('view/');
 
 		if (!isset($_SESSION['id']))
@@ -19,7 +18,6 @@ class Montage extends Controller
 			return;
 		}
 		$this->tpl->set('content', $contentTpl->fetch('camera.php'));
-		// $this->tpl->set('content', $contentTpl->fetch('canvas.php'));
 
 		echo $this->tpl->fetch('main.php');
 
@@ -36,17 +34,10 @@ class Montage extends Controller
 	function saveCompo()
 	{
 		$photo = new Photo();
-
 		$photo->setSrc($_POST['img']);
-
-		// echo "  ".$photo->src."  ";
 		$stickers = json_decode($_POST['stickers']);
-
 		$photo->mergeStickers($stickers);
-
-		$photo->savePhoto();
-
-
+		$photo->savePhoto($this->user->getId());
 
 		// var_dump($_POST);
         //

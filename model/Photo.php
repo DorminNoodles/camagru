@@ -15,13 +15,13 @@ class Photo extends File
 		$this->src = $src;
 	}
 
-	public function savePhoto()
+	public function savePhoto($userId)
 	{
 		echo ("SAVE IMG !");
 		$db = new Database("camagru");
 		$nb = $db->tableSize("photos");
 		imagepng($this->src, "./photos/". ($nb + 1) .".png");
-		$this->insertPhoto($db, $nb+1, 4);
+		$this->insertPhoto($db, $nb+1, $userId);
 	}
 
 	function insertPhoto($db, $id, $user_id)

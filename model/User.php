@@ -29,7 +29,7 @@ class User
 		$this->id = $id;
 	}
 
-	public function getID() {
+	public function getId() {
 		return $this->id;
 	}
 
@@ -95,20 +95,7 @@ class User
 	}
 
 	public function login($name, $password) {
-		// $arr = [];
-		// $data = $this->db->find_user($name);
-		// $this->db->find_user($name);
-		//
-		// if (strtolower($name) === strtolower($data['name']) && $password === $data['pwd']) {
-		// 	$this->setAuth(true);
-		// 	$this->setID($data['id']);
-		// 	$this->setLikes(unserialize($data['likes']));
-		// 	$arr['valid'] = true;
-		// }
-		// else
-		// 	$arr['valid'] = false;
-		// $this->save();
-		// return $arr;
+
 	}
 }
 

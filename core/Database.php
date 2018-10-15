@@ -51,14 +51,14 @@ class Database {
 		return unserialize($ret[0]['likes']);
 	}
 
-	public function insert($table, $title, $message) {
-		$this->connect();
-		$str = implode(', ', $values);
-		echo 'INSERT INTO '.$table.' VALUES '.$str;
-		$query = $this->db->prepare('INSERT INTO '.$table.' VALUES '.$str);
-		$query->execute();
-		return $query->fetchAll();
-	}
+	// public function insert($table, $title, $message) {
+	// 	$this->connect();
+	// 	$str = implode(', ', $values);
+	// 	echo 'INSERT INTO '.$table.' VALUES '.$str;
+	// 	$query = $this->db->prepare('INSERT INTO '.$table.' VALUES '.$str);
+	// 	$query->execute();
+	// 	return $query->fetchAll();
+	// }
 
 	function prepare($query) {
 		return $this->db->prepare($query);

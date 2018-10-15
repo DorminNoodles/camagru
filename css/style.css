@@ -194,8 +194,8 @@ a:hover
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	padding: 10px;
 	margin: 10px;
+	padding: 10px;
 	border: 1px #DDD solid;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px #DDD;
@@ -246,7 +246,6 @@ a:hover
 	width: auto;
 	max-width: 60px;
 	max-height: 60px;
-	/* border: 1px #FF0000 solid; */
 }
 
 .like img {
@@ -385,6 +384,10 @@ canvas {
 	width: 100%;
 }
 
+.errorMessage {
+	color: #F00;
+}
+
 @media (max-width: 800px)
 {
 	.btn {
@@ -402,7 +405,6 @@ canvas {
 	{
 		width: 100%;
 		display: flex;
-		/* flex-direction: column; */
 		flex-wrap: wrap;
 		justify-content: center;
 		border: 1px #000000 solid;
@@ -413,8 +415,6 @@ canvas {
 		width: 100%;
 		margin: 5px;
 		font-size: 1vw;
-		/* display: flex; */
-		/* width: 10%%; */
 	}
 }
 
