@@ -17,7 +17,7 @@ class Montage extends Controller
 			echo $this->tpl->fetch('main.php');
 			return;
 		}
-		$this->tpl->set('content', $contentTpl->fetch('camera.php'));
+		$this->tpl->set('content', $contentTpl->fetch('montage.php'));
 
 		echo $this->tpl->fetch('main.php');
 

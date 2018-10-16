@@ -38,6 +38,7 @@ class Database {
 	public function select($colsArr, $table, $condition) {
 		$this->connect();
 		$cols = implode(',', $colsArr);
+		// echo 'SELECT '.$cols.' FROM '.$table.' '.$condition;
 		$query = $this->db->prepare('SELECT '.$cols.' FROM '.$table.' '.$condition);
 		$query->execute();
 		return $query->fetchAll();

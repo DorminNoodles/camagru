@@ -37,15 +37,25 @@ class Register extends Controller
 		if (!$arr['valid'])
 			return ($arr);
 
-		// $this->sendMail();
+
+
+		$key = $this->createActivationKey(password_hash($randNb, PASSWORD_DEFAULT));
+		$this->sendActivation($key);
+
+		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;
+		// $keyForMail = 'localhost:8080/camagru/activation/'.$keyForMail;
 		//
-		// $this->db->connect();
-		// $query = $this->db->prepare('INSERT INTO users (name, pwd) VALUES \''. $_POST['username'].'\', \''. $_POST['password'].'\'');
-		// $query->execute();
+		// $keyForDb = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.password_hash($randNb, PASSWORD_DEFAULT);
 
 
+		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'   '.password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT);
+		// $keyForMail = password_verify('b'.$_POST['username'].$_POST['email'],password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT));
 
 
+		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;
+		$this->db->connect();
+		$query = $this->db->prepare('INSERT INTO users (name, pwd, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
+		$query->execute();
 
 		// $db = new Database('camagru');
 		// $ret = $this->db->find_user($_POST['username']);
@@ -60,11 +70,24 @@ class Register extends Controller
 		return($arr);
 	}
 
-	function sendMail() {
+	function createActivationKey() {
+		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
+		// $this->db->connect();
+		// $this->db->prepare('INSERT INTO users (activationKey) VALUES (\''.$key.'\')');
+		return $key;
+	}
+
+	function sanitize() {
+		$_POST['username'] = htmlentities($_POST['username']);
+		$_POST['password'] = htmlentities($_POST['password']);
+		$_POST['email'] = htmlentities($_POST['email']);
+	}
+
+	function sendActivation($msg) {
 		$emailTo = $_POST['email'];
 		$emailFrom = 'register@camagru.fr';
 		$subject = "Camagru - Confirm Your Account";
-		$message = "Hello";
+		$message = "Hello click here to confirm your account => ".$msg;
 		$ret = mail($emailTo, $subject, $message);
 		echo $ret . '     SEND EMAIL';
 	}
@@ -82,13 +105,6 @@ class Register extends Controller
 			return $arr;
 		}
 
-		// if($this->db->find_user($_POST['username']) !== null)
-		// 	echo "EXIST DEJA";
-		// $ret = $this->db->find_user($_POST['username']);
-		// print_r($ret);
-		//
-		// if ($ret == false)
-		// 	echo "fuck you";
 		if (!$arr['valid'] || $this->db->find_user($_POST['username']) !== false)
 		{
 			$arr['valid'] = false;
@@ -114,6 +130,20 @@ class Register extends Controller
 		{
 			$arr['valid'] = false;
 			$arr['message'] = 'Invalid email !';
+			return $arr;
+		}
+
+
+
+
+		$ret = $this->db->select(['*'], 'users', 'WHERE email=\''.$_POST['email'].'\'');
+
+		// print_r($ret);
+
+		if (!$arr['valid'] || isset($ret[0]))
+		{
+			$arr['valid'] = false;
+			$arr['message'] = 'Email already exist !';
 			return $arr;
 		}
 
