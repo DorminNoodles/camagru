@@ -5,6 +5,8 @@
 		<?php
 			if (!isset($_SESSION['id']))
 				echo '<div class="headerLink"><a href="/camagru/Register">Register</a></div>';
+			if (isset($_SESSION['id']))
+				echo '<div class="headerLink"><a href="/camagru/MyProfile">Profile</a></div>';
 		 	if (!isset($_SESSION['id']))
 				echo '<div class="headerLink"><a href="/camagru/Login">Login</a></div>';
 			else

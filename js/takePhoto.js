@@ -136,7 +136,7 @@ function replaceVideo() {
 		canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
 		origImg.src = canvas.toDataURL();
 	}
-	document.getElementById("montage").appendChild(canvas);
+	document.getElementById("camera").appendChild(canvas);
 	video.parentNode.removeChild(video);
 }
 

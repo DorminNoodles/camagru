@@ -46,18 +46,24 @@ class Login extends Controller
 		if ($arr['valid'])
 		{
 			$data = $this->db->find_user($name);
-			if (strtolower($name) === strtolower($data['name']) && $pwd === $data['pwd'])
-			{
-				$_SESSION['id'] = $data['id'];
-				$arr['valid'] = true;
-			}
-			else
-			{
+
+
+			if (strtolower($name) !== strtolower($data['name']) || $pwd !== $data['pwd']) {
 				$arr['valid'] = false;
 				$arr['message'] = "Error bad username or password";
+				return $arr;
 			}
-			return $arr;
 
+			if ($arr['valid'] == true && $data['active'] == false) {
+				echo "NOT ACTIVE";
+				$arr['valid'] = false;
+				$arr['message'] = "Error account not active";
+				return $arr;
+			}
+
+			$_SESSION['id'] = $data['id'];
+			$arr['valid'] = true;
+			return $arr;
 		}
 		return ($arr);
 	}

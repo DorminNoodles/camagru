@@ -17,8 +17,13 @@ class Montage extends Controller
 			echo $this->tpl->fetch('main.php');
 			return;
 		}
-		$this->tpl->set('content', $contentTpl->fetch('montage.php'));
 
+		$myPhotos = $this->getMyLibrary($_SESSION['id']);
+		// $contentTpl->set('myPhotos', $myPhotos);
+
+		$contentTpl->set('myPhotos', $myPhotos);
+
+		$this->tpl->set('content', $contentTpl->fetch('montage.php'));
 		echo $this->tpl->fetch('main.php');
 
 		if ($request->action == "saveCompo" && $_POST['img'] && $_POST['stickers'])
@@ -38,19 +43,17 @@ class Montage extends Controller
 		$stickers = json_decode($_POST['stickers']);
 		$photo->mergeStickers($stickers);
 		$photo->savePhoto($this->user->getId());
+	}
 
-		// var_dump($_POST);
-        //
-		// // var_dump(json_decode($_GET['compo']));
-		// $json = json_decode($_GET['compo']);
-        //
-        //
-		// $pouet = $json[0];
-        //
-        //
-		// $photo = new Photo();
-		// $photo->mergeImage("voleur", "pouet", "batlescouilles");
-
+	function getMyLibrary($id) {
+		$this->db->connect();
+		$query = $this->db->prepare('SELECT * FROM photos WHERE user_id='.$id.'');
+		$query->execute();
+		$data = $query->fetchAll();
+		$photos = [];
+		foreach ($data as $photo)
+			$photos[] = $photo['id'];
+		return $photos;
 	}
 }
 

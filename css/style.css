@@ -122,13 +122,12 @@ a:link
 	text-decoration: none;
 }
 
-a:visited
-{
+a:visited {
 	color: #DDDDDD;
 	text-decoration: none;
 }
-a:hover
-{
+
+a:hover {
 
 	text-decoration: none;
 }
@@ -139,8 +138,7 @@ a:hover
 
 } */
 
-#gallery
-{
+#gallery {
 	min-height: 700px;
 	/* min-width: 800px; */
 	display: flex;
@@ -149,8 +147,7 @@ a:hover
 	justify-content: center;
 }
 
-.divPhoto
-{
+.divPhoto {
 	width: 45%;
 	margin: 5px;
 	font-size: 1vw;
@@ -158,39 +155,47 @@ a:hover
 	/* width: 10%%; */
 }
 
-.photo
-{
+.photo {
 	width: 100%;
 	/* width: 45%; */
 
 }
 
-#btnGallery
-{
+#btnGallery {
 	display: flex;
 	width:100%;
 	justify-content: center;
 }
 
-#btnLoginMenu
-{
+#btnLoginMenu {
 	cursor: pointer;
 }
 
-.register
-{
+.register {
 	display: flex;
 	justify-content: center;
 }
 
-.login
-{
+.login {
 	display: flex;
 	justify-content: center;
 }
 
-.registerCard
-{
+.card {
+	display: flex;
+	justify-content: center;
+	margin: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	border: 1px #DDD solid;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #DDD;
+	min-height: 200px;
+	max-width: 360px;
+}
+
+.registerCard {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -203,8 +208,7 @@ a:hover
 	max-width: 360px;
 }
 
-.loginCard
-{
+.loginCard {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -252,7 +256,13 @@ a:hover
 	width: 100%;
 }
 
-#montage video {
+.montage {
+	display: flex;
+	justify-content: space-between;
+
+}
+
+#camera video {
 	width: 100%;
 	max-width: 640px;
 	border: 1px #000000 solid;
@@ -337,7 +347,11 @@ canvas {
 }
 
 #menuStickers img {
-	width: 180px;
+	width: 120px;
+}
+
+#menuStickers {
+	width: 80%;
 }
 
 .newComment {
@@ -386,6 +400,8 @@ canvas {
 
 .errorMessage {
 	color: #F00;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 @media (max-width: 800px)
@@ -440,4 +456,15 @@ hr {
 	font-weight: bold;
 	font-size: 15px;
 	margin-bottom: 5px;
+}
+
+.myLibrary {
+	max-width: 320px;
+	max-height: 450px;
+	overflow: scroll;
+	border: 2px #F00 solid;
+}
+
+.myPhoto {
+	max-width: 300px;
 }

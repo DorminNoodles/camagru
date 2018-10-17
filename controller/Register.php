@@ -39,7 +39,7 @@ class Register extends Controller
 
 
 
-		$key = $this->createActivationKey(password_hash($randNb, PASSWORD_DEFAULT));
+		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$this->sendActivation($key);
 
 		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;
@@ -70,13 +70,6 @@ class Register extends Controller
 		return($arr);
 	}
 
-	function createActivationKey() {
-		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
-		// $this->db->connect();
-		// $this->db->prepare('INSERT INTO users (activationKey) VALUES (\''.$key.'\')');
-		return $key;
-	}
-
 	function sanitize() {
 		$_POST['username'] = htmlentities($_POST['username']);
 		$_POST['password'] = htmlentities($_POST['password']);
@@ -87,7 +80,7 @@ class Register extends Controller
 		$emailTo = $_POST['email'];
 		$emailFrom = 'register@camagru.fr';
 		$subject = "Camagru - Confirm Your Account";
-		$message = "Hello click here to confirm your account => ".$msg;
+		$message = "Hello click here to confirm your account => http://localhost:8080/camagru/activation/".$msg;
 		$ret = mail($emailTo, $subject, $message);
 		echo $ret . '     SEND EMAIL';
 	}
