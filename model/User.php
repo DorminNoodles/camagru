@@ -81,9 +81,12 @@ class User
 		var_dump($_SESSION);
 	}
 
-	public function login($name, $password) {
+	public function checkPassword($id, $password) {
+		$data = $this->db->findUserById($id);
 
 	}
+
+
 }
 
 ?>

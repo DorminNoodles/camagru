@@ -49,8 +49,7 @@ class Login extends Controller
 		{
 			$data = $this->db->find_user($name);
 
-
-			if (strtolower($name) !== strtolower($data['name']) || $pwd !== $data['pwd']) {
+			if (strtolower($name) !== strtolower($data['name']) || !password_verify($pwd, $data['pwd'])) {
 				$arr['valid'] = false;
 				$arr['message'] = "Error bad username or password";
 				return $arr;

@@ -16,7 +16,6 @@ class Register extends Controller
 		$arr['message'] = '';
 
 
-
 		if(!empty($_POST))
 			$arr = $this->createUser();
 		$this->displayForm = ($arr['valid']) ? false : true;
@@ -45,14 +44,9 @@ class Register extends Controller
 		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;
 		// $keyForMail = 'localhost:8080/camagru/activation/'.$keyForMail;
 		//
+
 		// $keyForDb = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.password_hash($randNb, PASSWORD_DEFAULT);
-
-
-		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'   '.password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT);
-		// $keyForMail = password_verify('b'.$_POST['username'].$_POST['email'],password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT));
-
-
-		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;
+		$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$this->db->connect();
 		$query = $this->db->prepare('INSERT INTO users (name, pwd, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
 		$query->execute();
