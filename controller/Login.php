@@ -11,7 +11,9 @@ class Login extends Controller
 
 		parent::__construct();
 
-		if (isset($_POST['username']) && isset($_POST['password']) && !isset($_POST['id']))
+		// print_r($_POST);
+
+		if (!empty($_POST['username']) && !empty($_POST['password']) && !isset($_POST['id']))
 		{
 			$arr = $this->connectUser($_POST['username'], $_POST['password']);
 		}

@@ -177,8 +177,8 @@ a:hover {
 }
 
 .login {
-	display: flex;
-	justify-content: center;
+	/* display: flex; */
+	/* justify-content: center; */
 }
 
 .card {
@@ -224,6 +224,7 @@ a:hover {
 .input
 {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 }
 
@@ -279,8 +280,6 @@ canvas {
 	width: 120px;
 	border: 1px #000000 solid; */
 }
-
-
 
 #imageLoader {
 	visibility: hidden;

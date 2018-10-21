@@ -1,10 +1,8 @@
 <div class="login">
-	<div class="loginCard">
-		<div>Login</div>
-		<br/>
+	<div class="card">
 		<form class="loginForm" action="Login" method="post">
 			<div class="input">
-				<!-- <label>Name</label> -->
+				<label>Login</label>
 				<input type="text" name="username" placeholder="My Login">
 			</div>
 			<div class="input">

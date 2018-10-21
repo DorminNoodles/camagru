@@ -41,19 +41,6 @@ class User
 		return $this->name;
 	}
 
-	// public function addLike($photoId) {
-	// 	$arr = $this->db->updateLikes($photoID, 1);
-	// }
-
-	// public function updateLike($photoID) {
-	// 	$this->db->connect();
-	// 	if (!isset($this->likes[$photoID]))
-	// 		$this->likes[$photoID] = false;
-	// 	$this->likes[$photoID] = !$this->likes[$photoID];
-	// 	$serialized = serialize($this->likes);
-	// 	$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
-	// }
-
 	public function addLike($photoID) {
 		$this->db->connect();
 		$this->likes[$photoID] = true;
