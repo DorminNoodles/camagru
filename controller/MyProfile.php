@@ -9,7 +9,10 @@ class MyProfile extends Controller {
 	function __construct() {
 		parent::__construct();
 
+
 		$contentTpl = new Template('view/');
+		$contentTpl->set('successMessage', null);
+		$contentTpl->set('errorMessage', null);
 
 		if (!isset($_SESSION['id'])) {
 			$this->tpl->set('content', $contentTpl->fetch('404.php'));
@@ -17,15 +20,17 @@ class MyProfile extends Controller {
 			return;
 		}
 
+		// $this->user->checkPassword($_SESSION['id'], );
+
 		if (!empty($_POST['password'])) {
 			$ret = $this->changeProfile();
-			if (empty($ret)) {
-				$contentTpl->set('message', $ret);
-				return;
+			if (!empty($ret['error'])) {
+				$contentTpl->set('errorMessage', $ret['error']);
+			}
+			else if (!empty($ret['success'])) {
+				$contentTpl->set('successMessage', $ret['success']);
 			}
 		}
-
-
 
 		$contentTpl->set('login', $this->user->getName());
 		$this->tpl->set('content', $contentTpl->fetch('myProfile.php'));
@@ -37,27 +42,45 @@ class MyProfile extends Controller {
 		$password = new Password($_POST['password']);
 		$newPassword = new Password($_POST['newPassword']);
 		$username = new Username($_POST['username']);
-		// echo $password->getValue();
+		// $arr;
 
-
-		if (!$password->isValid())
-			return $password->getError();
+		if (!$password->isValid() || !$this->user->checkPassword($_SESSION['id'], $password->getValue()))
+			return array( 'error' => 'Bad Password !', 'success' => '');
 
 		if (!empty($_POST['newPassword'])) {
 			if (!$newPassword->isValid())
-				return $newPassword->getError();
+				return array( 'error' => $newPassword->getError(), 'succes' => '');
+			$this->db->connect();
+			$query = $this->db->prepare('UPDATE users SET password=\''.$newPassword->getCryptedValue().'\' WHERE id='.$_SESSION['id'].'');
+			$query->execute();
 		}
 
+		if (!empty($_POST['username'])) {
+			echo 'HELLO';
+			if ($username->getValue() != $this->user->getName()) {
+				$data = $this->db->find_user($username->getValue());
+				if (!empty($data))
+					return array('error' => 'Username already taken !', 'success' => '');
+				$this->db->connect();
+				$query = $this->db->prepare('UPDATE users SET name=\''.$username->getValue().'\' WHERE id='.$_SESSION['id'].'');
+				$query->execute();
+			}
+		}
+		// if (!empty($_POST['newPassword'])) {
+		// 	if (!$newPassword->isValid())
+		// 		return array( 'error' => $newPassword->getError(), 'succes' => '');
+		// 	$this->db->connect();
+		// 	$query = $this->db->prepare('UPDATE users SET password=\''.$newPassword->getCryptedValue().'\' WHERE id='.$_SESSION['id'].'');
+		// 	$query->execute();
+		// }
 
-		return '';
+		return array('error' => '', 'success' => 'Success !');
 	}
 
 	function sanitizeInput() {
 
 
-		$_POST['username'] = htmlentities($_POST['username']);
-		// $_POST['password'] = htmlentities($_POST['password']);
-		$_POST['newPassword'] = htmlentities($_POST['newPassword']);
+
 	}
 }
 

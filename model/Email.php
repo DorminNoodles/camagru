@@ -1,6 +1,6 @@
 <?php
 
-require('model/Input.php');
+require_once('model/Input.php');
 
 class Email extends Input {
 

@@ -1,5 +1,5 @@
-<div class="register">
-	<div class="registerCard">
+<div>
+	<div class="card">
 		<div>Create an Account</div>
 		<br/>
 		<form class="registerForm" action="Register" method="post">

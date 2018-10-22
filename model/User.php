@@ -83,6 +83,7 @@ class User
 
 	public function checkPassword($id, $password) {
 		$data = $this->db->findUserById($id);
+		return password_verify($password, $data['password']);
 
 	}
 

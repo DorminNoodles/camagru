@@ -19,7 +19,7 @@
 				<button type="submit" name="button">Login</button>
 			</div>
 		</form>
-		<!-- <div class="errorMessage"><?= $message; ?></div> -->
-	</div>
+		<div class="errorMessage"><?= $errorMessage; ?></div>
+		<div class="successMessage"><?= $successMessage; ?></div>
 	</div>
 </div>

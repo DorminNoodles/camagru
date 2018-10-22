@@ -18,7 +18,7 @@ class Detail extends Controller {
 
 
 		if (isset($_POST['message']))
-			$this->insertComment($this->user->getName(), $_POST['message'], $request->action);
+			$this->insertComment($this->user->getId(), $_POST['message'], $request->action);
 
 		$detailTpl = new Template("view/");
 		$detailTpl->set('likeImg', null);
@@ -48,7 +48,8 @@ class Detail extends Controller {
 		foreach ($data as $comment) {
 
 			$tmp['message'] = $comment['content'];
-			$tmp['login'] = $comment['login'];
+			$user = $this->db->findUserById($comment['userId']);
+			$tmp['login'] = $user['id'];
 			$arr[] = $tmp;
 		}
 		$detailTpl->set('comments', $arr);
@@ -91,9 +92,9 @@ class Detail extends Controller {
 		$detailTpl->set('newComment', $newCommentTpl->fetch('newComment.php'));
 	}
 
-	public function insertComment($login, $message, $photoId) {
+	public function insertComment($userId, $message, $photoId) {
 		$this->db->connect();
-		$query = $this->db->prepare('INSERT INTO comments (id_photo, login, content) VALUES ('.$photoId.', \''.$login.'\', \''.$message.'\')');
+		$query = $this->db->prepare('INSERT INTO comments (id_photo, userId, content) VALUES ('.$photoId.', \''.$userId.'\', \''.$message.'\')');
 		$query->execute();
 	}
 }

@@ -9,11 +9,14 @@ body:hover{
 	transform: rotate(156165deg);
 } */
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+
 body
 {
+	font-family: 'Montserrat', sans-serif;
 	margin: 0px;
 	width: 100%;
-	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	/* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; */
 }
 
 #headerContainer
@@ -40,6 +43,11 @@ body
 	color: #CCCCCC;
 	/* color: #FF55FF; */
 
+}
+
+*
+{
+	font-family: 'Montserrat', sans-serif;
 }
 
 .headerLink
@@ -171,11 +179,6 @@ a:hover {
 	cursor: pointer;
 }
 
-.register {
-	display: flex;
-	justify-content: center;
-}
-
 .login {
 	/* display: flex; */
 	/* justify-content: center; */
@@ -183,7 +186,9 @@ a:hover {
 
 .card {
 	display: flex;
+	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 	margin: 10px;
 	margin-left: auto;
 	margin-right: auto;
@@ -399,6 +404,13 @@ canvas {
 
 .errorMessage {
 	color: #F00;
+	font-weight: bold;
+	font-size: 20px;
+
+}
+
+.successMessage {
+	color: #0D0;
 	font-weight: bold;
 	font-size: 20px;
 }

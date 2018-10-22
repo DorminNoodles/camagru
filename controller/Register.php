@@ -48,7 +48,7 @@ class Register extends Controller
 		// $keyForDb = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.password_hash($randNb, PASSWORD_DEFAULT);
 		$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$this->db->connect();
-		$query = $this->db->prepare('INSERT INTO users (name, pwd, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
+		$query = $this->db->prepare('INSERT INTO users (name, password, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
 		$query->execute();
 
 		// $db = new Database('camagru');
