@@ -1,3 +1,3 @@
 <div class="registerCard">
-	<div>Un email de confirmation vous a ete envoye sur l'addresse de messagerie</div>
+	<div>Sending validation link at your email</div>
 </div>

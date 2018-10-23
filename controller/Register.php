@@ -39,6 +39,7 @@ class Register extends Controller
 
 
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
+		$key = str_replace ( '/', '', $key);
 		$this->sendActivation($key);
 
 		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;
@@ -51,16 +52,6 @@ class Register extends Controller
 		$query = $this->db->prepare('INSERT INTO users (name, password, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
 		$query->execute();
 
-		// $db = new Database('camagru');
-		// $ret = $this->db->find_user($_POST['username']);
-		//
-		//
-		// if (!isset($ret))
-		// {
-		// 	$arr['valid'] = false;
-		// 	$arr['username'] = 'Username already exist';
-		// }
-		// else
 		return($arr);
 	}
 

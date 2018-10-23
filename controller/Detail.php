@@ -49,7 +49,7 @@ class Detail extends Controller {
 
 			$tmp['message'] = $comment['content'];
 			$user = $this->db->findUserById($comment['userId']);
-			$tmp['login'] = $user['id'];
+			$tmp['login'] = $user['name'];
 			$arr[] = $tmp;
 		}
 		$detailTpl->set('comments', $arr);

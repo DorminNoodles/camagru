@@ -18,6 +18,9 @@ class Montage extends Controller
 			return;
 		}
 
+		if (isset($request->action))
+			echo "Hello";
+
 		$myPhotos = $this->getMyLibrary($_SESSION['id']);
 		// $contentTpl->set('myPhotos', $myPhotos);
 
