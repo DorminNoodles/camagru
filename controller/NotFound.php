@@ -1,11 +1,11 @@
 <?php
 
-require_once('core/Controller.php');
-
+require_once('core/controller.php');
+	// echo '404 Not Found';
 class NotFound extends Controller {
 
 	function __construct() {
-		echo '404 Not Found';
+		parent::__construct();
 	}
 }
 
