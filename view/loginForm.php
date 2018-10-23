@@ -15,6 +15,7 @@
 				<button type="submit" name="button">Login</button>
 			</div>
 		</form>
+		<div><a href="/camagru/PasswordLink">forgot password</a></div>
 		<div class="errorMessage"><?= $message; ?></div>
 	</div>
 </div>

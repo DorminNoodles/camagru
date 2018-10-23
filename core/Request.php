@@ -21,7 +21,7 @@ class Request
 	{
 		$this->controller = ($str) ? $str : 'Home';
 		if (!file_exists('controller/'.$this->controller.'.php'))
-			$this->controller = '404';
+			$this->controller = 'NotFound';
 	}
 }
 
