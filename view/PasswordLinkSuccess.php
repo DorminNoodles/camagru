@@ -9,6 +9,6 @@
 			<button type="submit" name="button">Login</button>
 		</div>
 	</form>
-	<div class="errorMessage"><?= $errorMessage;?></div>
-	<div class="successMessage"><?= $successMessage;?></div>
+	<div class="errorMessage"><?= $successMessage;?></div>
+	<div class="successMessage"><?= $errorMessage;?></div>
 </div>

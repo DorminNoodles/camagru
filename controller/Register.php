@@ -40,6 +40,7 @@ class Register extends Controller
 
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$key = str_replace ( '/', '', $key);
+		$key = str_replace ( '.', '', $key);
 		$this->sendActivation($key);
 
 		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;

@@ -19,12 +19,20 @@ class Photo extends File
 	{
 		echo ("SAVE IMG !");
 		$db = new Database("camagru");
-		$nb = $db->tableSize("photos");
-		imagepng($this->src, "./photos/". ($nb + 1) .".png");
-		$this->insertPhoto($db, $nb+1, $userId);
+		// $nb = $db->tableSize("photos");
+		$this->insertPhoto($db, $userId);
+		$db->connect();
+		$query = $db->prepare('SELECT MAX(id) FROM photos');
+		$query->execute();
+		$id = $query->fetch();
+		echo '<br/>';
+		print_r($id);
+		echo '<br/>';
+		echo '<br/>';
+		imagepng($this->src, "./photos/".$id[0].".png");
 	}
 
-	function insertPhoto($db, $id, $user_id)
+	function insertPhoto($db, $user_id)
 	{
 		$db = new DatabasePhoto("camagru");
 		$db->insertPhoto($user_id);
