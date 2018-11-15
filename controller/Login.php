@@ -69,29 +69,6 @@ class Login extends Controller
 		return ($arr);
 	}
 
-	// function createUser() {
-	//
-	// 	echo "Create_User";
-	// 	$arr = $this->checkInputs();
-	// 	if (!$arr['valid'])
-	// 		return ($arr);
-	//
-	//
-	// 	$db = new Database('camagru');
-	// 	$ret = $db->find_user($_POST['username']);
-	//
-	// 	// print_r($ret);
-	//
-	// 	if (!isset($ret))
-	// 	{
-	// 		$arr['valid'] = false;
-	// 		$arr['username'] = 'Username already exist';
-	// 	}
-	// 	else
-	// 		$this->sendMail();
-	// 	return($arr);
-	// }
-
 	// function sendMail() {
 	// 	$emailTo = $_POST['email'];
 	// 	$emailFrom = 'register@camagru.fr';

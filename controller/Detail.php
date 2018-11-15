@@ -16,7 +16,6 @@ class Detail extends Controller {
 			return;
 		}
 
-
 		if (isset($_POST['message']))
 			$this->insertComment($this->user->getId(), $_POST['message'], $request->action);
 
@@ -96,6 +95,25 @@ class Detail extends Controller {
 		$this->db->connect();
 		$query = $this->db->prepare('INSERT INTO comments (id_photo, userId, content) VALUES ('.$photoId.', \''.$userId.'\', \''.$message.'\')');
 		$query->execute();
+
+		$query = $this->db->prepare('SELECT * FROM photos WHERE id=\''.$photoId.'\'');
+		$query->execute();
+		$data = $query->fetch();
+
+		// print_r($data);
+		// echo $data['user_id'];
+		$query = $this->db->prepare('SELECT * FROM users WHERE id=\''.$data['user_id'].'\'');
+		$query->execute();
+		$data = $query->fetch();
+		// print_r($data);
+
+		if (isset($data['email'])) {
+			$emailTo = $data['email'];
+			$emailFrom = 'register@camagru.fr';
+			$subject = "Camagru - New comment !";
+			$message = "One of your photo recevied a new comment !";
+			$ret = mail($emailTo, $subject, $message);
+		}
 	}
 }
 

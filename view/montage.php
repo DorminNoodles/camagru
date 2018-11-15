@@ -24,15 +24,17 @@
 		</div>
 	</div>
 
-	<div class="myLibrary">
-		<?php
-			foreach ($myPhotos as $photo) {
-				echo '<a href="/camagru/deletePhoto/'.$photo.'">';
-				echo '<img class="myPhoto" src="/camagru/photos/'.$photo.'.png">';
-				echo '</a>';
-			}
-		?>
-	</div>
+	<?php if ($myPhotos) {?>
+		<div class="myLibrary">
+			<?php
+				foreach ($myPhotos as $photo) {
+					echo '<a href="/camagru/deletePhoto/'.$photo.'">';
+					echo '<img class="myPhoto" src="/camagru/photos/'.$photo.'.png">';
+					echo '</a>';
+				}
+			?>
+		</div>
+	<?php } ?>
 </div>
 
 

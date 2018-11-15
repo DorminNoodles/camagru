@@ -11,6 +11,7 @@ class User
 	private $id;
 	private $name;
 	private $likes;
+	private $email;
 
 	function __construct() {
 		$this->db = new Database("camagru");
@@ -46,6 +47,8 @@ class User
 		$this->likes[$photoID] = true;
 		$serialized = serialize($this->likes);
 		$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
+
+
 	}
 
 	public function disLike($photoID) {
@@ -54,7 +57,6 @@ class User
 		$serialized = serialize($this->likes);
 		$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
 	}
-
 
 	// public function deleteLike($photoID) {
 	// 	$this->db->connect();
@@ -73,6 +75,13 @@ class User
 		return $this->likes;
 	}
 
+	public function setEmail() {
+		$this->email = $email;
+	}
+	public function getEmail() {
+		return $this->email;
+	}
+
 	public function logout() {
 		echo 'test';
 		$_SESSION['auth'] = false;
@@ -86,7 +95,6 @@ class User
 		return password_verify($password, $data['password']);
 
 	}
-
 
 }
 

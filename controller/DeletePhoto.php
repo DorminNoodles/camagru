@@ -22,14 +22,13 @@ class DeletePhoto extends Controller
 
 		if (isset($request->action) && is_numeric($request->action))
 		{
-			//if photo exist
-			$this->deletePhoto($request->action, $this->user->getId());
-			echo "Hello";
+			if ($this->deletePhoto($request->action, $this->user->getId())) {
+				$this->tpl->set('content', $contentTpl->fetch('deletePhoto.php'));
+				echo $this->tpl->fetch('main.php');
+				return;
+			}
 		}
-
-		// $contentTpl->set('myPhotos', $myPhotos);
-
-
+		$this->tpl->set('content', $contentTpl->fetch('404.php'));
 		echo $this->tpl->fetch('main.php');
 	}
 
@@ -43,21 +42,13 @@ class DeletePhoto extends Controller
 
 
 		if (empty($data))
-			return 'Error !';
+			return false;
 		if ($data['user_id'] === $userId) {
 			$query = $this->db->prepare('DELETE FROM photos WHERE id=\''.$photoId.'\'');
 			$query->execute();
 			echo '<br/><br/>bordel';
 		}
-
-		return ('Success !');
-
-		// echo '<br/>';
-		// echo '<br/>';
-		// echo ($data['user_id']);
-		// // print_r($data);
-		// echo '<br/>';
-
+		return (true);
 	}
 }
 

@@ -30,24 +30,15 @@ class Register extends Controller
 	}
 
 	function createUser() {
-		echo "Create_User";
 		$this->sanitize();
 		$arr = $this->checkInputs();
 		if (!$arr['valid'])
 			return ($arr);
 
-
-
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$key = str_replace ( '/', '', $key);
 		$key = str_replace ( '.', '', $key);
 		$this->sendActivation($key);
-
-		// $keyForMail = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.$randNb;
-		// $keyForMail = 'localhost:8080/camagru/activation/'.$keyForMail;
-		//
-
-		// $keyForDb = password_hash($_POST['username'].$_POST['email'], PASSWORD_DEFAULT).'/'.password_hash($randNb, PASSWORD_DEFAULT);
 		$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$this->db->connect();
 		$query = $this->db->prepare('INSERT INTO users (name, password, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
@@ -68,7 +59,6 @@ class Register extends Controller
 		$subject = "Camagru - Confirm Your Account";
 		$message = "Hello click here to confirm your account => http://localhost:8080/camagru/activation/".$msg;
 		$ret = mail($emailTo, $subject, $message);
-		echo $ret . '     SEND EMAIL';
 	}
 
 	function checkInputs() {
@@ -116,8 +106,6 @@ class Register extends Controller
 
 
 		$ret = $this->db->select(['*'], 'users', 'WHERE email=\''.$_POST['email'].'\'');
-
-		// print_r($ret);
 
 		if (!$arr['valid'] || isset($ret[0]))
 		{
