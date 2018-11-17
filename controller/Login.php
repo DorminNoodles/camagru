@@ -41,8 +41,6 @@ class Login extends Controller
 
 
 	function connectUser($name, $pwd) {
-		echo "CONNECT_USER";
-
 		$arr['message'] = '';
 		$arr['valid'] = (!$this->checkInputs()) ? false : true;
 		if ($arr['valid'])

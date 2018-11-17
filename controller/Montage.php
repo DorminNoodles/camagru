@@ -56,7 +56,6 @@ class Montage extends Controller
 		$photos = [];
 		foreach ($data as $photo)
 			$photos[] = $photo['id'];
-		print_r($photos);
 		return $photos;
 	}
 }

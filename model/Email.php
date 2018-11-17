@@ -10,7 +10,6 @@ class Email extends Input {
 	}
 
 	public function checkEmail() {
-
 		if (strlen($this->value) < 5) {
 			$this->msg = 'Invalid Email !';
 			return false;

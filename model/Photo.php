@@ -17,18 +17,12 @@ class Photo extends File
 
 	public function savePhoto($userId)
 	{
-		echo ("SAVE IMG !");
 		$db = new Database("camagru");
-		// $nb = $db->tableSize("photos");
 		$this->insertPhoto($db, $userId);
 		$db->connect();
 		$query = $db->prepare('SELECT MAX(id) FROM photos');
 		$query->execute();
 		$id = $query->fetch();
-		echo '<br/>';
-		print_r($id);
-		echo '<br/>';
-		echo '<br/>';
 		imagepng($this->src, "./photos/".$id[0].".png");
 	}
 
@@ -36,11 +30,6 @@ class Photo extends File
 	{
 		$db = new DatabasePhoto("camagru");
 		$db->insertPhoto($user_id);
-	}
-
-	public function mergeImage($dest, $src, $pos)
-	{
-
 	}
 
 	public function mergeStickers($stickers)
@@ -55,11 +44,6 @@ class Photo extends File
 			imagecopy($img1,$img2,$sticker->x,$sticker->y,0,0,$w,$h);
 		}
 		$this->src = $img1;
-
-		// $test = imagecreatefrompng($this->src);
-		// $hello = base64_encode($test);
-		// echo ($hello);
-		// echo "hihihihi".$sticker->name;
 	}
 
 	public function existInDb($photoId)

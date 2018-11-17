@@ -1,38 +1,27 @@
-/* body
-{
-	transform: rotate(0deg);
-	margin: 0px;
-	transition: transform 15s;
-}
-
-body:hover{
-	transform: rotate(156165deg);
-} */
-
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500');
 
-body
-{
-	font-family: 'Montserrat', sans-serif;
+body {
+	display: flex;
+	background-color: #FFF;
+	min-height: 100vh;
 	margin: 0px;
-	width: 100%;
-	/* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; */
+	justify-content: space-between;
+	flex-direction: column;
 }
 
 #headerContainer
 {
 	background-color: #444444;
-	/* width: 100%; */
 	box-shadow: 0px 0px 4px #444444;
 	align-items: stretch;
 	display: flex;
 	justify-content: center;
 	height: 50px;
+	width: 100%;
 }
 
 #header
 {
-	/* background-color: #; */
 	position: relative;
 	display: flex;
 	width: 100%;
@@ -41,8 +30,6 @@ body
 	/* border: 1px solid; */
 	font-family: Verdana, Helvetica, Arial, Sans-Serif;
 	color: #CCCCCC;
-	/* color: #FF55FF; */
-
 }
 
 *
@@ -60,7 +47,6 @@ body
 	position: absolute;
 	right: 20px;
 	display: flex;
-	/* border: 1px solid; */
 	font-size: 20px;
 }
 
@@ -76,19 +62,6 @@ body
 	border-radius: 5px;
 	border: 1px #AAAAAA solid;
 }
-
-/* #dropDownMenu
-{
-	visibility: hidden;
-	position: absolute;
-	left : -50px;
-	top : 30px;
-	width: 200px;
-	height: 400px;
-	background-color: #FFFFFF;
-	border-radius: 5px;
-	border: 1px #AAAAAA solid;
-} */
 
 #contentContainer
 {
@@ -114,15 +87,8 @@ body
 	margin-left: 18px;
 	display: flex;
 	width: 85%;
-	/* border: 1px solid #33FFCC; */
 	color: #FFFFFF;
 }
-/* @media (max-width: 800px) {
-	#mainLogo
-	{
-		width: 20vw;
-	}
-} */
 
 a:link
 {
@@ -140,17 +106,9 @@ a:hover {
 	text-decoration: none;
 }
 
-/* img#gallery .photo
-{
-	width: 50px;
-
-} */
-
 #gallery {
 	min-height: 700px;
-	/* min-width: 800px; */
 	display: flex;
-	/* flex-direction: column; */
 	flex-wrap: wrap;
 	justify-content: center;
 }
@@ -159,14 +117,10 @@ a:hover {
 	width: 45%;
 	margin: 5px;
 	font-size: 1vw;
-	/* display: flex; */
-	/* width: 10%%; */
 }
 
 .photo {
 	width: 100%;
-	/* width: 45%; */
-
 }
 
 #btnGallery {
@@ -177,11 +131,6 @@ a:hover {
 
 #btnLoginMenu {
 	cursor: pointer;
-}
-
-.login {
-	/* display: flex; */
-	/* justify-content: center; */
 }
 
 .card {
@@ -278,12 +227,6 @@ a:hover {
 canvas {
 
 	border: 1px #000000 solid;
-}
-
-#takePhoto {
-	/* height: 45px;
-	width: 120px;
-	border: 1px #000000 solid; */
 }
 
 #imageLoader {
@@ -478,4 +421,13 @@ hr {
 
 .myPhoto {
 	max-width: 300px;
+}
+
+.footer {
+	display: flex;
+	background-color: #444444;
+	color: #FFF;
+	min-height: 100px;
+	align-items: center;
+	justify-content: center;
 }

@@ -4,7 +4,6 @@ require_once('core/controller.php');
 require_once('model/Email.php');
 
 class PasswordLink extends Controller {
-
 	function __construct(){
 		parent::__construct();
 
@@ -15,7 +14,7 @@ class PasswordLink extends Controller {
 
 		if (isset($_POST['email'])) {
 			$email = new Email($_POST['email']);
-			if ($email->isValid()) {
+			if ($email->isValid() && $email->is()) {
 				$this->sendPasswordLink($email->getValue());
 				$contentTpl->set('successMessage', 'Password Link sending !');
 			}
