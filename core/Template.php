@@ -21,12 +21,6 @@ class Template {
 		ob_end_clean();                // End buffering and discard
 		return $contents;              // Return the contents
 	}
-
-	function render() {
-		ob_start();                    // Start output buffering
-		$contents = ob_get_contents(); // Get the contents of the buffer
-		return $contents;              // Return the contents
-	}
 }
 
 ?>

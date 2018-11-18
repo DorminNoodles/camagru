@@ -8,11 +8,7 @@
 	</div>
 	<div class="comments">
 		<?php
-			// print_r($comments);
 			foreach ($comments as $comment) {
-				// echo '<div class="commentTitle">';
-				// echo $comment['title'];
-				// echo '</div>';
 				echo '<br/>';
 				echo '<div class="commentLogin">';
 				echo $comment['login'];

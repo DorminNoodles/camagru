@@ -20,7 +20,6 @@ class Gallery
 
 		for ($i=0;$i < 5 && $i < $nbPhotos;$i++)
 		{
-			// echo "start => ".$start;
 			if(isset($this->photos[$start + $i]['id']))
 			{
 				$img = [];

@@ -2,7 +2,7 @@
 
 require_once('model/Input.php');
 
-class Password extends Input {
+class InputPassword extends Input {
 
 	function __construct($input) {
 		parent::__construct($input);

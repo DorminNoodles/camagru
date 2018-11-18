@@ -10,10 +10,5 @@ class Logout extends Controller {
 		$this->tpl->set('content', 'Logout !');
 		echo $this->tpl->fetch('main.php');
 	}
-
-
-
 }
-
-
 ?>

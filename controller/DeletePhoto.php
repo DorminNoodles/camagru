@@ -8,9 +8,6 @@ class DeletePhoto extends Controller
 	function __construct($request)
 	{
 		parent::__construct();
-
-		echo $request->action;
-
 		$contentTpl = new Template('view/');
 
 		if (!isset($_SESSION['id']))
@@ -33,8 +30,6 @@ class DeletePhoto extends Controller
 	}
 
 	function deletePhoto($photoId, $userId) {
-
-		echo '<br/><br/>poulet';
 		$this->db->connect();
 		$query = $this->db->prepare('SELECT * FROM photos WHERE id=\''.$photoId.'\'');
 		$query->execute();
@@ -46,7 +41,6 @@ class DeletePhoto extends Controller
 		if ($data['user_id'] === $userId) {
 			$query = $this->db->prepare('DELETE FROM photos WHERE id=\''.$photoId.'\'');
 			$query->execute();
-			echo '<br/><br/>bordel';
 		}
 		return (true);
 	}

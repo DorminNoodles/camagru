@@ -1,14 +1,13 @@
 <?php
 
 require('core/Controller.php');
-require('model/Password.php');
-require('model/Username.php');
+require('model/InputPassword.php');
+require('model/InputUsername.php');
 
 class MyProfile extends Controller {
 
 	function __construct() {
 		parent::__construct();
-
 
 		$contentTpl = new Template('view/');
 		$contentTpl->set('successMessage', null);
@@ -19,8 +18,6 @@ class MyProfile extends Controller {
 			echo $this->tpl->fetch('main.php');
 			return;
 		}
-
-		// $this->user->checkPassword($_SESSION['id'], );
 
 		if (!empty($_POST['password'])) {
 			$ret = $this->changeProfile();
@@ -39,10 +36,9 @@ class MyProfile extends Controller {
 	}
 
 	function changeProfile() {
-		$password = new Password($_POST['password']);
-		$newPassword = new Password($_POST['newPassword']);
-		$username = new Username($_POST['username']);
-		// $arr;
+		$password = new InputPassword($_POST['password']);
+		$newPassword = new InputPassword($_POST['newPassword']);
+		$username = new InputUsername($_POST['username']);
 
 		if (!$password->isValid() || !$this->user->checkPassword($_SESSION['id'], $password->getValue()))
 			return array( 'error' => 'Bad Password !', 'success' => '');
@@ -56,31 +52,17 @@ class MyProfile extends Controller {
 		}
 
 		if (!empty($_POST['username'])) {
-			echo 'HELLO';
+			if (!$username->isValid())
+				return array( 'error' => $username->getError(), 'succes' => '');
 			if ($username->getValue() != $this->user->getName()) {
-				$data = $this->db->find_user($username->getValue());
-				if (!empty($data))
-					return array('error' => 'Username already taken !', 'success' => '');
+				if ($username->alreadyExist())
+					return array( 'error' => $username->getError(), 'succes' => '');
 				$this->db->connect();
 				$query = $this->db->prepare('UPDATE users SET name=\''.$username->getValue().'\' WHERE id='.$_SESSION['id'].'');
 				$query->execute();
 			}
 		}
-		// if (!empty($_POST['newPassword'])) {
-		// 	if (!$newPassword->isValid())
-		// 		return array( 'error' => $newPassword->getError(), 'succes' => '');
-		// 	$this->db->connect();
-		// 	$query = $this->db->prepare('UPDATE users SET password=\''.$newPassword->getCryptedValue().'\' WHERE id='.$_SESSION['id'].'');
-		// 	$query->execute();
-		// }
-
 		return array('error' => '', 'success' => 'Success !');
-	}
-
-	function sanitizeInput() {
-
-
-
 	}
 }
 

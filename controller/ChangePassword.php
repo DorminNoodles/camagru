@@ -14,7 +14,6 @@ class ChangePassword extends Controller {
 		$contentTpl->set('errorMessage', null);
 		$this->tpl->set('content', $contentTpl->fetch('changePassword.php'));
 
-
 		if (isset($_SESSION['id'])) {
 			echo $this->tpl->fetch('main.php');
 			return;
@@ -27,13 +26,6 @@ class ChangePassword extends Controller {
 				}
 			}
 		}
-
-		// if (isset($_POST['newPassword1']) && isset($_POST['newPassword2'])) {
-		// 	if ($this->checkPassword()) {
-		// 		$this->updateNewPassword($newPwd->getValue, $request->action);
-		// 	}
-		// }
-
 		echo $this->tpl->fetch('main.php');
 	}
 
@@ -63,7 +55,6 @@ class ChangePassword extends Controller {
 	}
 
 	function updateNewPassword($password, $key) {
-		echo 'fuck';
 		$password = password_hash($password, PASSWORD_DEFAULT);
 		$this->db->connect();
 		$query = $this->db->prepare('UPDATE users SET password=\''.$password.'\' WHERE activationKey=\''.$key.'\'');

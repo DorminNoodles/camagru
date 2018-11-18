@@ -1,6 +1,9 @@
 <?php
 
 require('core/Controller.php');
+require_once('model/InputUsername.php');
+require_once('model/InputPassword.php');
+require_once('model/InputEmail.php');
 
 class Register extends Controller
 {
@@ -16,42 +19,34 @@ class Register extends Controller
 		$arr['message'] = '';
 
 
-		if(!empty($_POST))
+		if (!empty($_POST))
 			$arr = $this->createUser();
 		$this->displayForm = ($arr['valid']) ? false : true;
 		$contentTpl = new Template('view/');
 		$this->tpl->set('content', $contentTpl->fetch('registerSuccess.php'));
 		$contentTpl->set('message', $arr['message']);
 		if (!$arr['valid'])
-		{
 			$this->tpl->set('content', $contentTpl->fetch('registerForm.php'));
-		}
 		echo $this->tpl->fetch('main.php');
 	}
 
 	function createUser() {
-		$this->sanitize();
+		$this->db->connect();
 		$arr = $this->checkInputs();
 		if (!$arr['valid'])
 			return ($arr);
-
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$key = str_replace ( '/', '', $key);
 		$key = str_replace ( '.', '', $key);
 		$this->sendActivation($key);
 		$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-		$this->db->connect();
 		$query = $this->db->prepare('INSERT INTO users (name, password, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
 		$query->execute();
 
 		return($arr);
 	}
 
-	function sanitize() {
-		$_POST['username'] = htmlentities($_POST['username']);
-		$_POST['password'] = htmlentities($_POST['password']);
-		$_POST['email'] = htmlentities($_POST['email']);
-	}
+
 
 	function sendActivation($msg) {
 		$emailTo = $_POST['email'];
@@ -67,52 +62,31 @@ class Register extends Controller
 		$arr['valid'] = true;
 		$arr['message'] = '';
 
-		if (!$arr['valid'] || !isset($_POST['username']))
-		{
+		$username = new InputUsername($_POST['username']);
+		$password = new InputPassword($_POST['password']);
+		$email = new InputEmail($_POST['email']);
+
+		if (!$username->isValid() || $username->alreadyExist()) {
 			$arr['valid'] = false;
-			$arr['message'] = 'Username need to be specified !';
+			$arr['message'] = $username->getError();
 			return $arr;
 		}
 
-		if (!$arr['valid'] || $this->db->find_user($_POST['username']) !== false)
-		{
+		if (!$password->isValid()) {
 			$arr['valid'] = false;
-			$arr['message'] = 'Username already exist !';
+			$arr['message'] = $password->getError();
 			return $arr;
 		}
 
-		if (!$arr['valid'] || !isset($_POST['password']))
-		{
+		if (!$email->isValid()) {
 			$arr['valid'] = false;
-			$arr['message'] = 'Password need to be specified !';
+			$arr['message'] = $email->getError();
 			return $arr;
 		}
 
-		if (!$arr['valid'] || strlen($_POST['password']) < 6)
-		{
-			$arr['valid'] = false;
-			$arr['message'] = 'password must be 6 characters minimum !';
-			return $arr;
-		}
-
-		if (!$arr['valid'] || strlen($_POST['email']) < 5)
-		{
-			$arr['valid'] = false;
-			$arr['message'] = 'Invalid email !';
-			return $arr;
-		}
-
-
-
-
-		$ret = $this->db->select(['*'], 'users', 'WHERE email=\''.$_POST['email'].'\'');
-
-		if (!$arr['valid'] || isset($ret[0]))
-		{
-			$arr['valid'] = false;
-			$arr['message'] = 'Email already exist !';
-			return $arr;
-		}
+		$_POST['username'] = $username->getValue();
+		$_POST['password'] = $password->getValue();
+		$_POST['email'] = $email->getValue();
 
 		return $arr;
 	}

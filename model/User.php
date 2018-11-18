@@ -6,7 +6,6 @@
 
 class User
 {
-	// private $auth;
 	private $db;
 	private $id;
 	private $name;
@@ -47,8 +46,6 @@ class User
 		$this->likes[$photoID] = true;
 		$serialized = serialize($this->likes);
 		$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
-
-
 	}
 
 	public function disLike($photoID) {
@@ -57,15 +54,6 @@ class User
 		$serialized = serialize($this->likes);
 		$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
 	}
-
-	// public function deleteLike($photoID) {
-	// 	$this->db->connect();
-	// 	// $arr = $this->db->getLikes();
-	//
-	// 	$this->likes[$photoID] = false;
-	// 	$serialized = serialize($arr);
-	// 	$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
-	// }
 
 	public function setLikes($likes) {
 		$this->likes = $likes;
@@ -83,10 +71,7 @@ class User
 	}
 
 	public function logout() {
-		echo 'test';
 		$_SESSION['auth'] = false;
-		// $_SESSION = NULL;
-		echo 'here ->';
 		var_dump($_SESSION);
 	}
 

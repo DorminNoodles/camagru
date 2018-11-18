@@ -18,11 +18,6 @@ class Montage extends Controller
 			return;
 		}
 
-		if (isset($request->action))
-			echo "Hello";
-
-		// $contentTpl->set('myPhotos', $myPhotos);
-
 		if ($request->action == "saveCompo" && $_POST['img'] && $_POST['stickers'])
 			$this->saveCompo();
 
@@ -30,12 +25,6 @@ class Montage extends Controller
 		$contentTpl->set('myPhotos', $this->getMyLibrary($_SESSION['id']));
 		$this->tpl->set('content', $contentTpl->fetch('montage.php'));
 		echo $this->tpl->fetch('main.php');
-
-	}
-
-	function render()
-	{
-
 
 	}
 

@@ -11,12 +11,10 @@ class Input {
 
 		$this->db = new Database('camagru');
 		$this->sanitizeInput($input);
-
 	}
 
 	function sanitizeInput($input) {
-		$this->value = htmlentities($input);
-		$this->value = $input;
+		$this->value = htmlentities($input, ENT_QUOTES);
 	}
 
 	public function getValue() {

@@ -8,9 +8,7 @@ class Activation extends Controller {
 
 		parent::__construct();
 
-
 		$tplContent = new Template('view/');
-
 
 		if ($this->checkActivation($request->action))
 		{

@@ -1,6 +1,8 @@
 <?php
 
 require('core/Controller.php');
+require_once('model/InputUsername.php');
+require_once('model/InputPassword.php');
 
 class Login extends Controller
 {
@@ -11,43 +13,56 @@ class Login extends Controller
 
 		parent::__construct();
 
-		// print_r($_POST);
-
-		if (!empty($_POST['username']) && !empty($_POST['password']) && !isset($_POST['id']))
-		{
-			$arr = $this->connectUser($_POST['username'], $_POST['password']);
-		}
-
-		// $this->displayForm = (isset($_SESSION['id'])) ? false : true;
+		if (!empty($_POST))
+			$arr = $this->connectUser();
 
 		$contentTpl = new Template('view/');
+		$contentTpl->set('message', '');
 
-		if (empty($arr['message']))
-			$contentTpl->set('message', '');
-		else
+		if (!empty($arr['message']))
 			$contentTpl->set('message', $arr['message']);
 
 		if (isset($_SESSION['id']))
 			$this->tpl->set('content', $contentTpl->fetch('loginSuccess.php'));
 		else
 			$this->tpl->set('content', $contentTpl->fetch('loginForm.php'));
-
 		echo $this->tpl->fetch('main.php');
 	}
 
 	function checkInputs() {
-		return (true);
+
+		$arr = [];
+		$arr['valid'] = true;
+		$arr['message'] = '';
+
+		$username = new InputUsername($_POST['username']);
+		if (!$username->isValid()) {
+			$arr['valid'] = false;
+			$arr['message'] = $username->getError();
+			return $arr;
+		}
+
+		$password = new InputPassword($_POST['password']);
+		if (!$username->isValid()) {
+			$arr['valid'] = false;
+			$arr['message'] = $username->getError();
+			return $arr;
+		}
+		$_POST['username'] = $username->getValue();
+		$_POST['password'] = $password->getValue();
+
+		return $arr;
 	}
 
+	function connectUser() {
+		$arr = $this->checkInputs();
+		if (!$arr['valid'])
+			return ($arr);
 
-	function connectUser($name, $pwd) {
-		$arr['message'] = '';
-		$arr['valid'] = (!$this->checkInputs()) ? false : true;
 		if ($arr['valid'])
 		{
-			$data = $this->db->find_user($name);
-
-			if (strtolower($name) !== strtolower($data['name']) || !password_verify($pwd, $data['password'])) {
+			$data = $this->db->findUserByName($_POST['username']);
+			if ($_POST['username'] !== strtolower($data['name']) || !password_verify($_POST['password'], $data['password'])) {
 				$arr['valid'] = false;
 				$arr['message'] = "Error bad username or password";
 				return $arr;
@@ -66,33 +81,5 @@ class Login extends Controller
 		}
 		return ($arr);
 	}
-
-	// function sendMail() {
-	// 	$emailTo = $_POST['email'];
-	// 	$emailFrom = 'register@camagru.fr';
-	// 	$subject = "Camagru - Confirm Your Account";
-	// 	$message = "Hello";
-	// 	$ret = mail($emailTo, $subject, $message);
-	// 	echo $ret . '     SEND EMAIL';
-	// }
-
-	// function checkInputs() {
-	//
-	// 	$arr = [];
-	// 	$valid = true;
-	//
-	// 	if (!$valid || !isset($_POST['username']))
-	// 	{
-	// 		echo ' >' . $valid . '< ';
-	// 		$valid = false;
-	// 		// echo ' >' . $valid . '< ';
-	// 		$arr['username'] = 'Username need to be specified !';
-	// 	}
-
-	//
-	// 	$arr['valid'] = $valid;
-	// 	return $arr;
-	// }
-
 }
 ?>

@@ -9,14 +9,12 @@ class Database {
 	protected $object;
 	protected $dbName;
 
-	function __construct($name)
-	{
+	function __construct($name) {
 		$this->dbName = $name;
 
 	}
 
-	public function connect()
-	{
+	public function connect() {
 		try {
 			$this->db = new PDO('mysql:host='.HOST.';dbname='.$this->dbName.';', 'root', 'qwerty');
 		}
@@ -29,16 +27,13 @@ class Database {
 		}
 	}
 
-	function connect_to_db()
-	{
-
-
+	public function quote($data) {
+		return $this->db->quote($data);
 	}
 
 	public function select($colsArr, $table, $condition) {
 		$this->connect();
 		$cols = implode(',', $colsArr);
-		// echo 'SELECT '.$cols.' FROM '.$table.' '.$condition;
 		$query = $this->db->prepare('SELECT '.$cols.' FROM '.$table.' '.$condition);
 		$query->execute();
 		return $query->fetchAll();
@@ -52,15 +47,6 @@ class Database {
 		return unserialize($ret[0]['likes']);
 	}
 
-	// public function insert($table, $title, $message) {
-	// 	$this->connect();
-	// 	$str = implode(', ', $values);
-	// 	echo 'INSERT INTO '.$table.' VALUES '.$str;
-	// 	$query = $this->db->prepare('INSERT INTO '.$table.' VALUES '.$str);
-	// 	$query->execute();
-	// 	return $query->fetchAll();
-	// }
-
 	function prepare($query) {
 		return $this->db->prepare($query);
 	}
@@ -69,12 +55,12 @@ class Database {
 		$ret = $this->db->exec($query);
 	}
 
-	public function find_user($username)
+	public function findUserByName($username)
 	{
 		$this->connect();
-		$query = 'SELECT * FROM users WHERE name=\'' .$username. '\'';
-		$arr = $this->db->query($query);
-		return($arr->fetch());
+		$query = $this->prepare('SELECT * FROM users WHERE name=\'' .$username. '\'');
+		$query->execute();
+		return($query->fetch());
 	}
 
 	public function findUserById($id)

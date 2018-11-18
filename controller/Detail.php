@@ -2,6 +2,7 @@
 
 require('core/Controller.php');
 require('model/Photo.php');
+require_once('model/InputComment.php');
 
 class Detail extends Controller {
 
@@ -45,7 +46,6 @@ class Detail extends Controller {
 		$arr = [];
 
 		foreach ($data as $comment) {
-
 			$tmp['message'] = $comment['content'];
 			$user = $this->db->findUserById($comment['userId']);
 			$tmp['login'] = $user['name'];
@@ -92,27 +92,25 @@ class Detail extends Controller {
 	}
 
 	public function insertComment($userId, $message, $photoId) {
+		$comment = new InputComment($message);
 		$this->db->connect();
-		$query = $this->db->prepare('INSERT INTO comments (id_photo, userId, content) VALUES ('.$photoId.', \''.$userId.'\', \''.$message.'\')');
+		$query = $this->db->prepare('INSERT INTO comments (id_photo, userId, content) VALUES ('.$photoId.', \''.$userId.'\', \''.$comment->getValue().'\')');
 		$query->execute();
-
+		//get id of photo owner
 		$query = $this->db->prepare('SELECT * FROM photos WHERE id=\''.$photoId.'\'');
 		$query->execute();
 		$data = $query->fetch();
-
-		// print_r($data);
-		// echo $data['user_id'];
+		//get mail of photo owner
 		$query = $this->db->prepare('SELECT * FROM users WHERE id=\''.$data['user_id'].'\'');
 		$query->execute();
 		$data = $query->fetch();
-		// print_r($data);
 
 		if (isset($data['email'])) {
 			$emailTo = $data['email'];
 			$emailFrom = 'register@camagru.fr';
 			$subject = "Camagru - New comment !";
 			$message = "One of your photo recevied a new comment !";
-			$ret = mail($emailTo, $subject, $message);
+			$ret = mail($emailTo, $subject, $comment->getValue());
 		}
 	}
 }

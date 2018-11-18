@@ -12,6 +12,6 @@
 
 </div>
 <div id="btnGallery">
-	<a href=<?= $previousPage; ?>><button>precedent</button>
-	<a href=<?= $nextPage; ?>><button>suivant</button>
+	<a href=<?= $previousPage; ?>><button>precedent</button></a>
+	<a href=<?= $nextPage; ?>><button>suivant</button></a>
 </div>

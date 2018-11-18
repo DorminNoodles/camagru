@@ -107,12 +107,7 @@ function displayStickers()
 function resetPhoto(e)
 {
 	location.reload();
-	// console.log("HELLLLO");
-	// canvas = document.getElementById("canvasPhoto");
-	// canvas.parentNode.removeChild(canvas);
 }
-
-
 
 function replaceVideo() {
 	var canvas = document.createElement("canvas");
@@ -121,11 +116,6 @@ function replaceVideo() {
 	canvas.height = 480;
 	canvas.onclick = pasteSticker;
 
-
-	// 	importImg.onload = function () {
-	// 		canvas.getContext('2d').drawImage(importImg, 0, 0, 640, 480);
-	// 		origImg.src = canvas.toDataURL();
-	// 	}
 	if (importImg) {
 		importImg.onload = function () {
 			canvas.getContext('2d').drawImage(importImg, 0, 0, 640, 480);
