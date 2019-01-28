@@ -43,5 +43,10 @@
 			userId INT(6) UNSIGNED,
 			content TEXT(3000)
 		)');
-		mkdir($path . "photos", 0700);
+
+		mkdir(dirname(getcwd()) . "/photos", 0700);
+
+		// echo dirname("/");
+		// echo getcwd();
+		// echo dirname(getcwd()) . PHP_EOL;
 ?>

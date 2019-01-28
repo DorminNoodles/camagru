@@ -162,6 +162,8 @@ function savePhoto()
 	form.setAttribute("method", "post");
 	form.setAttribute("action", "/camagru/montage/saveCompo");
 
+	console.log("hello");
+
 	for(var key in params)
 	{
 		var hiddenField = document.createElement("input");
