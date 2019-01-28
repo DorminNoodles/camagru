@@ -45,8 +45,4 @@
 		)');
 
 		mkdir(dirname(getcwd()) . "/photos", 0700);
-
-		// echo dirname("/");
-		// echo getcwd();
-		// echo dirname(getcwd()) . PHP_EOL;
 ?>

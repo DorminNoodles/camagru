@@ -59,7 +59,6 @@ function changeUI() {
 	resetBtn.id = "resetPhoto";
 	resetBtn.onclick = resetPhoto;
 	resetBtn.appendChild(document.createTextNode("Reset Photo"));
-	// document.getElementById("btn").appendChild(resetBtn);
 	document.getElementsByClassName("btn")[0].appendChild(resetBtn);
 	displayStickers();
 	createSaveBtn();
@@ -69,7 +68,7 @@ function instanceSticker(name)
 {
 	if (handleSticker == null)
 	{
-		console.log("fichtre");
+		// console.log("fichtre");
 		handleSticker = name;
 		var img = document.createElement("img");
 		img.src = "/camagru/stickers/" + name;
@@ -77,14 +76,20 @@ function instanceSticker(name)
 		img.style.pointerEvents = 	"none";
 		img.id = "sticker";
 		img.style.opacity = "0.8";
-		img.style.left = mouseX - (img.width/2);
-		img.style.top = mouseY - (img.height/2);
+		console.log(window.pageXOffset);
+		img.style.left = (mouseX - (img.width/2)) + "px";
+		img.style.top = (mouseY - (img.height/2)) + "px";
 
 		document.body.appendChild(img);
 		window.addEventListener('mousemove', function(e)
 		{
-			img.style.left = e.clientX - (img.width/2);
-			img.style.top = e.clientY - (img.height/2);
+			// console.log(window.pageYOffset);
+			// console.log(e.clientY);
+			// console.log(img.style.left + "px");
+			img.style.left = (e.clientX - (img.width/2)) + "px";
+			img.style.top = (e.clientY - (img.height/2)) + "px";
+			// img.style.left = e.clientX - (img.width/2);
+			// img.style.top = e.clientY - (img.height/2);
 		});
 	}
 	else
@@ -186,7 +191,7 @@ function pasteOnCanvas()
 	img.src = "/camagru/stickers/" + handleSticker;
 
 	x = (mouseX - (img.width/2)) - canvas.offsetLeft;
-	y = (mouseY - (img.height/2)) - canvas.offsetTop + document.body.scrollTop;
+	y = (mouseY - (img.height/2)) - canvas.offsetTop + window.pageYOffset;
 	canvas.getContext('2d').drawImage(img, x, y);
 
 	stickersArr.push({x:x, y:y, name:handleSticker});

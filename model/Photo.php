@@ -23,8 +23,6 @@ class Photo extends File
 		$query = $db->prepare('SELECT MAX(id) FROM photos');
 		$query->execute();
 		$id = $query->fetch();
-		if (is_dir("./photos"))
-			echo "bitch";
 		imagepng($this->src, "./photos/".$id[0].".png");
 	}
 
