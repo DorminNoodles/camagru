@@ -39,7 +39,7 @@ if (video)
 		},
 		function(stream) {
 			var vendorURL = window.URL;
-			video.src = vendorURL.createObjectURL(stream);
+			video.srcObject=stream;
 			video.play();
 		},
 		function(err){

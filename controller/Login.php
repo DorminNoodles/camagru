@@ -69,7 +69,6 @@ class Login extends Controller
 			}
 
 			if ($arr['valid'] == true && $data['active'] == false) {
-				echo "NOT ACTIVE";
 				$arr['valid'] = false;
 				$arr['message'] = "Error account not active";
 				return $arr;
