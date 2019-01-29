@@ -26,11 +26,17 @@ class InputUsername extends Input {
 			$this->error = 'Username bad character !';
 			return false;
 		}
-		if (!preg_match('/^[A-Za-z][A-Za-z0-9]{5,31}$/', $this->value)) {
+
+		$regex = "^[a-zA-Z0-9]{0,}/";
+
+		if (!preg_match($regex, $this->value)) {
 			$this->error = 'Username bad character !';
 			return false;
 		}
 
+		if (!preg_match("#^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$#", $password)) {
+			$passwordErr = "Must contains 6 characters, with at least one uppercase, one lowercase and one digit";
+		}
 		return true;
 	}
 
