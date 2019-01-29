@@ -26,6 +26,11 @@ class InputUsername extends Input {
 			$this->error = 'Username bad character !';
 			return false;
 		}
+		if (!preg_match('/^[A-Za-z][A-Za-z0-9]{5,31}$/', $this->value)) {
+			$this->error = 'Username bad character !';
+			return false;
+		}
+
 		return true;
 	}
 

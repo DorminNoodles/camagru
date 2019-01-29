@@ -12,6 +12,6 @@
 			<button type="submit" name="button">Confirm</button>
 		</div>
 	</form>
-	<div class="errorMessage"><?= $successMessage;?></div>
-	<div class="succesMessage"><?= $errorMessage;?></div>
+	<div class="errorMessage"><?= $errorMessage;?></div>
+	<div class="successMessage"><?= $successMessage;?></div>
 </div>

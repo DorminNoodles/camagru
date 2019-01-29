@@ -301,6 +301,10 @@ canvas {
 	width: 80%;
 }
 
+.commentMessage {
+	word-wrap: break-word;
+}
+
 .newComment {
 	border: 1px #AAA solid;
 	margin: 15px;

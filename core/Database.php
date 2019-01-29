@@ -63,6 +63,14 @@ class Database {
 		return($query->fetch());
 	}
 
+	public function findUserByEmail($email)
+	{
+		$this->connect();
+		$query = $this->prepare('SELECT * FROM users WHERE email=\'' .$email. '\'');
+		$query->execute();
+		return($query->fetch());
+	}
+
 	public function findUserById($id)
 	{
 		$this->connect();

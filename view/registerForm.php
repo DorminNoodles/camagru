@@ -10,6 +10,9 @@
 				<input type="password" name="password" placeholder="My Password">
 			</div>
 			<div class="input">
+				<input type="password" name="passwordConfirm" placeholder="Confirm Password">
+			</div>
+			<div class="input">
 				<input type="email" name="email" placeholder="My Email">
 			</div>
 			<div class="registerBtn">

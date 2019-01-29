@@ -38,7 +38,7 @@ class Gallery
 		if (!is_numeric($nb))
 			$nb = 0;
 
-		return ("/camagru/home/gallery/". ($nb+5));
+		return ("/camagru/home/gallery/" . ($nb + 5));
 	}
 
 	function previousPage($nb)
@@ -50,7 +50,20 @@ class Gallery
 
 		return ("/camagru/home/gallery/". $nb);
 	}
-}
 
+	function showPreviousBtn($nb)
+	{
+		if ($nb == 0)
+			return false;
+		return true;
+	}
+
+	function showNextBtn($nb)
+	{
+		if (($nb+5) < count($this->photos))
+			return true;
+		return false;
+	}
+}
 
 ?>

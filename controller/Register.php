@@ -18,7 +18,6 @@ class Register extends Controller
 		$arr['valid'] = false;
 		$arr['message'] = '';
 
-
 		if (!empty($_POST))
 			$arr = $this->createUser();
 		$this->displayForm = ($arr['valid']) ? false : true;
@@ -46,8 +45,6 @@ class Register extends Controller
 		return($arr);
 	}
 
-
-
 	function sendActivation($msg) {
 		$emailTo = $_POST['email'];
 		$emailFrom = 'register@camagru.fr';
@@ -64,6 +61,7 @@ class Register extends Controller
 
 		$username = new InputUsername($_POST['username']);
 		$password = new InputPassword($_POST['password']);
+		$passwordConfirm = new InputPassword($_POST['passwordConfirm']);
 		$email = new InputEmail($_POST['email']);
 
 		if (!$username->isValid() || $username->alreadyExist()) {
@@ -71,10 +69,14 @@ class Register extends Controller
 			$arr['message'] = $username->getError();
 			return $arr;
 		}
-
 		if (!$password->isValid()) {
 			$arr['valid'] = false;
 			$arr['message'] = $password->getError();
+			return $arr;
+		}
+		if ($password->getValue() != $passwordConfirm->getValue()) {
+			$arr['valid'] = false;
+			$arr['message'] = 'Passwords don\'t match';
 			return $arr;
 		}
 
@@ -87,9 +89,7 @@ class Register extends Controller
 		$_POST['username'] = $username->getValue();
 		$_POST['password'] = $password->getValue();
 		$_POST['email'] = $email->getValue();
-
 		return $arr;
 	}
-
 }
 ?>

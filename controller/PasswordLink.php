@@ -1,7 +1,8 @@
 <?php
 
 require_once('core/controller.php');
-require_once('model/Email.php');
+require_once('model/InputEmail.php');
+require_once('core/Database.php');
 
 class PasswordLink extends Controller {
 	function __construct(){
@@ -13,11 +14,14 @@ class PasswordLink extends Controller {
 		$contentTpl->set('successMessage', null);
 
 		if (isset($_POST['email'])) {
-			$email = new Email($_POST['email']);
-			if ($email->isValid() && $email->is()) {
+			$email = new InputEmail($_POST['email']);
+			$db = new Database("camagru");
+			if ($email->isValid() && $db->findUserByEmail($email->getValue())) {
 				$this->sendPasswordLink($email->getValue());
 				$contentTpl->set('successMessage', 'Password Link sending !');
 			}
+			else
+				$contentTpl->set('errorMessage', 'Bad Email');
 		}
 
 		$this->tpl->set('content', $contentTpl->fetch('PasswordLink.php'));
@@ -31,13 +35,14 @@ class PasswordLink extends Controller {
 		$this->db->connect();
 		$query = $this->db->prepare('UPDATE users SET activationKey=\''.$key.'\' WHERE email=\''.$email.'\'');
 		$query->execute();
-		$this->sendActivation($key, $email);
+		$this->sendMail($key, $email);
 	}
 
-	function sendActivation($key, $email) {
+	function sendMail($key, $email) {
+		// echo 'HELOOOO';
 		$emailTo = $email;
 		$emailFrom = 'register@camagru.fr';
-		$subject = "Camagru - Confirm Your Account";
+		$subject = "Camagru - Change Password";
 		$message = "Hello click here to change your password => http://localhost:8080/camagru/changePassword/".$key;
 		$ret = mail($emailTo, $subject, $message);
 	}

@@ -18,6 +18,10 @@ class Home extends Controller
 		$tplGallery->set('photos', $gallery->getPhotos($request->params[0]));
 		$tplGallery->set('nextPage', $gallery->nextPage($request->params[0]));
 		$tplGallery->set('previousPage', $gallery->previousPage($request->params[0]));
+
+		$tplGallery->set('showPreviousBtn', $gallery->showPreviousBtn($request->params[0]));
+		$tplGallery->set('showNextBtn', $gallery->showNextBtn($request->params[0]));
+
 		$this->tpl->set('content', $tplGallery->fetch('gallery.php'));
 		echo $this->tpl->fetch('main.php');
 	}

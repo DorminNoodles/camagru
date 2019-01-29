@@ -1,7 +1,7 @@
 <?php
 
 require_once('core/Controller.php');
-require_once('model/Password.php');
+require_once('model/InputPassword.php');
 
 class ChangePassword extends Controller {
 
@@ -12,26 +12,30 @@ class ChangePassword extends Controller {
 		$contentTpl = new Template('view/');
 		$contentTpl->set('successMessage', null);
 		$contentTpl->set('errorMessage', null);
-		$this->tpl->set('content', $contentTpl->fetch('changePassword.php'));
 
-		if (isset($_SESSION['id'])) {
-			echo $this->tpl->fetch('main.php');
-			return;
-		}
+		// if (isset($_SESSION['id'])) {
+		// 	echo $this->tpl->fetch('main.php');
+		// 	return;
+		// }
 
 		if (isset($request->action) && isset($_POST['newPassword1']) && isset($_POST['newPassword2'])) {
 			if ($this->checkPassword()) {
 				if ($this->checkLinkPassword($request->action)) {
 					$this->updateNewPassword($_POST['newPassword1'], $request->action);
+					$contentTpl->set('successMessage', 'Password changed !');
 				}
 			}
+			else
+				$contentTpl->set('errorMessage', 'Error Password');
+
 		}
+		$this->tpl->set('content', $contentTpl->fetch('changePassword.php'));
 		echo $this->tpl->fetch('main.php');
 	}
 
 	function checkPassword() {
-		$pwd1 = new Password($_POST['newPassword1']);
-		$pwd2 = new Password($_POST['newPassword2']);
+		$pwd1 = new InputPassword($_POST['newPassword1']);
+		$pwd2 = new InputPassword($_POST['newPassword2']);
 
 		if (!$pwd1->isValid())
 			return false;
