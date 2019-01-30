@@ -1,11 +1,8 @@
 <?php
 
-require('core/Template.php');
-require('model/User.php');
+require_once('core/Template.php');
+require_once('model/User.php');
 
-/**
- * Controller
- */
 class Controller {
 
 	protected $tpl;

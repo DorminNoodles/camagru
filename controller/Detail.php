@@ -1,7 +1,7 @@
 <?php
 
-require('core/Controller.php');
-require('model/Photo.php');
+require_once('core/Controller.php');
+require_once('model/Photo.php');
 require_once('model/InputComment.php');
 
 class Detail extends Controller {
@@ -9,11 +9,11 @@ class Detail extends Controller {
 	function __construct($request) {
 		parent::__construct();
 
-
 		$photo = new Photo();
 
 		if (!isset($request->action) || !$photo->existInDb($request->action)) {
-			require('controller/404.php');
+			echo("hello_2");
+			require('controller/NotFound.php');
 			return;
 		}
 

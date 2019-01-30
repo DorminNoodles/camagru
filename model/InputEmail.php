@@ -1,6 +1,7 @@
 <?php
 
 require_once('model/Input.php');
+require_once('core/Database.php');
 
 class InputEmail extends Input {
 
@@ -26,8 +27,22 @@ class InputEmail extends Input {
 			$this->error = 'Email bad character !';
 			return false;
 		}
+
+		if ($this->emailAlreadyExist($this->value)) {
+			$this->error = 'Email already exist !';
+			return false;
+		}
+
 		$this->value = filter_var($this->value, FILTER_SANITIZE_EMAIL);
 		return true;
+	}
+
+	public function emailAlreadyExist($email) {
+		$db = new Database("camagru");
+		$result = $db->findUserByEmail($email);
+		if ($result['email'])
+			return true;
+		return false;
 	}
 }
 
