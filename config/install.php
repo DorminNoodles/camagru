@@ -44,5 +44,6 @@
 			content TEXT(3000)
 		)');
 
-		mkdir(dirname(getcwd()) . "/photos", 0700);
+		if (!is_dir(dirname(getcwd()) . "/photos"))
+			mkdir(dirname(getcwd()) . "/photos", 0700);
 ?>
