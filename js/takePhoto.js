@@ -83,13 +83,8 @@ function instanceSticker(name)
 		document.body.appendChild(img);
 		window.addEventListener('mousemove', function(e)
 		{
-			// console.log(window.pageYOffset);
-			// console.log(e.clientY);
-			// console.log(img.style.left + "px");
 			img.style.left = (e.clientX - (img.width/2)) + "px";
 			img.style.top = (e.clientY - (img.height/2)) + "px";
-			// img.style.left = e.clientX - (img.width/2);
-			// img.style.top = e.clientY - (img.height/2);
 		});
 	}
 	else
@@ -137,6 +132,7 @@ function replaceVideo() {
 
 function pasteSticker()
 {
+	// console.log("PASTESTICKER");
 	console.log("sticker in hand = " + handleSticker);
 
 	pasteOnCanvas();
