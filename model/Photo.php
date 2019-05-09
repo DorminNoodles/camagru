@@ -34,16 +34,19 @@ class Photo extends File
 
 	public function mergeStickers($stickers)
 	{
-		// print_r($stickers);
 		$img1 = imagecreatefrompng($this->src);
 
 		foreach($stickers as $sticker)
 		{
-			echo $sticker->name;
-			$img2 = imagecreatefrompng("./stickers/". $sticker->name);
-			$w=imagesx($img2);
-			$h=imagesy($img2);
-			imagecopy($img1,$img2,$sticker->x,$sticker->y,0,0,$w,$h);
+			if (!empty($sticker->name))
+			{
+				// echo "./stickers/" . $sticker->name;
+				// echo '<br />';
+				$img2 = imagecreatefrompng("./stickers/" . $sticker->name);
+				$w=imagesx($img2);
+				$h=imagesy($img2);
+				imagecopy($img1,$img2,$sticker->x,$sticker->y,0,0,$w,$h);
+			}
 		}
 		$this->src = $img1;
 	}
