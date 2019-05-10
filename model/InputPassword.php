@@ -14,6 +14,23 @@ class InputPassword extends Input {
 			$this->error = 'Password must be 6 characters minimum !';
 			return false;
 		}
+
+		if (!preg_match('/[[:punct:]]/', $this->value)) {
+			$this->error = 'Password must be contain at leat 1 special character !';
+			return false;
+		}
+		if (!preg_match('/[[:upper:]]/', $this->value)) {
+			$this->error = 'Password must be contain at leat 1 uppercase character !';
+			return false;
+		}
+		if (!preg_match('/[[:lower:]]/', $this->value)) {
+			$this->error = 'Password must be contain at leat 1 lowercase character !';
+			return false;
+		}
+		if (!preg_match('/\d/', $this->value)) {
+			$this->error = 'Password must be contain at leat 1 number !';
+			return false;
+		}
 		return true;
 	}
 

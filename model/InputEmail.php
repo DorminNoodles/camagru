@@ -11,6 +11,7 @@ class InputEmail extends Input {
 	}
 
 	public function checkEmail() {
+		//if register == false don't check emailAlreadyExist
 		if (strlen($this->value) < 5) {
 			$this->msg = 'Email too small!';
 			return false;
@@ -28,10 +29,10 @@ class InputEmail extends Input {
 			return false;
 		}
 
-		if ($this->emailAlreadyExist($this->value)) {
-			$this->error = 'Email already exist !';
-			return false;
-		}
+		// if ($this->emailAlreadyExist($this->value) && $register) {
+		// 	$this->error = 'Email already exist !';
+		// 	return false;
+		// }
 
 		$this->value = filter_var($this->value, FILTER_SANITIZE_EMAIL);
 		return true;
@@ -40,6 +41,11 @@ class InputEmail extends Input {
 	public function emailAlreadyExist($email) {
 		$db = new Database("camagru");
 		$result = $db->findUserByEmail($email);
+		echo '<br/>';
+		echo '<br/>';
+		var_dump($result);
+		echo '<br/>';
+		echo '<br/>';
 		if ($result['email'])
 			return true;
 		return false;

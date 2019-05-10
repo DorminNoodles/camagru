@@ -22,9 +22,7 @@ class Database {
 			echo 'error Database connection';
 		}
 		if (isset($this->db))
-		{
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}
 	}
 
 	public function quote($data) {
@@ -58,7 +56,7 @@ class Database {
 	public function findUserByName($username)
 	{
 		$this->connect();
-		$query = $this->prepare('SELECT * FROM users WHERE name=\'' .$username. '\'');
+		$query = $this->db->prepare('SELECT * FROM users WHERE name=\'' .$username. '\'');
 		$query->execute();
 		return($query->fetch());
 	}
@@ -66,7 +64,8 @@ class Database {
 	public function findUserByEmail($email)
 	{
 		$this->connect();
-		$query = $this->prepare('SELECT * FROM users WHERE email=\'' .$email. '\'');
+		$query = $this->db->prepare('SELECT * FROM users WHERE email=\'' .$email. '\'');
+		// $ret = $query->execute();
 		$query->execute();
 		return($query->fetch());
 	}
@@ -88,6 +87,5 @@ class Database {
 		return ($tmp[0]);
 	}
 }
-
 
 ?>

@@ -7,6 +7,7 @@ var stickersArr = [];
 var video = document.querySelector('video');
 var imageLoader = document.getElementById('imageLoader');
 var importImg = null;
+var oneSticker = false;
 
 
 imageLoader.addEventListener('change', function(e){
@@ -132,12 +133,10 @@ function replaceVideo() {
 
 function pasteSticker()
 {
-	// console.log("PASTESTICKER");
-	console.log("sticker in hand = " + handleSticker);
-
 	pasteOnCanvas();
 	if (handleSticker)
 	{
+		oneSticker = true
 		var sticker;
 		handleSticker = null;
 		sticker = document.getElementById("sticker");
@@ -163,7 +162,8 @@ function savePhoto()
 	form.setAttribute("method", "post");
 	form.setAttribute("action", "/camagru/montage/saveCompo");
 
-	console.log("hello");
+	if (!oneSticker)
+		return;
 
 	for(var key in params)
 	{

@@ -3,6 +3,7 @@
 require_once('core/controller.php');
 require_once('model/InputEmail.php');
 require_once('core/Database.php');
+require_once('model/User.php');
 
 class PasswordLink extends Controller {
 	function __construct(){
@@ -16,6 +17,7 @@ class PasswordLink extends Controller {
 		if (isset($_POST['email'])) {
 			$email = new InputEmail($_POST['email']);
 			$db = new Database("camagru");
+
 			if ($email->isValid() && $db->findUserByEmail($email->getValue())) {
 				$this->sendPasswordLink($email->getValue());
 				$contentTpl->set('successMessage', 'Password Link sending !');
@@ -32,18 +34,17 @@ class PasswordLink extends Controller {
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$key = str_replace ( '/', '', $key);
 		$key = str_replace ( '.', '', $key);
-		$this->db->connect();
-		$query = $this->db->prepare('UPDATE users SET activationKey=\''.$key.'\' WHERE email=\''.$email.'\'');
-		$query->execute();
+
+		$user = new User();
+		$user->addActivationKey($key, $email);
 		$this->sendMail($key, $email);
 	}
 
 	function sendMail($key, $email) {
-		// echo 'HELOOOO';
 		$emailTo = $email;
 		$emailFrom = 'register@camagru.fr';
 		$subject = "Camagru - Change Password";
-		$message = "Hello click here to change your password => http://localhost:8080/camagru/changePassword/".$key;
+		$message = "Hello click here to change your password => <a href=\'http://localhost:8080/camagru/changePassword/".$key."\'>here for change your password</a>";
 		$ret = mail($emailTo, $subject, $message);
 	}
 }

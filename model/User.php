@@ -75,6 +75,12 @@ class User
 		var_dump($_SESSION);
 	}
 
+	public function addActivationKey($key, $email) {
+		$this->db->connect();
+		$query = $this->db->prepare('UPDATE users SET activationKey=\''.$key.'\' WHERE email=\''.$email.'\'');
+		$query->execute();
+	}
+
 	public function checkPassword($id, $password) {
 		$data = $this->db->findUserById($id);
 		return password_verify($password, $data['password']);

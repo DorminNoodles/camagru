@@ -30,8 +30,11 @@ class Register extends Controller
 	}
 
 	function createUser() {
+		// var_dump($_POST);
 		$this->db->connect();
 		$arr = $this->checkInputs();
+		// echo 'here';
+		var_dump($arr['valid']);
 		if (!$arr['valid'])
 			return ($arr);
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
@@ -40,6 +43,7 @@ class Register extends Controller
 		$this->sendActivation($key);
 		$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$query = $this->db->prepare('INSERT INTO users (name, password, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
+		echo 'here';
 		$query->execute();
 
 		return($arr);
@@ -49,8 +53,17 @@ class Register extends Controller
 		$emailTo = $_POST['email'];
 		$emailFrom = 'register@camagru.fr';
 		$subject = "Camagru - Confirm Your Account";
-		$message = "Hello click here to confirm your account => http://localhost:8080/camagru/activation/".$msg;
-		$ret = mail($emailTo, $subject, $message);
+		$message = "
+			<html>
+				<body>
+					Hello click here to confirm your account => <a href='http://localhost:8080/camagru/activation/".$msg."'>click here for activate your account</a>
+				</body>
+			</html>";
+		$header[] =  'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+        $headers[] = 'To: <' . $_POST['email'] . '>';
+        $headers[] = 'From: Camagru <register@camagru.fr>';
+		$ret = mail($emailTo, $subject, $message, implode("\r\n", $headers));
 	}
 
 	function checkInputs() {
@@ -81,6 +94,11 @@ class Register extends Controller
 		}
 
 		if (!$email->isValid()) {
+			$arr['valid'] = false;
+			$arr['message'] = $email->getError();
+			return $arr;
+		}
+		if ($email->emailAlreadyExist($email->getValue())) {
 			$arr['valid'] = false;
 			$arr['message'] = $email->getError();
 			return $arr;
