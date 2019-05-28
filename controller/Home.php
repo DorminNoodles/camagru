@@ -6,7 +6,6 @@ require('model/Gallery.php');
 
 class Home extends Controller
 {
-	public $render = [];
 	function __construct($request)
 	{
 		parent::__construct($request);

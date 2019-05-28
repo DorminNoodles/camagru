@@ -9,27 +9,32 @@ class Database {
 	protected $object;
 	protected $dbName;
 
-	function __construct($name) {
+	function __construct($name)
+	{
 		$this->dbName = $name;
-
 	}
 
-	public function connect() {
-		try {
+	public function connect()
+	{
+		try
+		{
 			$this->db = new PDO('mysql:host='.HOST.';dbname='.$this->dbName.';', 'root', 'qwerty');
 		}
-		catch ( PDOException $Exception ){
+		catch ( PDOException $Exception )
+		{
 			echo 'error Database connection';
 		}
 		if (isset($this->db))
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
-	public function quote($data) {
+	public function quote($data)
+	{
 		return $this->db->quote($data);
 	}
 
-	public function select($colsArr, $table, $condition) {
+	public function select($colsArr, $table, $condition)
+	{
 		$this->connect();
 		$cols = implode(',', $colsArr);
 		$query = $this->db->prepare('SELECT '.$cols.' FROM '.$table.' '.$condition);
@@ -37,7 +42,8 @@ class Database {
 		return $query->fetchAll();
 	}
 
-	public function userGetLikes($userID) {
+	public function userGetLikes($userID)
+	{
 		$this->connect();
 		$prep = $this->db->prepare('SELECT likes FROM users WHERE id = '.$userID.'');
 		$prep->execute();
@@ -45,11 +51,13 @@ class Database {
 		return unserialize($ret[0]['likes']);
 	}
 
-	function prepare($query) {
+	function prepare($query)
+	{
 		return $this->db->prepare($query);
 	}
 
-	public function exec($query) {
+	public function exec($query)
+	{
 		$ret = $this->db->exec($query);
 	}
 

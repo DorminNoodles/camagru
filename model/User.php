@@ -1,8 +1,4 @@
 <?php
-/**
- *
- */
-
 
 class User
 {
@@ -12,9 +8,13 @@ class User
 	private $likes;
 	private $email;
 
-	function __construct() {
+	function __construct($id) {
 		$this->db = new Database("camagru");
 		$this->auth = false;
+		$data = $this->db->select(['*'], 'users', 'WHERE id = '.$id);
+		echo 'fuck';
+		print_r($data);
+
 	}
 
 	public function getAuth() {

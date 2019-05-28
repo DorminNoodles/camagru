@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 class Request
 {
 	public $controller;
@@ -11,6 +8,7 @@ class Request
 
 	function __construct($url)
 	{
+		//get controller name, action and params from url
 		$arr = explode('/',$url);
 		$this->setController($arr[2]);
 		$this->action = (isset($arr[3])) ? $arr[3] : null;

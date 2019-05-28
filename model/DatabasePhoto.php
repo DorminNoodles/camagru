@@ -17,11 +17,17 @@ class DatabasePhoto extends Database
 	public function getPhotos()
 	{
 		$this->connect();
-		// $query = 'SELECT * FROM photos';
-		$query = 'SELECT * FROM photos ORDER BY date DESC';
-		$tmp = $this->db->query($query);
-		$arr = $tmp->fetchAll();
-		return ($arr);
+		if ($this->db != null)
+		{
+			$query = 'SELECT * FROM photos ORDER BY date DESC';
+			$tmp = $this->db->query($query);
+			$arr = $tmp->fetchAll();
+			return ($arr);
+		}
+		else
+		{
+			return null;
+		}
 	}
 }
  ?>

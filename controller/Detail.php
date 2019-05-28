@@ -11,7 +11,8 @@ class Detail extends Controller {
 
 		$photo = new Photo();
 
-		if (!isset($request->action) || !$photo->existInDb($request->action)) {
+		if (!isset($request->action) || !$photo->existInDb($request->action))
+		{
 			echo("hello_2");
 			require('controller/NotFound.php');
 			return;
@@ -28,7 +29,8 @@ class Detail extends Controller {
 		$this->displayPhoto($detailTpl, $request->action);
 
 
-		if (isset($_SESSION['id'])) {
+		if (isset($_SESSION['id']))
+		{
 			if (isset($request->params[0]))
 				$this->manageLike($request->params[0], $request->action);
 			$this->displayLike($detailTpl, $request->action);
@@ -41,11 +43,13 @@ class Detail extends Controller {
 
 	}
 
-	function displayComments($detailTpl, $photoId) {
+	function displayComments($detailTpl, $photoId)
+	{
 		$data = $this->db->select(['*'], 'comments', 'WHERE id_photo='.$photoId);
 		$arr = [];
 
-		foreach ($data as $comment) {
+		foreach ($data as $comment)
+		{
 			$tmp['message'] = $comment['content'];
 			$user = $this->db->findUserById($comment['userId']);
 			$tmp['login'] = $user['name'];
@@ -54,31 +58,38 @@ class Detail extends Controller {
 		$detailTpl->set('comments', $arr);
 	}
 
-	function manageLike($param, $photoId) {
+	function manageLike($param, $photoId)
+	{
 		if ( $param == 'like')
 			$this->user->addLike($photoId);
 		if ($param == 'dislike')
 			$this->user->disLike($photoId);
 	}
 
-	function displayPhoto($detailTpl, $photoId) {
+	function displayPhoto($detailTpl, $photoId)
+	{
 		$detailTpl->set('photoPath', '/camagru/photos/' .$photoId. '.png');
 	}
 
-	function displayLike($detailTpl, $photoId) {
-		if (isset($_SESSION['id'])) {
-			if (!$this->checkLike($photoId)) {
+	function displayLike($detailTpl, $photoId)
+	{
+		if (isset($_SESSION['id']))
+		{
+			if (!$this->checkLike($photoId))
+			{
 				$detailTpl->set('likeImg', '<img src="/camagru/img/likeIcone1.png">');
 				$detailTpl->set('photoId', $photoId . '/like');
 			}
-			else {
+			else
+			{
 				$detailTpl->set('likeImg', '<img src="/camagru/img/likeIcone2.png">');
 				$detailTpl->set('photoId', $photoId . '/dislike');
 			}
 		}
 	}
 
-	function checkLike($photoId) {
+	function checkLike($photoId)
+	{
 		$arr = $this->user->getLikes();
 		if (isset($arr[$photoId]) && $arr[$photoId])
 			return true;
@@ -86,12 +97,14 @@ class Detail extends Controller {
 			return false;
 	}
 
-	function displayNewComments($detailTpl) {
+	function displayNewComments($detailTpl)
+	{
 		$newCommentTpl = new Template("view/");
 		$detailTpl->set('newComment', $newCommentTpl->fetch('newComment.php'));
 	}
 
-	public function insertComment($userId, $message, $photoId) {
+	public function insertComment($userId, $message, $photoId)
+	{
 		$comment = new InputComment($message);
 		$this->db->connect();
 		$query = $this->db->prepare('INSERT INTO comments (id_photo, userId, content) VALUES ('.$photoId.', \''.$userId.'\', \''.$comment->getValue().'\')');
@@ -105,7 +118,8 @@ class Detail extends Controller {
 		$query->execute();
 		$data = $query->fetch();
 
-		if (isset($data['email'])) {
+		if (isset($data['email']))
+		{
 			$emailTo = $data['email'];
 			$emailFrom = 'register@camagru.fr';
 			$subject = "Camagru - New comment !";
