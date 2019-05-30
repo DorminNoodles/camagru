@@ -199,6 +199,25 @@ a:hover {
 	justify-content: center;
 }
 
+@media (max-width: 800px)
+{
+	.registerBtn button
+	{
+		background-color: white;
+		font-size: 24px;
+	    color: black;
+		width: 200px;
+	    border: 2px solid #DDD; /* Green */
+	}
+
+}
+
+.registerBtn
+{
+	display: flex;
+	justify-content: center;
+}
+
 .like {
 	object-fit: scale-down;
 	height: auto;
