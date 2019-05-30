@@ -22,7 +22,7 @@ class Database {
 		}
 		catch ( PDOException $Exception )
 		{
-			echo 'error Database connection';
+			// echo 'error Database connection';
 		}
 		if (isset($this->db))
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -73,7 +73,6 @@ class Database {
 	{
 		$this->connect();
 		$query = $this->db->prepare('SELECT * FROM users WHERE email=\'' .$email. '\'');
-		// $ret = $query->execute();
 		$query->execute();
 		return($query->fetch());
 	}

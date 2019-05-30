@@ -13,7 +13,6 @@ class Detail extends Controller {
 
 		if (!isset($request->action) || !$photo->existInDb($request->action))
 		{
-			echo("hello_2");
 			require('controller/NotFound.php');
 			return;
 		}
@@ -38,7 +37,6 @@ class Detail extends Controller {
 		}
 		$this->displayComments($detailTpl, $request->action);
 		$this->tpl->set('content', $detailTpl->fetch('detail.php'));
-
 		echo ($this->tpl->fetch('main.php'));
 
 	}
@@ -60,7 +58,7 @@ class Detail extends Controller {
 
 	function manageLike($param, $photoId)
 	{
-		if ( $param == 'like')
+		if ($param == 'like')
 			$this->user->addLike($photoId);
 		if ($param == 'dislike')
 			$this->user->disLike($photoId);

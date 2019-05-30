@@ -10,53 +10,60 @@ class Register extends Controller
 	public $form = true;
 	private $displayForm = true;
 
-	function __construct($request) {
-
+	function __construct($request)
+	{
 		parent::__construct();
 
 		$arr = [];
 		$arr['valid'] = false;
 		$arr['message'] = '';
 
-		if (!empty($_POST))
-			$arr = $this->createUser();
-		$this->displayForm = ($arr['valid']) ? false : true;
 		$contentTpl = new Template('view/');
-		$this->tpl->set('content', $contentTpl->fetch('registerSuccess.php'));
-		$contentTpl->set('message', $arr['message']);
-		if (!$arr['valid'])
-			$this->tpl->set('content', $contentTpl->fetch('registerForm.php'));
+
+		if (!isset($_SESSION['id']))
+		{
+			if (!empty($_POST) && $this->db != null)
+				$arr = $this->createUser();
+			$this->displayForm = ($arr['valid']) ? false : true;
+			$this->tpl->set('content', $contentTpl->fetch('registerSuccess.php'));
+			$contentTpl->set('message', $arr['message']);
+			if (!$arr['valid'])
+				$this->tpl->set('content', $contentTpl->fetch('registerForm.php'));
+		}
+		else
+		{
+			$contentTpl = new Template('view/');
+			$this->tpl->set('content', $contentTpl->fetch('404.php'));
+		}
 		echo $this->tpl->fetch('main.php');
 	}
 
-	function createUser() {
-		// var_dump($_POST);
+	function createUser()
+	{
 		$this->db->connect();
 		$arr = $this->checkInputs();
-		// echo 'here';
-		var_dump($arr['valid']);
 		if (!$arr['valid'])
 			return ($arr);
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$key = str_replace ( '/', '', $key);
 		$key = str_replace ( '.', '', $key);
-		$this->sendActivation($key);
+		$key = str_replace ( '$', '', $key);
+		$this->sendActivation($key, $_POST['username']);
 		$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$query = $this->db->prepare('INSERT INTO users (name, password, email, activationKey) VALUES (\''.$_POST['username'].'\', \''.$_POST['password'].'\', \''.$_POST['email'].'\', \''.$key.'\')');
-		echo 'here';
 		$query->execute();
-
 		return($arr);
 	}
 
-	function sendActivation($msg) {
+	function sendActivation($msg, $login)
+	{
 		$emailTo = $_POST['email'];
 		$emailFrom = 'register@camagru.fr';
 		$subject = "Camagru - Confirm Your Account";
 		$message = "
 			<html>
 				<body>
-					Hello click here to confirm your account => <a href='http://localhost:8080/camagru/activation/".$msg."'>click here for activate your account</a>
+					Hello ". $login .", click here to confirm your account => <a href='http://localhost:8080/camagru/activation/".$msg."'>click here for activate your account</a>
 				</body>
 			</html>";
 		$header[] =  'MIME-Version: 1.0';
@@ -66,8 +73,8 @@ class Register extends Controller
 		$ret = mail($emailTo, $subject, $message, implode("\r\n", $headers));
 	}
 
-	function checkInputs() {
-
+	function checkInputs()
+	{
 		$arr = [];
 		$arr['valid'] = true;
 		$arr['message'] = '';
@@ -77,28 +84,36 @@ class Register extends Controller
 		$passwordConfirm = new InputPassword($_POST['passwordConfirm']);
 		$email = new InputEmail($_POST['email']);
 
-		if (!$username->isValid() || $username->alreadyExist()) {
+		if (!$username->isValid() || $username->alreadyExist())
+		{
 			$arr['valid'] = false;
 			$arr['message'] = $username->getError();
 			return $arr;
 		}
-		if (!$password->isValid()) {
+
+		if (!$password->isValid())
+		{
 			$arr['valid'] = false;
 			$arr['message'] = $password->getError();
 			return $arr;
 		}
-		if ($password->getValue() != $passwordConfirm->getValue()) {
+
+		if ($password->getValue() != $passwordConfirm->getValue())
+		{
 			$arr['valid'] = false;
 			$arr['message'] = 'Passwords don\'t match';
 			return $arr;
 		}
 
-		if (!$email->isValid()) {
+		if (!$email->isValid())
+		{
 			$arr['valid'] = false;
 			$arr['message'] = $email->getError();
 			return $arr;
 		}
-		if ($email->emailAlreadyExist($email->getValue())) {
+
+		if ($email->emailAlreadyExist($email->getValue()))
+		{
 			$arr['valid'] = false;
 			$arr['message'] = $email->getError();
 			return $arr;

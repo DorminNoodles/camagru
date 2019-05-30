@@ -3,7 +3,7 @@
 require('model/Photo.php');
 require('core/Controller.php');
 
-class Montage extends Controller
+class Editing extends Controller
 {
 	function __construct($request)
 	{
@@ -13,7 +13,8 @@ class Montage extends Controller
 
 		if (!isset($_SESSION['id']))
 		{
-			$this->tpl->set('content', 'you are not connected');
+			$contentTpl->set('errorMsg', 'you are not connected');
+			$this->tpl->set('content', $contentTpl->fetch('errorCard.php'));
 			echo $this->tpl->fetch('main.php');
 			return;
 		}
@@ -23,7 +24,7 @@ class Montage extends Controller
 
 		//display Photo library
 		$contentTpl->set('myPhotos', $this->getMyLibrary($_SESSION['id']));
-		$this->tpl->set('content', $contentTpl->fetch('montage.php'));
+		$this->tpl->set('content', $contentTpl->fetch('editing.php'));
 		echo $this->tpl->fetch('main.php');
 
 	}

@@ -19,7 +19,8 @@ class DeletePhoto extends Controller
 
 		if (isset($request->action) && is_numeric($request->action))
 		{
-			if ($this->deletePhoto($request->action, $this->user->getId())) {
+			if ($this->deletePhoto($request->action, $this->user->getId()))
+			{
 				$this->tpl->set('content', $contentTpl->fetch('deletePhoto.php'));
 				echo $this->tpl->fetch('main.php');
 				return;
@@ -29,7 +30,8 @@ class DeletePhoto extends Controller
 		echo $this->tpl->fetch('main.php');
 	}
 
-	function deletePhoto($photoId, $userId) {
+	function deletePhoto($photoId, $userId)
+	{
 		$this->db->connect();
 		$query = $this->db->prepare('SELECT * FROM photos WHERE id=\''.$photoId.'\'');
 		$query->execute();
@@ -38,7 +40,8 @@ class DeletePhoto extends Controller
 
 		if (empty($data))
 			return false;
-		if ($data['user_id'] === $userId) {
+		if ($data['user_id'] === $userId)
+		{
 			$query = $this->db->prepare('DELETE FROM photos WHERE id=\''.$photoId.'\'');
 			$query->execute();
 		}

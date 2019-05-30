@@ -160,7 +160,7 @@ function savePhoto()
 	var params = {stickers: myJSON, img: origImg.src};
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
-	form.setAttribute("action", "/camagru/montage/saveCompo");
+	form.setAttribute("action", "/camagru/editing/saveCompo");
 
 	if (!oneSticker)
 		return;

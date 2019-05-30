@@ -56,7 +56,7 @@ class Login extends Controller
 
 	function connectUser() {
 		$arr = $this->checkInputs();
-		if (!$arr['valid'])
+		if (!$arr['valid'] || $this->db === null)
 			return ($arr);
 
 		if ($arr['valid'])

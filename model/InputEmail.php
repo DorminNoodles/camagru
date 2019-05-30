@@ -28,12 +28,6 @@ class InputEmail extends Input {
 			$this->error = 'Email bad character !';
 			return false;
 		}
-
-		// if ($this->emailAlreadyExist($this->value) && $register) {
-		// 	$this->error = 'Email already exist !';
-		// 	return false;
-		// }
-
 		$this->value = filter_var($this->value, FILTER_SANITIZE_EMAIL);
 		return true;
 	}
@@ -41,11 +35,6 @@ class InputEmail extends Input {
 	public function emailAlreadyExist($email) {
 		$db = new Database("camagru");
 		$result = $db->findUserByEmail($email);
-		echo '<br/>';
-		echo '<br/>';
-		var_dump($result);
-		echo '<br/>';
-		echo '<br/>';
 		if ($result['email'])
 			return true;
 		return false;

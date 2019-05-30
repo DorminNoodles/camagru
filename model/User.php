@@ -8,80 +8,100 @@ class User
 	private $likes;
 	private $email;
 
-	function __construct($id) {
+	function __construct($id)
+	{
 		$this->db = new Database("camagru");
 		$this->auth = false;
 		$data = $this->db->select(['*'], 'users', 'WHERE id = '.$id);
-		echo 'fuck';
-		print_r($data);
-
+		if (isset($data[0]))
+		{
+			$this->id = $id;
+			$this->name = $data[0]['name'];
+			$this->likes = unserialize ($data[0]['likes']);
+		}
 	}
 
-	public function getAuth() {
+	public function getAuth()
+	{
 		return ($this->auth);
 	}
 
-	public function setAuth($auth) {
+	public function setAuth($auth)
+	{
 		$this->auth = $auth;
 	}
 
-	public function setID($id) {
+	public function setID($id)
+	{
 		$this->id = $id;
 	}
 
-	public function getId() {
+	public function getId()
+	{
 		return $this->id;
 	}
 
-	public function setName($name) {
+	public function setName($name)
+	{
 		$this->name = $name;
 	}
 
-	public function getName() {
+	public function getName()
+	{
 		return $this->name;
 	}
 
-	public function addLike($photoID) {
+	public function addLike($photoID)
+	{
 		$this->db->connect();
+
 		$this->likes[$photoID] = true;
 		$serialized = serialize($this->likes);
 		$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
 	}
 
-	public function disLike($photoID) {
+	public function disLike($photoID)
+	{
 		$this->db->connect();
 		$this->likes[$photoID] = false;
 		$serialized = serialize($this->likes);
 		$this->db->exec('UPDATE users SET likes = \'' .$serialized.'\' WHERE id = '.$this->id.'');
 	}
 
-	public function setLikes($likes) {
+	public function setLikes($likes)
+	{
 		$this->likes = $likes;
 	}
 
-	public function getLikes() {
+	public function getLikes()
+	{
 		return $this->likes;
 	}
 
-	public function setEmail() {
+	public function setEmail()
+	{
 		$this->email = $email;
 	}
-	public function getEmail() {
+
+	public function getEmail()
+	{
 		return $this->email;
 	}
 
-	public function logout() {
+	public function logout()
+	{
 		$_SESSION['auth'] = false;
-		var_dump($_SESSION);
 	}
 
-	public function addActivationKey($key, $email) {
+	public function addActivationKey($key, $email)
+	{
 		$this->db->connect();
 		$query = $this->db->prepare('UPDATE users SET activationKey=\''.$key.'\' WHERE email=\''.$email.'\'');
 		$query->execute();
 	}
 
-	public function checkPassword($id, $password) {
+	public function checkPassword($id, $password)
+	{
 		$data = $this->db->findUserById($id);
 		return password_verify($password, $data['password']);
 

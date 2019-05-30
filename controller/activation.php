@@ -13,7 +13,8 @@ class Activation extends Controller {
 		if ($this->checkActivation($request->action))
 		{
 			$this->activateAccount($request->action);
-			$this->tpl->set('content', "ACTIVATION SUCCESS");
+			$tplContent->set('successMessage', "ACTIVATION SUCCESS");
+			$this->tpl->set('content', $tplContent->fetch('successCard.php'));
 		}
 		else
 			$this->tpl->set('content', $tplContent->fetch('404.php'));

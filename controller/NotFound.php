@@ -4,7 +4,8 @@ require_once('core/Controller.php');
 
 class NotFound extends Controller {
 
-	function __construct() {
+	function __construct()
+	{
 		parent::__construct();
 
 		$tplNotFound = new Template("view/");

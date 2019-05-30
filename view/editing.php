@@ -1,4 +1,4 @@
-<div class="montage">
+<div class="editing">
 	<div>
 		<div id="camera">
 			<video autoplay="true"></video>

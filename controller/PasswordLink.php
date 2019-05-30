@@ -14,11 +14,13 @@ class PasswordLink extends Controller {
 		$contentTpl->set('errorMessage', null);
 		$contentTpl->set('successMessage', null);
 
-		if (isset($_POST['email'])) {
+		if (isset($_POST['email']) && $this->db != null)
+		{
 			$email = new InputEmail($_POST['email']);
 			$db = new Database("camagru");
 
-			if ($email->isValid() && $db->findUserByEmail($email->getValue())) {
+			if ($email->isValid() && $db->findUserByEmail($email->getValue()))
+			{
 				$this->sendPasswordLink($email->getValue());
 				$contentTpl->set('successMessage', 'Password Link sending !');
 			}
@@ -30,7 +32,8 @@ class PasswordLink extends Controller {
 		echo $this->tpl->fetch('main.php');
 	}
 
-	function sendPasswordLink($email) {
+	function sendPasswordLink($email)
+	{
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$key = str_replace ( '/', '', $key);
 		$key = str_replace ( '.', '', $key);
@@ -40,7 +43,8 @@ class PasswordLink extends Controller {
 		$this->sendMail($key, $email);
 	}
 
-	function sendMail($key, $email) {
+	function sendMail($key, $email)
+	{
 		$emailTo = $email;
 		$emailFrom = 'register@camagru.fr';
 		$subject = "Camagru - Change Password";

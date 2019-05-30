@@ -5,7 +5,8 @@ require_once('model/InputPassword.php');
 
 class ChangePassword extends Controller {
 
-	function __construct($request) {
+	function __construct($request)
+	{
 
 		parent::__construct();
 
@@ -18,9 +19,12 @@ class ChangePassword extends Controller {
 		// 	return;
 		// }
 
-		if (isset($request->action) && isset($_POST['newPassword1']) && isset($_POST['newPassword2'])) {
-			if ($this->checkPassword()) {
-				if ($this->checkLinkPassword($request->action)) {
+		if (isset($request->action) && isset($_POST['newPassword1']) && isset($_POST['newPassword2']))
+		{
+			if ($this->checkPassword())
+			{
+				if ($this->checkLinkPassword($request->action))
+				{
 					$this->updateNewPassword($_POST['newPassword1'], $request->action);
 					$contentTpl->set('successMessage', 'Password changed !');
 				}
@@ -33,7 +37,8 @@ class ChangePassword extends Controller {
 		echo $this->tpl->fetch('main.php');
 	}
 
-	function checkPassword() {
+	function checkPassword()
+	{
 		$pwd1 = new InputPassword($_POST['newPassword1']);
 		$pwd2 = new InputPassword($_POST['newPassword2']);
 
@@ -46,7 +51,8 @@ class ChangePassword extends Controller {
 		return true;
 	}
 
-	function checkLinkPassword($key) {
+	function checkLinkPassword($key)
+	{
 		$this->db->connect();
 		$query = $this->db->prepare('SELECT * FROM users WHERE activationKey=\''.$key.'\'');
 		$query->execute();
@@ -58,7 +64,8 @@ class ChangePassword extends Controller {
 			return false;
 	}
 
-	function updateNewPassword($password, $key) {
+	function updateNewPassword($password, $key)
+	{
 		$password = password_hash($password, PASSWORD_DEFAULT);
 		$this->db->connect();
 		$query = $this->db->prepare('UPDATE users SET password=\''.$password.'\' WHERE activationKey=\''.$key.'\'');
