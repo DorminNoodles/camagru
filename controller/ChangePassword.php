@@ -14,11 +14,6 @@ class ChangePassword extends Controller {
 		$contentTpl->set('successMessage', null);
 		$contentTpl->set('errorMessage', null);
 
-		// if (isset($_SESSION['id'])) {
-		// 	echo $this->tpl->fetch('main.php');
-		// 	return;
-		// }
-
 		if (isset($request->action) && isset($_POST['newPassword1']) && isset($_POST['newPassword2']))
 		{
 			if ($this->checkPassword())
