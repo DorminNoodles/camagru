@@ -36,8 +36,4 @@
 		</div>
 	<?php } ?>
 </div>
-
-
-
-<script src="/camagru/js/takePhoto.js">
-</script>
+<script src="/camagru/js/takePhoto.js"></script>

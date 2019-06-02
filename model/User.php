@@ -8,16 +8,21 @@ class User
 	private $likes;
 	private $email;
 
-	function __construct($id)
+	function __construct($id = null)
 	{
 		$this->db = new Database("camagru");
 		$this->auth = false;
-		$data = $this->db->select(['*'], 'users', 'WHERE id = '.$id);
-		if (isset($data[0]))
+
+		if ($id)
 		{
-			$this->id = $id;
-			$this->name = $data[0]['name'];
-			$this->likes = unserialize ($data[0]['likes']);
+			$data = $this->db->select(['*'], 'users', 'WHERE id = '.$id);
+			if (isset($data[0]))
+			{
+				$this->id = $id;
+				$this->name = $data[0]['name'];
+				$this->email= $data[0]['email'];
+				$this->likes = unserialize ($data[0]['likes']);
+			}
 		}
 	}
 
@@ -104,9 +109,14 @@ class User
 	{
 		$data = $this->db->findUserById($id);
 		return password_verify($password, $data['password']);
-
 	}
 
+	public function changeEmail($email)
+	{
+		$this->db->connect();
+		$query = $this->db->prepare('UPDATE users SET email=\''. $email .'\' WHERE email=\''.$this->email.'\'');
+		$query->execute();
+	}
 }
 
 ?>

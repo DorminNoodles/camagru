@@ -3,6 +3,7 @@
 require('core/Controller.php');
 require('model/InputPassword.php');
 require('model/InputUsername.php');
+require('model/InputEmail.php');
 
 class MyProfile extends Controller {
 
@@ -35,6 +36,7 @@ class MyProfile extends Controller {
 		}
 
 		$contentTpl->set('login', $this->user->getName());
+		$contentTpl->set('email', $this->user->getEmail());
 		$this->tpl->set('content', $contentTpl->fetch('myProfile.php'));
 		echo $this->tpl->fetch('main.php');
 
@@ -45,6 +47,7 @@ class MyProfile extends Controller {
 		$password = new InputPassword($_POST['password']);
 		$newPassword = new InputPassword($_POST['newPassword']);
 		$username = new InputUsername($_POST['username']);
+		$email = new InputEmail($_POST['newEmail']);
 
 		if (!$password->isValid() || !$this->user->checkPassword($_SESSION['id'], $password->getValue()))
 			return array( 'error' => 'Bad Password !', 'success' => '');
@@ -70,6 +73,15 @@ class MyProfile extends Controller {
 				$query = $this->db->prepare('UPDATE users SET name=\''.$username->getValue().'\' WHERE id='.$_SESSION['id'].'');
 				$query->execute();
 			}
+		}
+		if (!empty($_POST['newEmail']))
+		{
+			if (!$email->isValid())
+				return array( 'error' => $username->getError(), 'succes' => '');
+			if ($email->emailAlreadyExist($email->getValue()))
+				return array( 'error' => $username->getError(), 'succes' => '');
+
+			$this->user->changeEmail($email->getValue());
 		}
 		return array('error' => '', 'success' => 'Success !');
 	}

@@ -40,8 +40,6 @@ class Photo extends File
 		{
 			if (!empty($sticker->name))
 			{
-				// echo "./stickers/" . $sticker->name;
-				// echo '<br />';
 				$img2 = imagecreatefrompng("./stickers/" . $sticker->name);
 				$w=imagesx($img2);
 				$h=imagesy($img2);

@@ -15,8 +15,12 @@
 				<label>New Password</label>
 				<input type="password" name="newPassword" placeholder="My Password">
 			</div>
+			<div class="input">
+				<label>New Email</label>
+				<input type="email" name="newEmail" placeholder="My Email" value="<?= $email ?>">
+			</div>
 			<div class="loginBtn">
-				<button type="submit" name="button">Login</button>
+				<button type="submit" name="button">Save</button>
 			</div>
 		</form>
 		<div class="errorMessage"><?= $errorMessage; ?></div>

@@ -29,7 +29,7 @@
 					likes BLOB(65535)
 				)');
 
-		$db->exec('INSERT INTO users (name, password, email, active) VALUES (\'admin\',\'qwerty\',\'loic.chety@gmail.com1\', 1)');
+		$db->exec('INSERT INTO users (name, password, email, active) VALUES (\'admin\',\'Coucou@\',\'loic.chety@gmail.com1\', 1)');
 		$db->exec('INSERT INTO users (name, password, email, active) VALUES (\'mickey\',\'qwerty\',\'loic.chety@gmail.com2\', 1)');
 		$db->exec('INSERT INTO users (name, password, email, active) VALUES (\'monsieur\',\'qwerty\',\'loic.chety@gmail.com3\', 1)');
 		$db->exec('CREATE TABLE photos (

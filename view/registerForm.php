@@ -13,7 +13,7 @@
 				<input type="password" name="passwordConfirm" placeholder="Confirm Password">
 			</div>
 			<div class="input">
-				<input type="email" name="email" placeholder="My Email">
+				<input type="text" name="email" placeholder="My Email">
 			</div>
 			<div class="registerBtn">
 				<button type="submit" name="button">Register</button>

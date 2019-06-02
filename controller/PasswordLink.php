@@ -37,6 +37,7 @@ class PasswordLink extends Controller {
 		$key = password_hash(rand(0, 99999999), PASSWORD_DEFAULT);
 		$key = str_replace ( '/', '', $key);
 		$key = str_replace ( '.', '', $key);
+		$key = str_replace ( '$', '', $key);
 
 		$user = new User();
 		$user->addActivationKey($key, $email);
@@ -48,7 +49,7 @@ class PasswordLink extends Controller {
 		$emailTo = $email;
 		$emailFrom = 'register@camagru.fr';
 		$subject = "Camagru - Change Password";
-		$message = "Hello click here to change your password => <a href=\'http://localhost:8080/camagru/changePassword/".$key."\'>here for change your password</a>";
+		$message = "Hello click here to change your password => http://localhost:8080/camagru/changePassword/".$key."";
 		$ret = mail($emailTo, $subject, $message);
 	}
 }
